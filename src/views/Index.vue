@@ -24,7 +24,7 @@ import { randomMusicApi } from "@/api/resources"
 import type { RouteRecordName } from "vue-router";
 import Header from "../components/GWHeader.vue";
 import type { Tab } from "@/types/gw.props";
-import { getWebsiteApiBaseUrl, getDocPreviewBaseUrl } from '@/utils/website'
+import { getWebsiteApiBaseUrl } from '@/utils/website'
 import type { Resource } from "@/types/gw.resources";
 
 const tabs = ref<Tab[]>([
