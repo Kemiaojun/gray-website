@@ -1,5 +1,7 @@
 <template>
-  <div class="graython-Link-root">
+    <div class="library-container">
+      <LinkSearch @change="refreshData"></LinkSearch>
+      <div class="graython-Link-root">
     <GWTitleImageCard :blankCard="true" :onClick="createLink">
       <!-- <template v-slot:add-btn>
         <p>这里是插槽内容。</p>
@@ -78,6 +80,7 @@
       </el-form-item>
     </el-form>
   </el-dialog>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -93,6 +96,7 @@ import {
 import type { Link, IntEnumOption } from "@/types/gw.resources";
 import GWTitleImageCard from "@/components/GWTitleImageCard.vue";
 import ImageUpload from "@/components/ImageUpload.vue";
+import LinkSearch from "./LinkSearch.vue";
 
 const isCanRequest = ref(true);
 
@@ -106,14 +110,15 @@ onMounted( async () => {
   await groupTypesApi().then((rsp) => {
     types.value = rsp.data;
   });
-  refreshData();
+  refreshData(null);
 });
 
-const refreshData = async () => {
-  await listLinkApi(-1).then((rsp) => {
+const refreshData =  async (params: any) => {
+  await listLinkApi(params ? params : 0).then((rsp) => {
     links.value = rsp.data;
   });
 };
+
 
 // 对话框是否可见
 const dialogVisible = ref(false);
@@ -245,17 +250,19 @@ const onFileChange = (f: File) => {
 </script>
 
 <style scoped lang="scss">
-.graython-Link-root {
-  background-color: var(--gw-bg-color);
-  @include box(100%, 100%);
-  position: relative;
+.library-container {
+  width: 100%;
+  height: calc(100% - 50px);
+  padding: 5px 20px;
   overflow: scroll;
+}
+.graython-Link-root {
+  padding: 10px 0;
+  position: relative;
   display: flex;
   gap: 20px;
-  padding: 20px;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
 }
 
 .Link-card {
