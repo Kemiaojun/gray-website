@@ -103,18 +103,21 @@ const isCanRequest = ref(true);
 const anchorFormRef = ref<FormInstance>();
 
 const types = ref<IntEnumOption[]>();
+
 // 库数据
 const links = ref<Link[]>();
+const groupType = ref<number>(-1);
 
 onMounted( async () => {
   await groupTypesApi().then((rsp) => {
     types.value = rsp.data;
   });
-  refreshData(null);
+  refreshData(groupType.value);
 });
 
 const refreshData =  async (params: any) => {
-  await listLinkApi(params ? params : 0).then((rsp) => {
+  groupType.value = params;
+  await listLinkApi(groupType.value ? groupType.value : -1).then((rsp) => {
     links.value = rsp.data;
   });
 };
@@ -198,7 +201,7 @@ function deleteLink(Link: Link) {
   })
     .then(async () => {
       await deleteLinkApi(Link.id).then(() => {
-        refreshData();
+        refreshData(groupType.value);
       });
       ElMessage({
         type: "success",
@@ -232,7 +235,7 @@ const handleConfirm = async (formEl: FormInstance | undefined) => {
         isCanRequest.value = true;
         resetForm();
         handleClose();
-        refreshData();
+        refreshData(groupType.value);
       }).finally(()=>{
         isCanRequest.value = true;
       });
