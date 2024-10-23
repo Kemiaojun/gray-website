@@ -13,18 +13,18 @@
           :key="linkItem.url"
         >
           <img
-            v-if="linkItem.logo.startsWith('http')"
-            :src="linkItem.logo"
+            v-if="linkItem.coverUrl.startsWith('http')"
+            :src="linkItem.coverUrl"
             alt="Logo"
             class="img"
           />
-          <img v-else :src="`/icons/${linkItem.logo}`" alt="Logo" class="img" />
+          <img v-else :src="getWebsiteApiBaseUrl() + linkItem.coverUrl" alt="Logo" class="img" />
           <div class="link-text">
-            <div class="nowrap link-title">{{ linkItem.title }}</div>
-            <div class="nowrap" style="font-size: 14px">
-              {{ linkItem.desc }}
+            <div class="nowrap link-title">{{ linkItem.name }}</div>
+            <div class="nowrap" style="font-size: 12px">
+              {{ linkItem.remark }}
             </div>
-            <span class="tooltip-text">{{ linkItem.desc }}</span>
+            <!-- <span class="tooltip-text">{{ linkItem.remark }}</span> -->
           </div>
         </a>
       </div>
@@ -35,6 +35,7 @@
 <script setup lang="ts">
 import type { CardLinkItem } from "@/types/gw.props";
 import { toRefs } from "vue";
+import { getWebsiteApiBaseUrl } from '@/utils/website'
 
 interface ItemProps {
   title?: String;
@@ -94,6 +95,7 @@ const { title, tsize, items } = toRefs(props);
 }
 .nowrap {
   width: 150px;
+  padding-top: 5px;
   text-overflow: ellipsis;
   text-wrap: nowrap;
   white-space-collapse: collapse;
@@ -109,25 +111,25 @@ const { title, tsize, items } = toRefs(props);
   font-weight: 400;
 }
 
-.tooltip-text {
-  visibility: hidden; /* 初始隐藏 */
-  background-color: var(--gw-bg-active-color);
-  color: var(--gw-font-color);
-  text-align: center;
-  border-radius: 5px;
-  padding: 5px 10px;
-  position: absolute;
-  z-index: 1;
-  bottom: 0; /* 位于目标元素的上方 */
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0; /* 设置为透明 */
-  transition: opacity 0.3s; /* 添加动画过渡效果 */
-}
+// .tooltip-text {
+//   visibility: hidden; /* 初始隐藏 */
+//   background-color: var(--gw-bg-active-color);
+//   color: var(--gw-font-color);
+//   text-align: center;
+//   border-radius: 5px;
+//   padding: 5px 10px;
+//   position: absolute;
+//   z-index: 1;
+//   bottom: 0; /* 位于目标元素的上方 */
+//   left: 50%;
+//   transform: translateX(-50%);
+//   opacity: 0; /* 设置为透明 */
+//   transition: opacity 0.3s; /* 添加动画过渡效果 */
+// }
 
-.link-text:hover .tooltip-text {
-  visibility: visible; /* 当悬停时显示 */
-  opacity: 1; /* 设置为不透明 */
-}
+// .link-text:hover .tooltip-text {
+//   visibility: visible; /* 当悬停时显示 */
+//   opacity: 1; /* 设置为不透明 */
+// }
 
 </style>

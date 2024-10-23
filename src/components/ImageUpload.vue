@@ -1,11 +1,11 @@
 <template>
-  <div class="image-upload" @click="selectFile" >
+  <div class="image-upload" :style="{ height: size ? size + 'px' : '200px'}" @click="selectFile" >
     <!-- 图片选择器 -->
     <input ref="fileselectRef" style="display: none;" type="file" accept="image/*" @change="onFileChange" />
     
     <!-- 图片预览 -->
-    <div  class="image-preview " :style="{ border: imagePreview ? 'none': '1px solid var(--gw-bg-active-color)'}">
-      <img style="height:200px;width: auto;border-radius: 10px;object-fit: contain; /* 保证图片按比例填充容器 */" v-if="imagePreview" :src="imagePreview" alt="预览图片" />
+    <div  class="image-preview " :style="{ border: imagePreview ? 'none': '1px solid var(--gw-bg-active-color)', width: size ? size + 'px' : '200px' }">
+      <img  class="img" :style="{ height: size ? size + 'px' : '200px'}" v-if="imagePreview" :src="imagePreview" alt="预览图片" />
       <SvgIcon v-else :size="50" icon-class="add" />
     </div>
    
@@ -18,6 +18,7 @@ import { getWebsiteApiBaseUrl } from '@/utils/website'
 
 interface ImageProps {
   imageUrl?: string; 
+  size?: number;
 }
 
 const props = defineProps<ImageProps>();
@@ -25,7 +26,7 @@ const props = defineProps<ImageProps>();
 // 定义用于存储文件和预览图片的响应式变量
 const selectedFile = ref<File | null>(null);
 const imagePreview = ref<string | null>(null);
-
+const size = ref<number | undefined>();
 const fileselectRef = ref();
 
 const emit = defineEmits<{
@@ -56,15 +57,16 @@ onUnmounted(() =>{
 
 onMounted(()=>{
   if(props.imageUrl){
-    imagePreview.value =getWebsiteApiBaseUrl() + props.imageUrl;
+    imagePreview.value = props.imageUrl.startsWith("http") ? props.imageUrl: getWebsiteApiBaseUrl() + props.imageUrl;
   }
+  size.value = props.size;
+  console.log(size);
 });
 
 </script>
 
 <style scoped>
 .image-upload {
-  height: 200px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -73,7 +75,6 @@ onMounted(()=>{
 }
 
 .image-preview {
-  width: 200px;
   align-items: center;
   text-align: center;
   display: inline-flex;
@@ -83,7 +84,10 @@ onMounted(()=>{
 
 .image-preview img {
   max-width: 100%;
-  max-height: 300px;
+  width: auto;
+  border-radius: 10px;
+  object-fit: contain; /* 保证图片按比例填充容器 */
+  
 }
 
 button {

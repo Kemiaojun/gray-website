@@ -26,7 +26,7 @@
       <!-- 背景图片 -->
       <div
         class="card-image"
-        :style="{ backgroundImage: 'url(' + getWebsiteApiBaseUrl() + image + ')' }"
+        :style="{ backgroundImage: 'url(' + imgSrc() + ')' }"
       ></div>
 
       <!-- 标题和按钮 -->
@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
 import { getWebsiteApiBaseUrl } from "@/utils/website";
-import { ref, toRefs, toRaw } from "vue";
+import { ref, toRefs, toRaw, computed } from "vue";
 
 interface CardProps {
   blankCard: boolean;
@@ -58,6 +58,14 @@ const isHovered = ref(false);
 const props = defineProps<CardProps>();
 
 const { blankCard, image, title } = toRefs(props);
+
+const imgSrc = () => {
+  if(image.value?.startsWith("http")){
+    return image.value;
+  }
+
+  return getWebsiteApiBaseUrl() + image.value;
+}
 
 // 点击卡片时调用父组件的回调函数
 function clickThis() {

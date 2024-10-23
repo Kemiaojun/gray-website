@@ -10,6 +10,16 @@ type Collection = {
   thumbnailUrl?: string;
 }
 
+type Link = {
+  id?: number;
+  name: string;
+  remark: string;
+  url: string;
+  cover: string;
+  coverUrl?: string;
+  groupType:number;
+}
+
 type Library = {
   id?: number;
   folderId?: number;
@@ -57,6 +67,6 @@ interface IntEnumOption {
 }
 
 export type {
-  Directory,Library,Resource,ResourceSearch,IntEnumOption,Collection
+  Directory,Library,Resource,ResourceSearch,IntEnumOption,Collection,Link
 }
 

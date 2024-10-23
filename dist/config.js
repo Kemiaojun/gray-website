@@ -32,19 +32,16 @@ window.blconfig = {
    */
   ENVS: {
     DEV: {
-      WEBSITE_API_BASE_URI: "http://192.168.192.127:8081/website-api/",
-      BLOSSOM_API_BASE_URI: "http://192.168.192.66/blossom-api/",
-      DOC_PREVIEW_BASE_URI: "http://192.168.192.66:8012/onlinePreview?url="
+      WEBSITE_API_BASE_URI: "http://localhost:8081/website-api/",
+      BLOSSOM_API_BASE_URI: "http://192.168.192.66/blossom-api/"
     },
     TEST: {
       WEBSITE_API_BASE_URI: "http://192.168.192.66:8081/website-api/",
-      BLOSSOM_API_BASE_URI: "http://192.168.192.66/blossom-api/",
-      DOC_PREVIEW_BASE_URI: "http://192.168.192.66:8012/onlinePreview?url="
+      BLOSSOM_API_BASE_URI: "http://192.168.192.66/blossom-api/"
     },
     PROD: {
       WEBSITE_API_BASE_URI: "https://8g76m0325.vicp.fun/website-api/",
-      BLOSSOM_API_BASE_URI: "https://8g76m0325.vicp.fun/blossom-api/",
-      DOC_PREVIEW_BASE_URI: "https://8g76m0325.vicp.fun/onlinePreview?url="
+      BLOSSOM_API_BASE_URI: "https://8g76m0325.vicp.fun/blossom-api/"
     }
   },
   /**

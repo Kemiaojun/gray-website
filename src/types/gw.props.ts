@@ -5,8 +5,8 @@ export type Tab = {
 }
 
 export type CardLinkItem = {
-  title?: string;
-  desc: string;
-  logo: string;
+  name?: string;
+  remark: string;
+  coverUrl: string;
   url:string;
 }

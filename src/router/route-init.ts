@@ -14,6 +14,7 @@ const Collection = () => import('../views/resource/Collection.vue')
 const MgtLibrary = () => import('../views/resource/MgtLibrary.vue')
 const Resource = () => import('../views/resource/Resource.vue')
 const Links = () => import('../views/link/Links.vue')
+const Anchor = () => import('../views/link/Anchor.vue')
 const Login = () => import('@/views/index/Login.vue')
 const Articles = () => import('@/views/article/Articles.vue')
 const TodoIndex = () => import('@/views/todo/TodoIndex.vue')
@@ -54,6 +55,7 @@ router.addRoute({
   children: [
     { path: '/collection', name: 'Collection', component: Collection, meta: { keepAlive: true } },
     { path: '/library', name: 'Library', component: Library, meta: { keepAlive: true } },
+    { path: '/anchor', name: 'Anchor', component: Anchor, meta: { keepAlive: true } },
   ]
 })
 
