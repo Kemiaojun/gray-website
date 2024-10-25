@@ -14,6 +14,10 @@ export const movieRefreshApi = (): Promise<R<any>> => {
   return rq.get<R<any>>('/movie/refresh')
 }
 
+export const movieCategoriesApi = (): Promise<R<any>> => {
+  return rq.get<R<any>>('/movie/categories')
+}
+
 /**
  * 分页获取
  * @param params

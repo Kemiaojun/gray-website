@@ -17,8 +17,8 @@
         />
       </el-select>
     </div>
-<!-- 合集选择下拉框 -->
-<div class="search-item">
+    <!-- 合集选择下拉框 -->
+    <div class="search-item">
       <el-select
         v-model="selectedCollectionId"
         clearable
@@ -61,7 +61,11 @@ import type {
   Collection,
   IntEnumOption,
 } from "@/types/gw.resources";
-import { listLibraryApi, resourcesTypesApi, listCollectionApi } from "@/api/resources";
+import {
+  listLibraryApi,
+  resourcesTypesApi,
+  listCollectionApi,
+} from "@/api/resources";
 
 const types = ref<IntEnumOption[]>();
 const libraries = ref<Library[]>();
@@ -74,18 +78,17 @@ const emit = defineEmits<{
   (event: "change", value: ResourceSearch): void;
 }>();
 
-const handleCollectionChange = async ( )=> {
-  if(selectedCollectionId.value){
+const handleCollectionChange = async () => {
+  if (selectedCollectionId.value) {
     selectedLibraryId.value = null;
     await listLibraryApi(selectedCollectionId.value).then((rsp) => {
-    libraries.value = rsp.data;
-  });
+      libraries.value = rsp.data;
+    });
   }
-
-}
+};
 onMounted(async () => {
   await listCollectionApi().then((rsp) => {
-    if(rsp.data){
+    if (rsp.data) {
       collections.value = rsp.data;
     }
   });
@@ -99,7 +102,11 @@ onMounted(async () => {
 });
 
 watch(
-  () => [selectedResourceTypes.value, selectedCollectionId.value, selectedLibraryId.value],
+  () => [
+    selectedResourceTypes.value,
+    selectedCollectionId.value,
+    selectedLibraryId.value,
+  ],
   ([newTypes, newCollection, newLibrary]) => {
     // 在这里可以执行一些逻辑，例如检查新值是否满足某些条件
     emit("change", {

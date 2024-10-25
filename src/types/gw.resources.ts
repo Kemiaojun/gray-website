@@ -59,7 +59,7 @@ type Movie = {
   id: number,
   title: string,
   thumbnail?: string,
-  thumbnailUrl: string,
+  coverUrl: string,
   previewUrl: string,
 }
 

@@ -1,0 +1,1 @@
+import{_ as o}from"./index-0LZCLISq.js";import{c as s,D as c,o as r}from"./@vue-BV9Q_yhH.js";const t={},n={class:"gw-search-root"};function _(e,a){return r(),s("div",n,[c(e.$slots,"search-items",{},void 0,!0)])}const m=o(t,[["render",_],["__scopeId","data-v-86adbc59"]]);export{m as _};
