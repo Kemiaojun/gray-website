@@ -4,8 +4,8 @@
     <input ref="fileselectRef" style="display: none;" type="file" accept="image/*" @change="onFileChange" />
     
     <!-- 图片预览 -->
-    <div  class="image-preview " :style="{ border: imagePreview ? 'none': '1px solid var(--gw-bg-active-color)', width: size ? size + 'px' : '200px' }">
-      <img  class="img" :style="{ height: size ? size + 'px' : '200px'}" v-if="imagePreview" :src="imagePreview" alt="预览图片" />
+    <div  class="image-preview " :style="{ border: imageUrl ? 'none': '1px solid var(--gw-bg-active-color)', width: size ? size + 'px' : '200px' }">
+      <img  class="img" :style="{ height: size ? size + 'px' : '200px'}" v-if="imagePreview" :src="imagePreview()" alt="预览图片" />
       <SvgIcon v-else :size="50" icon-class="add" />
     </div>
    
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onUnmounted, onMounted } from 'vue';
+import { ref, onUnmounted, onMounted, toRefs } from 'vue';
 import { getWebsiteApiBaseUrl } from '@/utils/website'
 
 interface ImageProps {
@@ -23,10 +23,21 @@ interface ImageProps {
 
 const props = defineProps<ImageProps>();
 
+
+const { size } =  toRefs(props);
+
+const imageUrl=  ref(props.imageUrl);
+
 // 定义用于存储文件和预览图片的响应式变量
 const selectedFile = ref<File | null>(null);
-const imagePreview = ref<string | null>(null);
-const size = ref<number | undefined>();
+const imagePreview = () => {
+  if(imageUrl.value){
+    return  imageUrl.value.startsWith("http") || imageUrl.value.startsWith("data") ? imageUrl.value: getWebsiteApiBaseUrl() + imageUrl.value;
+  }
+  return "";
+}
+
+
 const fileselectRef = ref();
 
 const emit = defineEmits<{
@@ -40,7 +51,7 @@ const onFileChange = (event: Event) => {
     selectedFile.value = input.files[0];
     const reader = new FileReader();
     reader.onload = (e: ProgressEvent<FileReader>) => {
-      imagePreview.value = e.target?.result as string;
+      imageUrl.value = e.target?.result as string;
     };
     reader.readAsDataURL(selectedFile.value);
     emit("selectFile",selectedFile.value);
@@ -56,11 +67,6 @@ onUnmounted(() =>{
 });
 
 onMounted(()=>{
-  if(props.imageUrl){
-    imagePreview.value = props.imageUrl.startsWith("http") ? props.imageUrl: getWebsiteApiBaseUrl() + props.imageUrl;
-  }
-  size.value = props.size;
-  console.log(size);
 });
 
 </script>

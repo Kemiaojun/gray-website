@@ -27,20 +27,20 @@
       </GWTitleImageCard>
       <GWTitleImageCard
         :blankCard="false"
-        v-for="(collection, index) in links"
+        v-for="(link, index) in links"
         :key="index"
-        :image="collection.coverUrl"
-        :title="collection.name"
-        :card-data="collection"
+        :image="link.coverUrl"
+        :title="link.name"
+        :card-data="link"
       >
         <template v-slot:customize-btn>
           <span
-            @click="editLink(collection)"
+            @click="editLink(link)"
             style="color: green"
             class="customize-btn iconbl bl-a-fileedit-line"
           ></span>
           <span
-            @click="deleteLink(collection)"
+            @click="deleteLink(link)"
             style="color: red"
             class="customize-btn iconbl bl-delete-line"
           ></span>
@@ -246,6 +246,7 @@ function deleteLink(Link: Link) {
 // 关闭对话框
 const handleClose = () => {
   dialogVisible.value = false;
+  resetForm();
 };
 
 const handleConfirm = async (formEl: FormInstance | undefined) => {
