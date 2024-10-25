@@ -26,3 +26,7 @@ export const movieCategoriesApi = (): Promise<R<any>> => {
 export const pageMovieApi = (params:any): Promise<R<any>> => {
   return rq.post<R<any>>('/movie/page',{...params})
 }
+
+export const m3u8MovieApi = (params:any): Promise<R<any>> => {
+  return rq.post<R<any>>('/movie/m3u8',{...params})
+}
