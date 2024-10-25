@@ -19,6 +19,7 @@
         </div>
       </template>
       <template v-slot:right-items>
+        
         <div class="flex-item">
           <span style="font-size: small; color: var(--gw-font-color)"
             >影片数量: </span
@@ -33,7 +34,9 @@
             >{{ total }}</span
           >
           <div class="flex-item" style="margin-left: 20px">
-            <SvgIcon :size="20" icon-class="m3u8" :onclick="handleM3u8" />
+            <SvgIcon :size="20" icon-class="m3u8" class="svg-icon" :onclick="handleM3u8" />
+            <span width="30px"></span>
+            <SvgIcon :size="20" icon-class="refresh" class="svg-icon" :onclick="reloadData" />
           </div>
         </div>
       </template>
@@ -279,13 +282,18 @@ watch(
   },
   { deep: true, immediate: true }
 );
+
+const reloadData =() =>{
+  movieRefreshApi();
+}
+
 // 挂载处理
 onMounted(async () => {
   refreshData();
   await movieCategoriesApi().then((rsp) => {
     categories.value = rsp.data;
   });
-  movieRefreshApi();
+
 });
 </script>
 
@@ -301,5 +309,12 @@ onMounted(async () => {
 .flex-item {
   display: inline-flex;
   margin-right: 5px;
+}
+
+.svg-icon {
+  margin-left: 10px;
+  &:hover{
+    cursor: pointer;
+  }
 }
 </style>
