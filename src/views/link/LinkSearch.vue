@@ -38,7 +38,6 @@ const emit = defineEmits<{
 
 onMounted(async () => {
   await groupTypesApi().then((rsp) => {
-    debugger;
     if (rsp.data) {
       groupTypes.value = rsp.data;
     }

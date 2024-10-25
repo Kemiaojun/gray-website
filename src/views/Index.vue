@@ -32,6 +32,7 @@ const tabs = ref<Tab[]>([
   { icon: "blog", name: "Articles", title: "博文" },
   { icon: "location", name: "Links", title: "导航" },
   { icon: "image", name: "Resource", title: "资源" },
+  { icon: "movie", name: "Movie", title: "影院" },
 ]);
 const selectedTab = ref("Home");
 
@@ -41,7 +42,6 @@ const curRoute = ref<RouteRecordName>("Home");
 onMounted( async ()=>{
   const core = window._PlayerCore
   await randomMusicApi(5).then((rsp =>{
-    debugger;
     if(rsp.data){
       core.AppendSongList(rsp.data.map((music: Resource) => {
         return {
@@ -84,17 +84,12 @@ const showHeader = () => {
   return true;
 };
 
-const hideFooterArray = ["Login", "Articles", "Resource", "TodoIndex", "PlanIndex", "NoteIndex"];
+const showFooterArray = ["Home"];
 
 const showFooter = () => {
   const currentRoute = router.currentRoute.value;
-  if (
-    currentRoute?.name &&
-    hideFooterArray.find((ele) => ele === currentRoute.name)
-  ) {
-    return false;
-  }
-  return true;
+  return currentRoute?.name &&
+  showFooterArray.find((ele) => ele === currentRoute.name);
 };
 
 const selectTab = (name: string) => {

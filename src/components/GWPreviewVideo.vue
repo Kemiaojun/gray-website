@@ -2,19 +2,15 @@
   <!-- 模态框 用来预览-->
   <div class="preview-container">
     <div class="preview-btns">
-      <span
-        style="font-size: 24px"
-        @click="close"
-        class="iconbl bl-a-closeline-line"
-      ></span>
+      <SvgIcon :size="30" @click="close" icon-class="close" />
     </div>
 
     <!-- 通过 v-if 判断是否有视频资源 -->
     <div class="preview-content" v-if="url">
       <video
+        id="videoPlayer"
         controls
         :src="url"
-        width="800px"
         @pause="handleVideoPause"
         @ended="handleVideoEnd"
         @abort="handleVideoAbort"
@@ -79,7 +75,14 @@ const handleVideoAbort = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 45px;
+  padding: 0;
+  margin: 0;
+}
+
+#videoPlayer {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 让视频内容覆盖整个区域 */
 }
 
 .preview-image {
@@ -96,13 +99,9 @@ const handleVideoAbort = () => {
   z-index: 3999;
   display: flex;
   flex-direction: column;
-  .iconbl {
-    &:hover {
-      background-color: var(--gw-bg-color);
-    }
-    background-color: var(--gw-bg-color-5);
-    border-radius: 50%;
-    padding: 5px;
+  opacity: 20%;
+  &:hover {
+    opacity: 100%;
   }
 }
 </style>

@@ -55,6 +55,14 @@ type Resource = {
   unclassified?: boolean;
 }
 
+type Movie = {
+  id: number,
+  title: string,
+  thumbnail?: string,
+  thumbnailUrl: string,
+  previewUrl: string,
+}
+
 interface ResourceSearch {
   resourceTypes?: number[]|number;
   collectionId?: number[]|number;
@@ -67,6 +75,6 @@ interface IntEnumOption {
 }
 
 export type {
-  Directory,Library,Resource,ResourceSearch,IntEnumOption,Collection,Link
+  Directory,Library,Resource,ResourceSearch,IntEnumOption,Collection,Link,Movie
 }
 
