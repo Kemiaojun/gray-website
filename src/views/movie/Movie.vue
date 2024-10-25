@@ -203,9 +203,8 @@ const handleConfirm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   await formEl.validate(async (valid, fields) => {
     if (valid) {
-      m3u8MovieApi(form.value).then((rsp) => {
-
-      })
+      m3u8MovieApi(form.value);
+      handleClose();
     } else {
       console.log("error submit!", fields);
     }
