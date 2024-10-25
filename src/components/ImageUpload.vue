@@ -5,7 +5,7 @@
     
     <!-- 图片预览 -->
     <div  class="image-preview " :style="{ border: imageUrl ? 'none': '1px solid var(--gw-bg-active-color)', width: size ? size + 'px' : '200px' }">
-      <img  class="img" :style="{ height: size ? size + 'px' : '200px'}" v-if="imagePreview" :src="imagePreview()" alt="预览图片" />
+      <img  class="img" :style="{ height: size ? size + 'px' : '200px'}" v-if="imagePreview()" :src="imagePreview()" alt="预览图片" />
       <SvgIcon v-else :size="50" icon-class="add" />
     </div>
    
