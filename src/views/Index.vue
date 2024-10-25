@@ -30,9 +30,9 @@ import type { Resource } from "@/types/gw.resources";
 const tabs = ref<Tab[]>([
   { icon: "home", name: "Home", title: "首页" },
   { icon: "blog", name: "Articles", title: "博文" },
-  { icon: "location", name: "Links", title: "导航" },
+  { icon: "web", name: "Links", title: "导航" },
   { icon: "image", name: "Resource", title: "资源" },
-  { icon: "movie", name: "Movie", title: "影院" },
+  { icon: "studio", name: "Movie", title: "影院" },
 ]);
 const selectedTab = ref("Home");
 

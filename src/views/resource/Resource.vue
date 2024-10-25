@@ -1,6 +1,23 @@
 <template>
   <div class="virtual-waterfall-container">
-    <GWResourceSearch :data="searchCondition" @change="pageSearch"></GWResourceSearch>
+    <GWResourceSearch :data="searchCondition" @change="pageSearch">
+      <template v-slot:right-items>
+        <div class="flex-item">
+          <span style="font-size: small; color: var(--gw-font-color)"
+            >资源数量: </span
+          ><span
+            style="
+              font-size: small;
+              color: var(--gw-font-color);
+              font-style: italic;
+              font-weight: bold;
+              text-decoration: underline;
+            "
+            >{{ resourceCount }}</span
+          >
+        </div>
+      </template>
+    </GWResourceSearch>
     <fs-virtual-water-fall ref="waterFallRef" :request="req" :gap="20" :column="5" :request-size="10">
       <template #item="{ item }">
         <img v-if="item.resourceType === '图片'" class="img-item" :src="item.thumbnailUrl" @click="previewImage(item)"/>
@@ -41,7 +58,7 @@ import { pageResourceApi } from "@/api/resources"
 import { getWebsiteApiBaseUrl } from '@/utils/website'
 import type { ResourceSearch } from "@/types/gw.resources";
 import GWResourceSearch from "./ResourceSearch.vue";
-
+const resourceCount = ref(0);
 let totalPage = 1;
 let searchCondition:ResourceSearch = {};
 // 使用 ref 引用子组件实例
@@ -63,6 +80,7 @@ const req: FsVirtualWaterfallReuqest = async (page, pageSize) => {
   
   // 数据处理
   let { result, total } = rsp.data;
+  resourceCount.value = total;
   totalPage = Math.ceil(total/pageSize);
   const rows = result.map((item: any) => ({
     id:item.id, 
@@ -124,7 +142,7 @@ const pageSearch = async (params:any) =>{
 .virtual-waterfall-container {
   width: calc(100%);
   height: calc(100% - 50px);
-  padding: 0 20px 20px 20px;
+  padding: 5px 20px 20px 20px;
 }
 .img-item {
   width: 100%;
@@ -184,4 +202,10 @@ const pageSearch = async (params:any) =>{
     opacity: 1; /* 设置透明度，值在 0（完全透明）到 1（不透明）之间 */
   }
 }
+
+.flex-item {
+  display: inline-flex;
+  margin-right: 5px;
+}
+
 </style>

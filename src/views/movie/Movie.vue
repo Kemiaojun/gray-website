@@ -1,10 +1,10 @@
 <template>
-  <div class="image-gallery">
+  <div class="movie-gallery">
     <GWSearchCondition>
       <template v-slot:left-items>
         <div class="flex-item">
           <el-select
-            v-model="category"
+            v-model="folderName"
             clearable
             placeholder="分类"
             style="width: 150px"
@@ -16,10 +16,14 @@
               :value="item"
             />
           </el-select>
+          <el-input
+            style="margin-left: 10px"
+            v-model="movieName"
+            placeholder="电影名称"
+          ></el-input>
         </div>
       </template>
       <template v-slot:right-items>
-        
         <div class="flex-item">
           <span style="font-size: small; color: var(--gw-font-color)"
             >影片数量: </span
@@ -34,9 +38,19 @@
             >{{ total }}</span
           >
           <div class="flex-item" style="margin-left: 20px">
-            <SvgIcon :size="20" icon-class="m3u8" class="svg-icon" :onclick="handleM3u8" />
+            <SvgIcon
+              :size="20"
+              icon-class="m3u8"
+              class="svg-icon"
+              :onclick="handleM3u8"
+            />
             <span width="30px"></span>
-            <SvgIcon :size="20" icon-class="refresh" class="svg-icon" :onclick="reloadData" />
+            <SvgIcon
+              :size="20"
+              icon-class="refresh"
+              class="svg-icon"
+              :onclick="reloadData"
+            />
           </div>
         </div>
       </template>
@@ -139,7 +153,7 @@ import {
   movieRefreshApi,
   pageMovieApi,
   movieCategoriesApi,
-  m3u8MovieApi
+  m3u8MovieApi,
 } from "@/api/movie";
 import GWFlexContainer from "@/components/GWFlexContainer.vue";
 import GWFlexImage from "@/components/GWFlexImage.vue";
@@ -150,7 +164,7 @@ const router = useRouter();
 
 const total = ref(0);
 const pageNo = ref(1);
-const pageSize = ref(20);
+const pageSize = ref(10);
 
 const movies = ref<Movie[]>();
 
@@ -160,7 +174,9 @@ const currentMovie = ref<Movie>();
 
 const categories = ref<string[]>();
 const m3u8FormRef = ref<FormInstance>();
-const category = ref<string>();
+const folderName = ref<string>();
+const movieName = ref<string>();
+
 const form = ref<any>({
   name: "",
   folderName: "",
@@ -233,7 +249,8 @@ const refreshData = async () => {
   await pageMovieApi({
     pageNo: pageNo.value,
     pageSize: pageSize.value,
-    folderName: category.value,
+    folderName: folderName.value,
+    name: movieName.value,
   }).then((rsp) => {
     movies.value = rsp.data.result;
     total.value = rsp.data.total;
@@ -276,16 +293,16 @@ const closePreview = () => {
   previewShow.value = false;
 };
 watch(
-  () => category.value,
+  () => [folderName.value, movieName.value],
   () => {
     refreshData();
   },
   { deep: true, immediate: true }
 );
 
-const reloadData =() =>{
+const reloadData = () => {
   movieRefreshApi();
-}
+};
 
 // 挂载处理
 onMounted(async () => {
@@ -293,12 +310,11 @@ onMounted(async () => {
   await movieCategoriesApi().then((rsp) => {
     categories.value = rsp.data;
   });
-
 });
 </script>
 
 <style scoped lang="scss">
-.image-gallery {
+.movie-gallery {
   background-color: var(--gw-bg-color);
   width: calc(100%);
   height: calc(100% - 50px);
@@ -313,7 +329,7 @@ onMounted(async () => {
 
 .svg-icon {
   margin-left: 10px;
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
 }
