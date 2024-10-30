@@ -61,6 +61,7 @@ type Movie = {
   thumbnail?: string,
   coverUrl: string,
   previewUrl: string,
+  series?: string,
 }
 
 interface ResourceSearch {
