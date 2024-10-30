@@ -34,7 +34,7 @@ export default defineConfig({
     proxy: {
       // 第一个代理后端地址
       "/website-api": {
-        target: "https://8g76m0325.vicp.fun",
+        target: "https://61.111.251.180",
         // target: "http://localhost:8081",
         changeOrigin: true,
         rewrite: (path) => path,
