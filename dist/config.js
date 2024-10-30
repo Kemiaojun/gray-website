@@ -40,8 +40,8 @@ window.blconfig = {
       BLOSSOM_API_BASE_URI: "http://192.168.192.66/blossom-api/"
     },
     PROD: {
-      WEBSITE_API_BASE_URI: "http://61.111.251.180/website-api/",
-      BLOSSOM_API_BASE_URI: "http://61.111.251.180/blossom-api/"
+      WEBSITE_API_BASE_URI: "https://61.111.251.180/website-api/",
+      BLOSSOM_API_BASE_URI: "https://61.111.251.180/blossom-api/"
     }
   },
   /**
