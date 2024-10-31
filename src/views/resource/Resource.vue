@@ -32,7 +32,7 @@
         <div class="video-container" v-else-if="item.resourceType === 'PDF' || item.resourceType === 'PPT' || item.resourceType === 'WORD' || item.resourceType === 'EXCEL'"> 
           <img  class="video-item" :src="item.thumbnailUrl" @click="previewPdf(item)"/>
         </div>
-        <GWLogoCard  v-else-if="item.resourceType === 'DMG' || item.resourceType === '压缩包'  " :name="item.name" :url="item.previewUrl" :ext="item.ext" class="img-item"></GWLogoCard>
+        <GWLogoCard  v-else-if="item.resourceType === 'DMG' || item.resourceType === '压缩包'  " :name="item.name" :url="item.previewUrl" :ext="item.ext" :size ="item.size" class="img-item"></GWLogoCard>
       </template>
     </fs-virtual-water-fall>
   </div>
@@ -93,6 +93,7 @@ const req: FsVirtualWaterfallReuqest = async (page, pageSize) => {
     fileUrl: getWebsiteApiBaseUrl() + item.previewUrl,
     name:item.name,
     ext:item.ext,
+    size:item.size,
     pageCount: item.pageCount?item.pageCount:0
   }));
   return {

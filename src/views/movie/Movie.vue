@@ -263,7 +263,6 @@ const fileselectRef = ref();
 
 // 处理文件选择，转换为Base64格式进行预览
 const onFileChange = async (event: Event) => {
-  debugger;
   if (currentMovieId.value) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -278,7 +277,6 @@ const onFileChange = async (event: Event) => {
       formData.append("id", currentMovieId.value + "");
       await movieCoverApi(formData)
         .then((rsp) => {
-          debugger;
           if (rsp.data) {
             ElMessage({
               type: "info",

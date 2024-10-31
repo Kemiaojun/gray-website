@@ -57,6 +57,11 @@
       <div class="day-text">
       {{ name }}
     </div>
+    <div
+    style="position: absolute;left: 10px; bottom: 10px;"
+    >
+    {{ computedSize }}
+    </div>
     <svg t="1728709721504" @click="download"
           style="position: absolute;right: 10px; bottom: 10px;"
           class="control-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="12683" width="20px" height="20px"><path d="M85.333333 585.813333a42.666667 42.666667 0 0 1 42.666667 42.666667v185.642667a42.666667 42.666667 0 0 0 42.666667 42.666666h682.666666a42.666667 42.666667 0 0 0 42.666667-42.666666V628.48a42.666667 42.666667 0 1 1 85.333333 0v185.642667a128 128 0 0 1-128 128H170.666667a128 128 0 0 1-128-128V628.48a42.666667 42.666667 0 0 1 42.666666-42.666667z" fill="#75C82B" p-id="12684"></path><path d="M341.333333 128a42.666667 42.666667 0 0 1 42.666667-42.666667h256a42.666667 42.666667 0 0 1 42.666667 42.666667v247.168h128a42.666667 42.666667 0 0 1 28.330666 74.581333l-298.666666 264.832a42.666667 42.666667 0 0 1-56.618667 0l-298.666667-264.832A42.666667 42.666667 0 0 1 213.333333 375.168h128V128z m85.333334 42.666667v247.168a42.666667 42.666667 0 0 1-42.666667 42.666666H325.76L512 625.621333l186.24-165.12H640a42.666667 42.666667 0 0 1-42.666667-42.666666V170.666667h-170.666666z" fill="#75C82B" p-id="12685"></path></svg>
@@ -64,17 +69,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, toRefs } from "vue";
+import { ref, toRefs, computed } from "vue";
 import FileSaver from "file-saver";
 
 interface CardProps {
   url: string;
   name: string;
   ext: string;
+  size: number;
 }
 
 const props = defineProps<CardProps>();
-const { url, name, ext } = toRefs(props);
+const { url, name, ext, size } = toRefs(props);
 
 function download() {
   fetch(url.value)
@@ -84,6 +90,19 @@ function download() {
     })
     .catch((error) => console.error("下载音频异常:", error));
 }
+
+let computedSize = computed(() => {
+  if(size.value){
+    
+      let sz = size.value/1024;
+      if(sz<1024) return '['+sz.toFixed(2)+'KB]'
+      sz = sz/1024;
+      if(sz<1024) return '['+sz.toFixed(2)+'MB]'
+      sz = sz/1024;
+      if(sz<1024) return '['+sz.toFixed(2)+'GB]'
+  }
+  return "";
+});
 </script>
 
 <style scoped>
