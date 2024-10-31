@@ -28,7 +28,15 @@
         </div>
       </div>
       <div class="gw-flex-info">
-        <h3 class="movie-title">{{ movie.title }}{{ size }}</h3>
+        <el-tooltip
+            class="item"
+            effect="dark"
+            :content="movie.title + size"
+            placement="bottom"
+          >
+          <h3 class="movie-title">{{ movie.title }}{{ size }}</h3>
+          </el-tooltip>
+       
         <h3 v-if="movie.series == '是'" class="movie-play" :onclick="toogleSeries">
           剧集
         </h3>
@@ -128,6 +136,9 @@ img {
   color: var(--gw-font-color);
   padding: 0.5rem;
   font-size: 1rem;
+  white-space: nowrap; /* 不换行 */
+  overflow: hidden; /* 隐藏超出部分 */
+  text-overflow: ellipsis; /* 使用省略号表示超出部分 */
 }
 
 .movie-play {
@@ -136,7 +147,7 @@ img {
   text-align: center;
   padding: 0.5rem;
   border-radius: 0.5rem;
-
+  min-width: 55px;
   &:hover {
     cursor: pointer;
   }

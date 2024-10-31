@@ -410,7 +410,7 @@ const handleLogin = () => {
 .login-form {
   width: 300px;
   position: absolute;
-  left: 10vw;
+  left: 15vw;
   top: 10vh;
   z-index: 9999;
   .logo {
