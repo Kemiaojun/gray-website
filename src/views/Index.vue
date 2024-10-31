@@ -51,7 +51,7 @@ onMounted( async ()=>{
           img: music.thumbnailUrl ? getWebsiteApiBaseUrl() + music.thumbnailUrl:""
         }
       }))
-      core.Play();
+      // core.Play();
     }
   }));
 });

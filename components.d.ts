@@ -46,7 +46,7 @@ declare module 'vue' {
     GWAudioPreview: typeof import('./src/components/GWAudioPreview.vue')['default']
     GWClassifyImage: typeof import('./src/components/GWClassifyImage.vue')['default']
     GWFlexContainer: typeof import('./src/components/GWFlexContainer.vue')['default']
-    GWFlexImage: typeof import('./src/components/GWFlexImage.vue')['default']
+    GWFlexMovieCard: typeof import('./src/components/GWFlexMovieCard.vue')['default']
     GWHeader: typeof import('./src/components/GWHeader.vue')['default']
     GWLinkCard: typeof import('./src/components/GWLinkCard.vue')['default']
     GWLogoCard: typeof import('./src/components/GWLogoCard.vue')['default']

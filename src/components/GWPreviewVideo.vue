@@ -4,9 +4,7 @@
     <div class="preview-btns">
       <SvgIcon :size="30" @click="close" icon-class="close" />
     </div>
-
-    <!-- 通过 v-if 判断是否有视频资源 -->
-    <div class="preview-content" v-if="url">
+    <div class="preview-content">
       <video
         id="videoPlayer"
         controls
@@ -18,7 +16,6 @@
         你的浏览器不支持视频播放。
       </video>
     </div>
-    <p v-else>没有视频可预览</p>
   </div>
 </template>
 
@@ -99,7 +96,8 @@ const handleVideoAbort = () => {
   z-index: 3999;
   display: flex;
   flex-direction: column;
-  opacity: 20%;
+  opacity: 50%;
+  background-color: var(--gw-bg-active-color);
   &:hover {
     opacity: 100%;
   }

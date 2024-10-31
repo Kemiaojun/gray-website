@@ -57,14 +57,12 @@
     </GWSearchCondition>
     <GWFlexContainer style="min-height: calc(100% - 100px)">
       <template v-slot:flex-items>
-        <GWFlexImage
+        <GWFlexMovieCard
           v-for="(movie, index) in movies"
           :click="clickThis"
           :play="playThis"
-          :title="movie.title"
-          :item-data="movie"
-          :src="getWebsiteApiBaseUrl() + movie.coverUrl"
-        ></GWFlexImage>
+          :movie="movie"
+        ></GWFlexMovieCard>
       </template>
     </GWFlexContainer>
     <!-- 图片选择器 -->
@@ -77,8 +75,8 @@
     />
     <GWPreviewVideo
       v-if="previewShow"
-      :url="getWebsiteApiBaseUrl() + currentMovie?.previewUrl"
-      :name="currentMovie?.title"
+      :url="currentMovieUrl"
+      :name="currentMovieName"
       :on-close="closePreview"
     ></GWPreviewVideo>
     <div style="width: 100%">
@@ -147,7 +145,6 @@
 import { ref, reactive, onMounted, watch } from "vue";
 import { useRouter } from "vue-router";
 import type { Movie } from "@/types/gw.resources";
-import { getWebsiteApiBaseUrl } from "@/utils/website";
 import {
   movieCoverApi,
   movieRefreshApi,
@@ -156,9 +153,9 @@ import {
   m3u8MovieApi,
 } from "@/api/movie";
 import GWFlexContainer from "@/components/GWFlexContainer.vue";
-import GWFlexImage from "@/components/GWFlexImage.vue";
 import { ElMessage } from "element-plus";
 import type { FormRules, FormInstance } from "element-plus";
+import GWFlexMovieCard from "@/components/GWFlexMovieCard.vue";
 
 const router = useRouter();
 
@@ -170,7 +167,9 @@ const movies = ref<Movie[]>();
 
 const previewShow = ref<boolean>(false);
 
-const currentMovie = ref<Movie>();
+const currentMovieName = ref<string>();
+const currentMovieUrl = ref<string>();
+const currentMovieId = ref<number>();
 
 const categories = ref<string[]>();
 const m3u8FormRef = ref<FormInstance>();
@@ -230,13 +229,16 @@ const handleConfirm = async (formEl: FormInstance | undefined) => {
   });
 };
 
-const clickThis = (item: Movie) => {
-  currentMovie.value = item;
+const clickThis = (item:Movie) => {
+  currentMovieName.value = item.title;
+  currentMovieUrl.value = item.previewUrl;
+  currentMovieId.value = item.id;
   fileselectRef.value.click();
 };
 
-const playThis = (item: Movie) => {
-  currentMovie.value = item;
+const playThis = (item: {name:string,url:string}) => {
+  currentMovieName.value = item.name;
+  currentMovieUrl.value = item.url;
   previewShow.value = true;
 };
 
@@ -261,7 +263,7 @@ const fileselectRef = ref();
 
 // 处理文件选择，转换为Base64格式进行预览
 const onFileChange = async (event: Event) => {
-  if (currentMovie.value) {
+  if (currentMovieId.value) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const reader = new FileReader();
@@ -272,7 +274,7 @@ const onFileChange = async (event: Event) => {
       reader.readAsDataURL(input.files[0]);
       let formData = new FormData();
       formData.append("file", input.files[0]);
-      formData.append("id", currentMovie.value.id + "");
+      formData.append("id", currentMovieId.value + "");
       await movieCoverApi(formData)
         .then((rsp) => {
           debugger;
