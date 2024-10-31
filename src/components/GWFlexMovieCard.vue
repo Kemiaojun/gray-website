@@ -76,7 +76,8 @@ let size = computed(() => {
 // 点击卡片时调用父组件的回调函数
 function clickThis() {
   if (props?.click) {
-    const param = toRaw(movie);
+    debugger;
+    const param = toRaw(movie.value);
     props.click(param);
   }
 }
