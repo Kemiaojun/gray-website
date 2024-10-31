@@ -961,7 +961,7 @@ const handleLogin = () => {
 .at-at {
   position: absolute;
   left: 75%;
-  top: 50%;
+  top: 52%;
   margin: -135px 0 0 -120px;
   width: 250px;
   height: 114px;
