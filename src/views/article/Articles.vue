@@ -206,15 +206,9 @@ const getDocTree = (callback?: () => void) => {
     if (callback) callback()
   }
 
-  if (userStore.isLogin) {
-    docTreeApi()
+  docTreeOpenApi()
       .then((resp) => then(resp))
       .finally(() => (docTreeLoading.value = false))
-  } else {
-    docTreeOpenApi()
-      .then((resp) => then(resp))
-      .finally(() => (docTreeLoading.value = false))
-  }
 }
 
 /**
@@ -250,11 +244,9 @@ const getCurEditArticle = async (id: string) => {
     }
     article.value = resp.data
   }
-  if (userStore.isLogin) {
-    await articleInfoApi({ id: id, showToc: false, showMarkdown: false, showHtml: true }).then((resp) => then(resp))
-  } else {
+  
     await articleInfoOpenApi({ id: id, showToc: false, showMarkdown: false, showHtml: true }).then((resp) => then(resp))
-  }
+  
 }
 
 /**
