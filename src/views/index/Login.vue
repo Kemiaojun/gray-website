@@ -1036,7 +1036,7 @@ const handleLogin = () => {
   margin-top: 15px;
   width: 100px;
   height: 96px;
-  background: #fff;
+  background: var(--gw-bg-active-color);
   z-index: 20;
   -webkit-animation: at-at-body 2.5s infinite;
   animation: at-at-body 2.5s infinite;
@@ -1162,7 +1162,7 @@ const handleLogin = () => {
   margin: 0 88px 0 0;
   width: 64px;
   height: 38px;
-  background: #fff;
+  background: var(--gw-bg-active-color);
 }
 .at-at-neck {
   position: absolute;
@@ -1221,7 +1221,7 @@ const handleLogin = () => {
   top: 0px;
   width: 8px;
   height: 200%;
-  background: #fff;
+  background: var(--gw-bg-active-color);
   transform: rotate(-20deg);
   transform-origin: left top;
 }
@@ -1231,7 +1231,7 @@ const handleLogin = () => {
   top: 0px;
   width: 8px;
   height: 200%;
-  background: #fff;
+  background:var(--gw-bg-active-color);
   transform: rotate(-20deg);
   transform-origin: left top;
 }
@@ -1241,7 +1241,7 @@ const handleLogin = () => {
   top: 0px;
   width: 8px;
   height: 200%;
-  background: #fff;
+  background:var(--gw-bg-active-color);
   transform: rotate(20deg);
   transform-origin: left top;
 }
@@ -1338,7 +1338,7 @@ const handleLogin = () => {
   height: 0;
   border-style: solid;
   border-width: 0 0 15px 64px;
-  border-color: transparent transparent #fff transparent;
+  border-color: transparent transparent var(--gw-bg-active-color) transparent;
 }
 .head:before {
   content: "";
@@ -1349,7 +1349,7 @@ const handleLogin = () => {
   height: 0;
   border-style: solid;
   border-width: 0 0 38px 16px;
-  border-color: transparent transparent #fff transparent;
+  border-color: transparent transparent var(--gw-bg-active-color) transparent;
 }
 .head-chin {
   position: absolute;
@@ -1357,7 +1357,7 @@ const handleLogin = () => {
   bottom: -9px;
   width: 18px;
   height: 9px;
-  background: #fff;
+  background: var(--gw-bg-active-color);
 }
 .head-chin:before {
   content: "";
@@ -1368,7 +1368,7 @@ const handleLogin = () => {
   height: 0;
   border-style: solid;
   border-width: 0 6px 9px 0;
-  border-color: transparent #fff transparent transparent;
+  border-color: transparent var(--gw-bg-active-color) transparent transparent;
   z-index: 5;
 }
 .head-chin:after {
@@ -1380,7 +1380,7 @@ const handleLogin = () => {
   height: 0;
   border-style: solid;
   border-width: 9px 18px 0 0;
-  border-color: #fff transparent transparent transparent;
+  border-color: var(--gw-bg-active-color) transparent transparent transparent;
 }
 .head-chin .head-chin-bg-first {
   position: absolute;
@@ -1428,6 +1428,7 @@ const handleLogin = () => {
   bottom: 1px;
   width: 36px;
   height: 2px;
+  background-color: var(--gw-font-color);
   -webkit-animation: fire 2.5s infinite;
   animation: fire 2.5s infinite;
   -webkit-animation-timing-function: ease-out;
@@ -1447,7 +1448,7 @@ const handleLogin = () => {
   margin: 0 0 0 4px;
   width: 8px;
   height: 2px;
-  background: #fff;
+  background: rgb(219, 145, 34);
 }
 .head-left-bg {
   position: absolute;
@@ -1498,7 +1499,7 @@ const handleLogin = () => {
   margin: 0 4px 0 0;
   width: 50px;
   height: 68px;
-  background: #fff;
+  background: var(--gw-bg-active-color);
 }
 .at-at-body-left:after {
   content: "";
@@ -1509,7 +1510,7 @@ const handleLogin = () => {
   height: 0;
   border-style: solid;
   border-width: 0 0 16px 50px;
-  border-color: transparent transparent #fff transparent;
+  border-color: transparent transparent var(--gw-bg-active-color) transparent;
 }
 .at-at-body-left-bg {
   position: absolute;
@@ -1558,7 +1559,7 @@ const handleLogin = () => {
   margin: 0 0 0 4px;
   width: 68px;
   height: 65px;
-  background: #fff;
+  background: var(--gw-bg-active-color);
 }
 .at-at-body-right:after {
   content: "";
@@ -1569,7 +1570,7 @@ const handleLogin = () => {
   height: 0;
   border-style: solid;
   border-width: 26px 0 0 68px;
-  border-color: transparent transparent transparent #fff;
+  border-color: transparent transparent transparent var(--gw-bg-active-color);
 }
 .at-at-body-right-bg-1,
 .at-at-body-right-bg-2,
@@ -1627,7 +1628,7 @@ const handleLogin = () => {
   margin-top: 3px;
   width: 60px;
   height: 20px;
-  background: #fff;
+  background:var(--gw-bg-active-color);
 }
 .at-at-body-bottom .body-bottom-left {
   position: absolute;
@@ -1645,7 +1646,7 @@ const handleLogin = () => {
   height: 0;
   border-style: solid;
   border-width: 0 48px 16px 0;
-  border-color: transparent #fff transparent transparent;
+  border-color: transparent var(--gw-bg-active-color) transparent transparent;
 }
 .at-at-body-bottom .body-bottom-left:after {
   content: "";
@@ -1656,7 +1657,7 @@ const handleLogin = () => {
   height: 0;
   border-style: solid;
   border-width: 0 15px 12px 0;
-  border-color: transparent #fff transparent transparent;
+  border-color: transparent var(--gw-bg-active-color) transparent transparent;
 }
 .at-at-body-bottom-bg {
   padding: 4px 0 4px 15px;
@@ -1787,7 +1788,7 @@ const handleLogin = () => {
   left: -8px;
   bottom: -8px;
   border-radius: 20px;
-  border: 4px solid #fff;
+  border: 4px solid var(--gw-bg-active-color);
   width: 40px;
   height: 40px;
   background: #9fd6ff;
@@ -1800,7 +1801,7 @@ const handleLogin = () => {
   margin-top: -5px;
   width: 100%;
   height: 10px;
-  background: #fff;
+  background: var(--gw-bg-active-color);
 }
 .leg-content .leg-first-joint i:after {
   content: "";
@@ -1847,7 +1848,7 @@ const handleLogin = () => {
   left: 4px;
   top: 20px;
   border-radius: 20px;
-  border: 4px solid #fff;
+  border: 4px solid var(--gw-bg-active-color);
   width: 32px;
   height: 32px;
   background: #9fd6ff;
@@ -1860,7 +1861,7 @@ const handleLogin = () => {
   margin-top: -3px;
   width: 100%;
   height: 6px;
-  background: #fff;
+  background: var(--gw-bg-active-color);
 }
 .leg-content .leg-second {
   position: absolute;
@@ -1930,7 +1931,7 @@ const handleLogin = () => {
   height: 0;
   border-style: solid;
   border-width: 0 20px 100px 20px;
-  border-color: transparent transparent #fff transparent;
+  border-color: transparent transparent var(--gw-bg-active-color) transparent;
 }
 .leg-content .foot-ankle-bottom {
   position: absolute;
@@ -1949,7 +1950,7 @@ const handleLogin = () => {
   height: 0;
   border-style: solid;
   border-width: 40px 20px 0 20px;
-  border-color: #fff transparent transparent transparent;
+  border-color:var(--gw-bg-active-color) transparent transparent transparent;
 }
 .leg-content .foot-ankle-space {
   position: absolute;
@@ -1968,7 +1969,7 @@ const handleLogin = () => {
   margin: 0 0 0 -12px;
   width: 24px;
   height: 37px;
-  background: #fff;
+  background: var(--gw-bg-active-color);
 }
 .leg-content .foot-bottom {
   position: absolute;
@@ -1989,7 +1990,7 @@ const handleLogin = () => {
   height: 0;
   border-style: solid;
   border-width: 0 27px 100px 27px;
-  border-color: transparent transparent #fff transparent;
+  border-color: transparent transparent var(--gw-bg-active-color) transparent;
 }
 .leg-content .foot-bottom:after {
   content: "";
