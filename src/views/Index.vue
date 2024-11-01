@@ -33,6 +33,8 @@ const tabs = ref<Tab[]>([
   { icon: "web", name: "Links", title: "导航" },
   { icon: "image", name: "Resource", title: "资源" },
   { icon: "studio", name: "Movie", title: "影院" },
+  { icon: "music3", name: "Music", title: "歌曲" },
+
 ]);
 const selectedTab = ref("Home");
 

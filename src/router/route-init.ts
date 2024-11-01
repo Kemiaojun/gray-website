@@ -16,6 +16,8 @@ const Resource = () => import('../views/resource/Resource.vue')
 const Links = () => import('../views/link/Links.vue')
 const Anchor = () => import('../views/link/Anchor.vue')
 const Movie = () => import('../views/movie/Movie.vue')
+const Music = () => import('../views/music/Music.vue')
+
 const Login = () => import('@/views/index/Login.vue')
 const Articles = () => import('@/views/article/Articles.vue')
 const TodoIndex = () => import('@/views/todo/TodoIndex.vue')
@@ -43,6 +45,8 @@ router.addRoute({
     { path: '/articles', name: 'Articles', component: Articles, meta: { keepAlive: true } },
     { path: '/resource', name: 'Resource', component: Resource, meta: { keepAlive: true } },
     { path: '/movie', name: 'Movie', component: Movie, meta: { keepAlive: true } },
+    { path: '/music', name: 'Music', component: Music, meta: { keepAlive: true } },
+
     { path: '/todo', name: 'TodoIndex', component: TodoIndex, meta: { keepAlive: true } },
     { path: '/plan', name: 'PlanIndex', component: PlanIndex, meta: { keepAlive: false } },
     { path: '/note', name: 'NoteIndex', component: NoteIndex, meta: { keepAlive: false } }

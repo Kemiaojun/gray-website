@@ -176,7 +176,7 @@ img {
   flex-wrap: wrap;
   align-items: start;
   align-content: start;
-  justify-content: start;
+  justify-content: space-around;
   top: 0;
   left: 0;
   right: 0;
@@ -193,8 +193,8 @@ img {
     background-color: var(--gw-bg-color);
     width: 60px;
     font-size: 12px;
-    padding: 2px;
-    text-align: center;
+    padding: 5px;
+    text-align: left;
     border-radius: 2px;
     border: 1px solid var(--gw-font-color);
     white-space: nowrap; /* 不换行 */
