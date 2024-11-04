@@ -8,19 +8,27 @@
             :class="activeIndex === '1' ? 'selectTab' : ''"
           >
             <template #title>
-              <el-icon> <List /> </el-icon>歌曲
+              <el-icon> <List /> </el-icon>歌手专辑
             </template></el-menu-item
           >
           <el-menu-item
             index="2"
             :class="activeIndex === '2' ? 'selectTab' : ''"
             ><template #title>
-              <el-icon> <Collection /> </el-icon>专辑
+              <el-icon> <Collection /> </el-icon>全部歌曲
             </template></el-menu-item
           >
           <el-menu-item
             index="3"
             :class="activeIndex === '3' ? 'selectTab' : ''"
+          >
+            <template #title>
+              <el-icon> <List /> </el-icon>我喜欢的
+            </template></el-menu-item
+          >
+          <el-menu-item
+            index="3"
+            :class="activeIndex === '4' ? 'selectTab' : ''"
           >
             <template #title>
               <el-icon> <List /> </el-icon>播放列表
@@ -30,9 +38,50 @@
       </el-aside>
 
       <el-container class="right-container">
-        <div v-if="activeIndex === '3'" class="tab-body">3</div>
+        <div v-if="activeIndex === '4'" class="tab-body">4</div>
+        <div v-else-if="activeIndex === '3'" class="tab-body">3</div>
+
         <div v-else-if="activeIndex === '2'" class="tab-body">2</div>
-        <div v-else="activeIndex === '1'" class="tab-body">1</div>
+        <div v-else="activeIndex === '1'" class="tab-body">
+          <div v-if="showCollection">
+            <div class="row-card" style="justify-content: space-between;align-items:center;border-bottom: 1px solid var(--gw-font-color-1">
+              <GWAvatar
+                size="large"
+                :src="
+                  getWebsiteApiBaseUrl() +
+                  'thumbnail/music/' +
+                  currentSinger.name +
+                  '.png'
+                "
+              >
+              </GWAvatar>
+              <div @click="showCollection = false">返回</div>
+            </div>
+            <div class="row-card">
+            <GWTitleCard v-for="collection in singerCollectionList" :image="getWebsiteApiBaseUrl() + 'preview/' + collection.value + '/cover.png'" :title="collection.name" @clickT=""></GWTitleCard>
+            </div>
+            
+          </div>
+          <div v-else class="row-card">
+            <div
+              class="col-card"
+              v-for="singer in filteredList"
+              @click="singerCollection(singer)"
+            >
+              <GWAvatar
+                size="large"
+                :src="
+                  getWebsiteApiBaseUrl() +
+                  'thumbnail/music/' +
+                  singer.name +
+                  '.png'
+                "
+              >
+              </GWAvatar>
+              <div class="name">{{ singer.name }}</div>
+            </div>
+          </div>
+        </div>
         <div class="music-player-wrapper">
           <div class="music-player">
             <audio
@@ -44,10 +93,20 @@
             ></audio>
             <div class="top-bar">
               <span class="iconfont icon-24gl-volumeMiddle"></span>
-              <div ref="soundProgressBarRef" class="progress-bar sound-progress-bar">
-                <span @click="adjustSound" class="duration-bar sound-duration"></span>
+              <div
+                ref="soundProgressBarRef"
+                class="progress-bar sound-progress-bar"
+              >
+                <span
+                  @click="adjustSound"
+                  class="duration-bar sound-duration"
+                ></span>
                 <span ref="soundProgressRef" class="progress sound-progress">
-                  <span @mousedown="roundMouseDown" ref="roundRef" class="round"></span>
+                  <span
+                    @mousedown="roundMouseDown"
+                    ref="roundRef"
+                    class="round"
+                  ></span>
                 </span>
               </div>
               <span
@@ -123,8 +182,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
+import { movieCategoriesApi } from "@/api/movie";
+import GWAvatar from "@/components/GWAvatar.vue";
+import GWTitleCard from "@/components/GWTitleCard.vue";
+import { getWebsiteApiBaseUrl } from "@/utils/website";
 
 // 获取路由对象
 const route = useRoute();
@@ -157,8 +220,22 @@ const roundRef = ref();
 const soundProgressBarRef = ref();
 
 //变量
-let duration,
-  nowPlayIndex = 0;
+let duration, nowPlayIndex = 0;
+const showCollection = ref<boolean>(false);
+const currentSinger = ref<any>();
+const singerName = ref<string>('');
+
+const singerList = ref<any[]>([]);
+  const singerCollectionList = ref<any[]>([]);
+
+const singerCollection = async (singer: any) => {
+  currentSinger.value = singer;
+  showCollection.value = true;
+
+  await movieCategoriesApi({ type: 4, folderPath: singer.value }).then((rsp) => {
+    singerCollectionList.value = rsp.data;
+  });
+};
 
 const musicList = ref<any[]>([
   {
@@ -374,39 +451,48 @@ function adjustProgress(e) {
 }
 
 // 点击声音条更改声音大小
-function adjustSound(e){
+function adjustSound(e) {
   audioRef.value.volume = e.offsetX / e.target.offsetWidth;
-  soundProgressRef.value.style.width = e.offsetX / e.target.offsetWidth * 100 + '%';
+  soundProgressRef.value.style.width =
+    (e.offsetX / e.target.offsetWidth) * 100 + "%";
 }
 
-    // 声音拖动
-function roundMouseDown(){
-  let soundBarLength = soundProgressBarRef.value.offsetWidth
+// 声音拖动
+function roundMouseDown() {
+  let soundBarLength = soundProgressBarRef.value.offsetWidth;
 
-// 鼠标移动
-document.onmousemove = function (ev) {
-    let myEvent = ev || event
-    let disX = myEvent.clientX - soundProgressBarRef.value.getBoundingClientRect().left
+  // 鼠标移动
+  document.onmousemove = function (ev) {
+    let myEvent = ev || event;
+    let disX =
+      myEvent.clientX - soundProgressBarRef.value.getBoundingClientRect().left;
     if (disX > soundBarLength) {
-        disX = soundBarLength
+      disX = soundBarLength;
     } else if (disX == 0) {
-        disX = 0
+      disX = 0;
     }
-    soundProgressRef.value.style.width = disX / soundBarLength * 100 + '%'
-    audioRef.value.volume = disX / soundBarLength
+    soundProgressRef.value.style.width = (disX / soundBarLength) * 100 + "%";
+    audioRef.value.volume = disX / soundBarLength;
+  };
+
+  // 鼠标抬起
+  document.onmouseup = function () {
+    document.onmousemove = null;
+    document.onmouseup = null;
+  };
 }
 
-// 鼠标抬起
-document.onmouseup = function () {
-    document.onmousemove = null
-    document.onmouseup = null
-}
-}
+let filteredList = computed(() => {
+  return singerList.value.filter((singer) => {
+    return singer.name.toLowerCase().includes(singerName.value.toLowerCase());
+  });
+});
 
-   
-
-onMounted(() => {
+onMounted(async () => {
   setMusic(0);
+  await movieCategoriesApi({ type: 3 }).then((rsp) => {
+    singerList.value = rsp.data;
+  });
 });
 </script>
 
@@ -437,6 +523,7 @@ onMounted(() => {
   background: var(--gw-bg-color);
   border-right: 1px solid var(--gw-bg-active-color);
   width: 150px;
+  margin-right: 5px;
   height: calc(100vh - 85px);
 }
 
@@ -461,5 +548,25 @@ onMounted(() => {
   flex-grow: 1;
   position: relative;
   overflow-y: scroll;
+}
+.row-card {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+  cursor: pointer;
+  flex-wrap: wrap;
+}
+.col-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.name {
+  padding: 5px;
+  font-weight: bold;
 }
 </style>

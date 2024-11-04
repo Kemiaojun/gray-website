@@ -44,6 +44,10 @@
   --gw-header-color: rgb(49, 49, 49);
   --gw-font-color: rgb(46, 52, 60);
   --gw-font-color-1: rgb(46, 52, 60, 0.1);
+  --avatar-xlarge-size: 128px;
+  --avatar-large-size: 64px;
+  --avatar-medium-size: 48px;
+  --avatar-small-size: 32px;
 }
 /* 黑夜主题 */
 html.dark {

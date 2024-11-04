@@ -11,9 +11,9 @@
           >
             <el-option
               v-for="item in categories"
-              :key="item"
-              :label="item"
-              :value="item"
+              :key="item.value"
+              :label="item.name"
+              :value="item.name"
             />
           </el-select>
           <el-input
@@ -114,9 +114,9 @@
         >
           <el-option
             v-for="item in categories"
-            :key="item"
-            :label="item"
-            :value="item"
+            :key="item.value"
+            :label="item.name"
+            :value="item.name"
           />
         </el-select>
       </el-form-item>
@@ -171,7 +171,7 @@ const currentMovieName = ref<string>();
 const currentMovieUrl = ref<string>();
 const currentMovieId = ref<number>();
 
-const categories = ref<string[]>();
+const categories = ref<any[]>();
 const m3u8FormRef = ref<FormInstance>();
 const folderName = ref<string>();
 const movieName = ref<string>();
@@ -308,7 +308,7 @@ const reloadData = () => {
 // 挂载处理
 onMounted(async () => {
   refreshData();
-  await movieCategoriesApi().then((rsp) => {
+  await movieCategoriesApi({type:1}).then((rsp) => {
     categories.value = rsp.data;
   });
 });
