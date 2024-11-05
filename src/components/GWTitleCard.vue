@@ -1,11 +1,12 @@
 <template>
-  <div class="card">
+  <div class="card" @click="clickThis">
     <div class="card_image">
       <img :src="image" />
-    </div>
-    <div class="card_title title-white">
+      <div class="card_title title-white">
       <p>{{ title }}</p>
     </div>
+    </div>
+    
   </div>
 </template>
 
@@ -23,11 +24,18 @@ const props = defineProps<CardProps>();
 
 const { image, title } = toRefs(props);
 
+
+// 点击卡片时调用父组件的回调函数
+function clickThis() {
+  if (props?.clickT) {
+    const param = props.cardData ? toRaw(props.cardData) : {};
+    props?.clickT(param);
+  }
+}
 </script>
 
 <style scoped lang="scss">
 .card {
-  margin: 20px auto;
   width: 150px;
   height: 150px;
   border-radius: 40px;
@@ -45,18 +53,19 @@ box-shadow: 5px 5px 20px 7px rgba(0,0,0,0.25), -5px -5px 20px 7px rgba(0,0,0,0.2
 .card .card_image img {
   width: inherit;
   height: inherit;
-  border-radius: 40px;
+  border-radius: 20px;
   object-fit: cover;
 }
 
 .card .card_title {
   text-align: center;
-  border-radius: 0px 0px 40px 40px;
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-  margin-top: -80px;
-  height: 40px;
+    border-radius: 0 0 20px 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    height: 30px;
+    margin-top: -55px;
+    background-color: var(--gw-bg-active-color);
 }
 
 .card:hover {

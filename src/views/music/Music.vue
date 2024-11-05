@@ -7,69 +7,181 @@
             index="1"
             :class="activeIndex === '1' ? 'selectTab' : ''"
           >
-            <template #title>
-              <el-icon> <List /> </el-icon>歌手专辑
-            </template></el-menu-item
-          >
+            <SvgIcon :size="22" icon-class="musician" />
+            <div style="margin-left: 10px">歌手专辑</div>
+          </el-menu-item>
           <el-menu-item
             index="2"
             :class="activeIndex === '2' ? 'selectTab' : ''"
-            ><template #title>
-              <el-icon> <Collection /> </el-icon>全部歌曲
-            </template></el-menu-item
           >
+            <SvgIcon :size="22" icon-class="music" />
+            <div style="margin-left: 10px">全部歌曲</div>
+          </el-menu-item>
           <el-menu-item
             index="3"
             :class="activeIndex === '3' ? 'selectTab' : ''"
           >
-            <template #title>
-              <el-icon> <List /> </el-icon>我喜欢的
-            </template></el-menu-item
-          >
+            <SvgIcon :size="22" icon-class="favorite" />
+            <div style="margin-left: 10px">我喜欢的</div>
+          </el-menu-item>
           <el-menu-item
-            index="3"
+            index="4"
             :class="activeIndex === '4' ? 'selectTab' : ''"
           >
-            <template #title>
-              <el-icon> <List /> </el-icon>播放列表
-            </template></el-menu-item
-          >
+            <SvgIcon :size="22" icon-class="music-list" />
+            <div style="margin-left: 10px">播放列表</div>
+          </el-menu-item>
         </el-menu>
       </el-aside>
 
       <el-container class="right-container">
-        <div v-if="activeIndex === '4'" class="tab-body">4</div>
-        <div v-else-if="activeIndex === '3'" class="tab-body">3</div>
-
-        <div v-else-if="activeIndex === '2'" class="tab-body">2</div>
-        <div v-else="activeIndex === '1'" class="tab-body">
-          <div v-if="showCollection">
-            <div class="row-card" style="justify-content: space-between;align-items:center;border-bottom: 1px solid var(--gw-font-color-1">
-              <GWAvatar
-                size="large"
-                :src="
-                  getWebsiteApiBaseUrl() +
-                  'thumbnail/music/' +
-                  currentSinger.name +
-                  '.png'
-                "
-              >
-              </GWAvatar>
-              <div @click="showCollection = false">返回</div>
-            </div>
-            <div class="row-card">
-            <GWTitleCard v-for="collection in singerCollectionList" :image="getWebsiteApiBaseUrl() + 'preview/' + collection.value + '/cover.png'" :title="collection.name" @clickT=""></GWTitleCard>
-            </div>
-            
+        <div v-if="activeIndex === '4'" class="tab-body">
+          <div
+            class="row-card"
+            style="
+              justify-content: space-between;
+              align-items: center;
+              border-bottom: 1px solid var(--gw-font-color-1);
+            "
+          >
+            <el-input
+              v-model="musicName3"
+              placeholder="歌曲名称"
+            >
+          </el-input>
           </div>
-          <div v-else class="row-card">
+          <div
+            class="row-card"
+            style="border-bottom: 1px solid var(--gw-font-color-1)"
+          >
+            <SvgIcon
+              style="cursor: pointer"
+              :size="20"
+              icon-class="previous"
+              @click="previousMusic"
+            />
+            <SvgIcon
+              style="cursor: pointer"
+              :size="20"
+              icon-class="play"
+              @click="playSelectedMusic(filterMusicList)"
+            />
+            <SvgIcon
+              style="cursor: pointer"
+              :size="20"
+              icon-class="next"
+              @click="nextMusic"
+            />
+          </div>
+          <GWMusicSortableTable
+            :table-data="musicList"
+            :current-id="currentMusicId"
+            :click-t="playSelectedMusic"
+            :page-change="pageChange"
+          ></GWMusicSortableTable>
+        </div>
+        <div v-else-if="activeIndex === '3'" class="tab-body">
+          <div
+            class="row-card"
+            style="
+              justify-content: space-between;
+              align-items: center;
+              border-bottom: 1px solid var(--gw-font-color-1);
+            "
+          >
+          <el-input v-model="musicName2" placeholder="歌曲名称" />
+        </div>
+          <div
+            class="row-card"
+            style="border-bottom: 1px solid var(--gw-font-color-1)"
+          >
+            <SvgIcon
+              style="cursor: pointer"
+              :size="20"
+              icon-class="previous"
+              @click="previousMusic"
+            />
+            <SvgIcon
+              style="cursor: pointer"
+              :size="20"
+              icon-class="play"
+              @click="playSelectedMusic(filterMusicList)"
+            />
+            <SvgIcon
+              style="cursor: pointer"
+              :size="20"
+              icon-class="next"
+              @click="nextMusic"
+            />
+          </div>
+          <GWMusicSortableTable
+            :table-data="allMusic"
+            :current-id="currentMusicId"
+            :click-t="playSelectedMusic"
+            :page-change="pageChange"
+          ></GWMusicSortableTable>
+        </div>
+
+        <div v-else-if="activeIndex === '2'" class="tab-body">
+          <div
+            class="row-card"
+            style="
+              justify-content: space-between;
+              align-items: center;
+              border-bottom: 1px solid var(--gw-font-color-1);
+            "
+          >
+            <el-input v-model="musicName1" placeholder="歌曲名称" />
+          </div>
+          <div
+            class="row-card"
+            style="border-bottom: 1px solid var(--gw-font-color-1)"
+          >
+            <SvgIcon
+              style="cursor: pointer"
+              :size="20"
+              icon-class="previous"
+              @click="previousMusic"
+            />
+            <SvgIcon
+              style="cursor: pointer"
+              :size="20"
+              icon-class="play"
+              @click="playSelectedMusic(filterMusicList)"
+            />
+            <SvgIcon
+              style="cursor: pointer"
+              :size="20"
+              icon-class="next"
+              @click="nextMusic"
+            />
+          </div>
+          <GWMusicSortableTable
+            :table-data="allMusic"
+            :current-id="currentMusicId"
+            :click-t="playSelectedMusic"
+            :page-change="pageChange"
+          ></GWMusicSortableTable>
+        </div>
+        <div v-else="activeIndex === '1'" class="tab-body">
+          <div v-if="singerTab == 1">
+            <div
+              class="row-card"
+              style="
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid var(--gw-font-color-1);
+              "
+            >
+              <el-input v-model="singerName" placeholder="歌手名字" />
+            </div>
             <div
               class="col-card"
               v-for="singer in filteredList"
               @click="singerCollection(singer)"
             >
               <GWAvatar
-                size="large"
+                size="xlarge"
                 :src="
                   getWebsiteApiBaseUrl() +
                   'thumbnail/music/' +
@@ -80,6 +192,114 @@
               </GWAvatar>
               <div class="name">{{ singer.name }}</div>
             </div>
+          </div>
+          <div v-else-if="singerTab == 2" class="row-card">
+            <div
+              class="row-card"
+              style="
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid var(--gw-font-color-1);
+              "
+            >
+              <GWAvatar
+                size="xlarge"
+                :src="
+                  getWebsiteApiBaseUrl() +
+                  'thumbnail/music/' +
+                  currentSinger.name +
+                  '.png'
+                "
+              >
+              </GWAvatar>
+              <div style="flex-grow: 1; font-weight: bold; font-style: italic">
+                {{ currentSinger.name }}
+              </div>
+              <div
+                style="
+                  background-color: var(--gw-bg-active-color);
+                  padding: 5px;
+                  border-radius: 5px;
+                "
+                @click="singerTab = 1"
+              >
+                <SvgIcon :size="20" icon-class="back" />
+              </div>
+            </div>
+            <div class="row-card">
+              <GWTitleCard
+                v-for="collection in singerCollectionList"
+                :image="
+                  getWebsiteApiBaseUrl() +
+                  'preview/' +
+                  collection.value +
+                  '/cover.png'
+                "
+                :card-data="collection"
+                :title="collection.name"
+                :click-t="enterCollection"
+              ></GWTitleCard>
+            </div>
+          </div>
+          <div v-else>
+            <div
+              class="row-card"
+              style="
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid var(--gw-font-color-1);
+              "
+            >
+              <img
+                style="width: 100px; height: 100px; border-radius: 10px"
+                :src="
+                  getWebsiteApiBaseUrl() +
+                  'preview/' +
+                  currentCollection.value +
+                  '/cover.png'
+                "
+              />
+              <div style="flex-grow: 1; font-weight: bold; font-style: italic">
+                {{ currentCollection.name }}
+              </div>
+              <div
+                style="
+                  background-color: var(--gw-bg-active-color);
+                  padding: 5px;
+                  border-radius: 5px;
+                "
+                @click="singerTab = 2"
+              >
+                <SvgIcon :size="20" icon-class="back" />
+              </div>
+            </div>
+            <div
+              class="row-card"
+              style="border-bottom: 1px solid var(--gw-font-color-1)"
+            >
+              <SvgIcon
+                style="cursor: pointer"
+                :size="20"
+                icon-class="previous"
+                @click="previousMusic"
+              />
+              <SvgIcon
+                style="cursor: pointer"
+                :size="20"
+                icon-class="play"
+                @click="playSelectedMusic(sortedCollectionMusicList)"
+              />
+              <SvgIcon
+                style="cursor: pointer"
+                :size="20"
+                icon-class="next"
+                @click="nextMusic"
+              />
+            </div>
+            <GWSortableTable
+              :table-data="collectionMusicList"
+              :click-t="playSelectedMusic"
+            ></GWSortableTable>
           </div>
         </div>
         <div class="music-player-wrapper">
@@ -137,9 +357,7 @@
               <div class="info-right">
                 <div class="music-name">
                   <span ref="musicNameRef" class="name">Letting go</span>
-                  <span ref="musicAuthorRef" class="musician"
-                    >汪苏泷/金若晨</span
-                  >
+                  <span ref="musicAuthorRef" class="musician"></span>
                 </div>
                 <div class="playback-setting">
                   <span
@@ -182,22 +400,52 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, watch } from "vue";
 import { useRoute } from "vue-router";
 import { movieCategoriesApi } from "@/api/movie";
+import { musicRefreshApi, musicListApi, pageMusicApi } from "@/api/music";
 import GWAvatar from "@/components/GWAvatar.vue";
 import GWTitleCard from "@/components/GWTitleCard.vue";
+import GWSortableTable from "@/components/GWSortableTable.vue";
+import GWMusicSortableTable from "@/components/GWMusicSortableTable.vue";
 import { getWebsiteApiBaseUrl } from "@/utils/website";
 
 // 获取路由对象
 const route = useRoute();
-
+const regex1 = /^\[(\d{1}):(\d{2})\.(\d+)$/;
+const regex2 = /^\[(\d{2}):(\d{2})\.(\d+)$/;
+const regex3 = /^\[(\d{1}):(\d{2}):(\d{2})$/;
 const activeIndex = ref("1");
 
 // 选择菜单
 const handleSelect = function (key: any, keyPath: any) {
   activeIndex.value = key;
+  if (key == "1") {
+    singerTab.value = 1;
+  } else if (key == "2") {
+    pageMusic();
+  } else if (key == "3") {
+    pageMusic({ favorite: 1 });
+  } else if (key == "4") {
+    pageMusic({ playlist: 1 });
+  }
 };
+
+async function pageMusic(param?: any) {
+  await pageMusicApi({
+    pageNo: 1,
+    pageSize: 500,
+    name: param?.musicName,
+    favorite: param?.favorite,
+    playlist: param?.playlist,
+  }).then((rsp) => {
+    allMusic.value = rsp.data.result;
+  });
+}
+
+const pageMusicName = function(param:any) {
+  pageMusic({musicName: param});
+}
 
 const showLyrics = ref<boolean>(false);
 
@@ -214,123 +462,89 @@ const infoLeftRef = ref();
 const lyricMaskRef = ref();
 const playerProgressRef = ref();
 const musicTimeRef = ref();
-
+const currentMusicId = ref<number>(-1);
 const soundProgressRef = ref();
 const roundRef = ref();
 const soundProgressBarRef = ref();
 
 //变量
-let duration, nowPlayIndex = 0;
-const showCollection = ref<boolean>(false);
+let duration,
+  nowPlayIndex = 0;
+const singerTab = ref<number>(1);
 const currentSinger = ref<any>();
-const singerName = ref<string>('');
+const currentCollection = ref<any>();
+const singerName = ref<string>("");
+const musicSearchName = ref<string>("");
+const musicName1 = ref<string>();
+const musicName2 = ref<string>();
+const musicName3 = ref<string>();
 
 const singerList = ref<any[]>([]);
-  const singerCollectionList = ref<any[]>([]);
+const collectionMusicList = ref<any[]>([]);
+const sortedCollectionMusicList = ref<any[]>([]);
+
+const singerCollectionList = ref<any[]>([]);
+
+const musicList = ref<any[]>([]);
+const filterMusicList = ref<any[]>([]);
+const allMusic = ref<any[]>([]);
+const lyricStr = ref<string>("");
+
+watch(() => musicName1.value,(newName1)=>{pageMusicName(newName1)});
+watch(() => musicName2.value,(newName2)=>{pageMusicName(newName2)});
+watch(() => musicName3.value,(newName3)=>{pageMusicName(newName3)});
+
+
+const playSelectedMusic = (rows: any) => {
+  musicList.value = rows;
+  setMusic(0);
+  playMusic();
+};
+const pageChange = function (musics: any[]) {
+  filterMusicList.value = musics;
+};
 
 const singerCollection = async (singer: any) => {
   currentSinger.value = singer;
-  showCollection.value = true;
+  singerTab.value = 2;
 
-  await movieCategoriesApi({ type: 4, folderPath: singer.value }).then((rsp) => {
-    singerCollectionList.value = rsp.data;
+  await movieCategoriesApi({ type: 4, folderPath: singer.value }).then(
+    (rsp) => {
+      singerCollectionList.value = rsp.data;
+    }
+  );
+};
+
+const enterCollection = async (collection: any) => {
+  singerTab.value = 3;
+  currentCollection.value = collection;
+  await musicListApi({ folderPath: collection.value }).then((rsp) => {
+    collectionMusicList.value = rsp.data;
   });
 };
 
-const musicList = ref<any[]>([
-  {
-    name: "111",
-    url: "http://192.168.192.66:8081/website-api/preview/1/audio_effect/SUNO/%E7%AB%A5%E5%B9%B4%E8%89%B2%E5%BD%A9%20(Childhood%20Colors)%20.mp3",
-    img: "/favicon.png",
-    author: "aaaaaa",
-  },
-  {
-    name: "222",
-    url: "http://192.168.192.66:8081/website-api/preview/1/audio_effect/SUNO/Cherry%20Blossoms.mp3",
-    img: "/favicon.png",
-    author: "abadads",
-  },
-]);
+const refresh = (collection: any) => {
+  musicRefreshApi({ folderPath: collection.value });
+};
 
 // 获取歌词
 let timeArr: string[] = [];
 let lrcArr: string[] = [];
-const lyricStr = `[00:00.00]Letting go
-[00:00.00]原唱 : 蔡健雅
-[00:00.63]制作人 : 汪苏泷/金若晨
-[00:03.79]Letting go
-[00:06.28]我终于舍得为你放开手
-[00:10.48]因为爱你爱到我心痛
-[00:15.80]但你却不懂
-[00:20.25]这是一封离别信
-[00:24.01]写下我该离开的原因
-[00:27.58]我在你生命中扮演的角色太模糊了
-[00:34.71]对我曾忽冷忽热
-[00:38.14]我到底是情人还是朋友
-[00:41.64]爱你是否不该太认真
-[00:45.71]That’s why
-[00:47.75]I'm letting go
-[00:50.48]我终于舍得为你放开手
-[00:54.52]因为爱你爱到我心痛
-[00:59.64]但你却不懂
-[01:02.07]Letting go
-[01:04.60]你对一切都软弱与怠惰
-[01:08.43]让人怀疑你是否爱过我 真的爱过我
-[01:18.92]Letting go
-[01:22.67]Letting go
-[01:31.43]Letting go
-[01:36.53]你是呼吸的空气
-[01:40.10]脱离不了的地心引力
-[01:43.29]你在我生命中 曾经是我存在的原因
-[01:50.49]也许就像他们说
-[01:54.13]爱情只会让人变愚蠢
-[01:57.38]自作多情 爱得太天真
-[02:01.43]That’s why
-[02:03.74]I’m letting go
-[02:06.30]我终于舍得为你放开手
-[02:10.04]因为爱你爱到我心痛
-[02:15.07]但你却不懂
-[02:18.18]Letting go
-[02:20.51]你对一切都软弱与怠惰
-[02:24.03]让人怀疑你是否爱过我 真的爱过我
-[02:33.43]为你再也找不到借口
-[02:36.95]That’s when we should let it go
-[02:43.90]That’s when we should let it go
-[02:45.55]在夜深人静里想着
-[02:49.20]心不安 却越沸腾
-[02:52.86]我无助 我无助 好想哭 好想哭
-[02:56.62]我找不到退路
-[02:59.75]在夜深人静里写着
-[03:03.50]心慢慢 就越变冷（心不安 却越沸腾）
-[03:06.72]我不恨 我不恨 也不哭 也不哭
-[03:10.45]我的眼泪 早已哭干了
-[03:17.26]Coz I’m letting go
-[03:20.41]我终于舍得为你放开手
-[03:24.06]因为爱你爱到我心痛
-[03:29.78]但你却不懂
-[03:32.13]Letting go
-[03:34.68]你对一切都软弱与怠惰
-[03:38.60]让人怀疑你是否爱过我 真的爱过我
-[03:46.31]Letting go
-[03:48.75]你对一切都软弱与怠惰
-[03:52.74]让人怀疑你是否爱过我
-[03:58.17]That’s when we should let it go
-[04:05.09]That’s when we should let it go
-[04:08.60]That’s when we should let it go
-[04:12.17]That’s when we should let it go`;
 
 // 处理时间显示进度条
 function timeAndProgress() {
-  playerProgressRef.value.style.width =
-    (audioRef.value.currentTime / audioRef.value.duration) * 100 + "%";
-  let time: number = audioRef.value.duration - audioRef.value.currentTime;
-  let minue = parseInt(time / 60);
-  let second = parseInt(time % 60);
-  let str = `${minue < 10 ? "0" + minue : minue}:${
-    second < 10 ? "0" + second : second
-  }`;
-  musicTimeRef.value.innerHTML = str;
-  lycSlide();
+  if (playerProgressRef.value) {
+    playerProgressRef.value.style.width =
+      (audioRef.value.currentTime / audioRef.value.duration) * 100 + "%";
+    let time: number = audioRef.value.duration - audioRef.value.currentTime;
+    let minue = parseInt(time / 60);
+    let second = parseInt(time % 60);
+    let str = `${minue < 10 ? "0" + minue : minue}:${
+      second < 10 ? "0" + second : second
+    }`;
+    musicTimeRef.value.innerHTML = str;
+    lycSlide();
+  }
 }
 
 function toogleLyrics() {
@@ -362,10 +576,17 @@ function lycSlide() {
 function lyricInit() {
   // 获取歌词
   let insertLrcStr = "";
-  const str = lyricStr.split("\n");
+  const str = lyricStr.value.split("\n");
   str.forEach((item) => {
     const splitLyc = item.split("]");
-    timeArr.push(timeFormat(splitLyc[0].substr(1, splitLyc[0].length - 4)));
+    if (regex1.test(splitLyc[0])) {
+      timeArr.push(timeFormat(splitLyc[0].substr(1, 5)));
+    } else if (regex2.test(splitLyc[0])) {
+      timeArr.push(timeFormat(splitLyc[0].substr(1, 6)));
+    } else if (regex3.test(splitLyc[0])) {
+      timeArr.push(timeFormat(splitLyc[0].substr(4, splitLyc[0].length)));
+    }
+
     lrcArr.push(splitLyc[1]);
     insertLrcStr += `<li>${lrcArr[lrcArr.length - 1]}</li>`;
   });
@@ -374,12 +595,21 @@ function lyricInit() {
 
 // 设置播放的音乐和图片
 function setMusic(index: number) {
-  musicImgRef.value.src = musicList.value[index].img;
-  audioRef.value.src = musicList.value[index].url;
-  musicAuthorRef.value.innerHTML = musicList.value[index].author;
-  musicNameRef.value.innerHTML = musicList.value[index].name;
-  lyricInit();
-  playMusic();
+  if (musicList.value.length > 0) {
+    let music = musicList.value[index];
+    currentMusicId.value = music.id;
+    // musicImgRef.value.src = music.img;
+    audioRef.value.src =
+      getWebsiteApiBaseUrl() +
+      "preview/" +
+      music.folderPath +
+      "/" +
+      music.fileName;
+    musicAuthorRef.value.innerHTML = music.artist;
+    musicNameRef.value.innerHTML = music.title;
+    lyricStr.value = music.lyrics;
+    lyricInit();
+  }
 }
 // 播放音乐
 function playMusic() {
@@ -403,6 +633,7 @@ function previousMusic() {
     nowPlayIndex--;
   }
   setMusic(nowPlayIndex);
+  playMusic();
 }
 
 // 下一首
@@ -413,6 +644,7 @@ function nextMusic() {
     nowPlayIndex++;
   }
   setMusic(nowPlayIndex);
+  playMusic();
 }
 // 格式化时间
 function timeFormat(timeStr: string) {
@@ -436,17 +668,21 @@ function binarySearch(arr, target, left = 0, right = arr.length - 1) {
   }
 }
 
+let timer;
+
 // 加载完MP3需要设置时间显示与进度条监听
 function canPlay() {
+  if (timer) {
+    clearInterval(timer);
+  }
   duration = audioRef.value.duration;
-  setInterval(function () {
+  timer = setInterval(function () {
     timeAndProgress();
   }, 1000);
 }
 
 function adjustProgress(e) {
   audioRef.value.currentTime = (e.offsetX / e.target.offsetWidth) * duration;
-  debugger;
   timeAndProgress();
 }
 
@@ -489,9 +725,19 @@ let filteredList = computed(() => {
 });
 
 onMounted(async () => {
-  setMusic(0);
   await movieCategoriesApi({ type: 3 }).then((rsp) => {
     singerList.value = rsp.data;
+  });
+  await pageMusicApi({
+    pageNo: 1,
+    pageSize: 5,
+    musicName: musicSearchName.value,
+    playlist: 1,
+  }).then((rsp) => {
+    musicList.value = rsp.data.result;
+    if (musicList.value.length > 0) {
+      setMusic(0);
+    }
   });
 });
 </script>
@@ -549,6 +795,7 @@ onMounted(async () => {
   position: relative;
   overflow-y: scroll;
 }
+
 .row-card {
   width: 100%;
   display: inline-flex;
@@ -558,6 +805,7 @@ onMounted(async () => {
   cursor: pointer;
   flex-wrap: wrap;
 }
+
 .col-card {
   display: inline-flex;
   flex-direction: column;
@@ -568,5 +816,16 @@ onMounted(async () => {
 .name {
   padding: 5px;
   font-weight: bold;
+}
+
+.el-table__row {
+  background-color: var(--gw-bg-color) !important;
+  /* 设置表格背景透明 */
+}
+
+/* 取消悬停行的背景颜色 */
+.transparent-table .el-table__row:hover {
+  background-color: transparent !important;
+  /* 悬停行背景透明 */
 }
 </style>

@@ -33,7 +33,7 @@ const tabs = ref<Tab[]>([
   { icon: "web", name: "Links", title: "导航" },
   { icon: "image", name: "Resource", title: "资源" },
   { icon: "studio", name: "Movie", title: "影院" },
-  { icon: "music3", name: "Music", title: "歌曲" },
+  { icon: "music3", name: "Music", title: "音乐" },
 
 ]);
 const selectedTab = ref("Home");
@@ -41,6 +41,14 @@ const selectedTab = ref("Home");
 const includeRouter = ref<any>(["Home"]);
 const curRoute = ref<RouteRecordName>("Home");
 
+
+// key	type	explaination
+// name	string	Song name, will appear on song name area.
+// id	number	Song id, use Object to collect.
+// src	string	Song audio source.
+// author	string[] | undefined	Song author.
+// album	string | undefined	Song album.
+// img	string | undefined	Song thumbnail, will appear at player left.
 onMounted( async ()=>{
   const core = window._PlayerCore
   await randomMusicApi(5).then((rsp =>{
