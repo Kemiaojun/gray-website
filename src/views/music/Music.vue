@@ -228,8 +228,8 @@
                 :image="
                   getWebsiteApiBaseUrl() +
                   'preview/' +
-                  collection.value +
-                  '/cover.png'
+                  collection.value + '/' + collection.name + 
+                  '.jpg'
                 "
                 :card-data="collection"
                 :title="collection.name"
