@@ -251,8 +251,7 @@
                 :src="
                   getWebsiteApiBaseUrl() +
                   'preview/' +
-                  currentCollection.value +
-                  '/cover.png'
+                  currentCollection.value + '/' + currentCollection.name + '.jpg'
                 "
               />
               <div style="flex-grow: 1; font-weight: bold; font-style: italic">
