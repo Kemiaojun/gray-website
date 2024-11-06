@@ -71,6 +71,7 @@ box-shadow: 5px 5px 20px 7px rgba(0,0,0,0.25), -5px -5px 20px 7px rgba(0,0,0,0.2
       text-wrap: nowrap;
       white-space-collapse: collapse;
       overflow: hidden;
+      white-space: nowrap;
       padding: 0 10px;
     }
 }
