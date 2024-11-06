@@ -332,7 +332,7 @@ table tr:hover td {
 
 .music-title {
   color: #ff8aa9;
-  max-width: 200px;
+  max-width: 160px;
   text-overflow: ellipsis;
   text-wrap: nowrap;
   white-space-collapse: collapse;

@@ -7,29 +7,54 @@
             index="1"
             :class="activeIndex === '1' ? 'selectTab' : ''"
           >
-            <SvgIcon :size="22" icon-class="musician" />
-            <div style="margin-left: 10px">歌手专辑</div>
+            <el-tooltip
+              class="item"
+              effect="dark"
+              content="歌手专辑"
+              placement="right"
+            >
+              <SvgIcon :size="22" icon-class="musician" />
+            </el-tooltip>
+            <div style="margin-left: 10px"></div>
           </el-menu-item>
           <el-menu-item
             index="2"
             :class="activeIndex === '2' ? 'selectTab' : ''"
           >
-            <SvgIcon :size="22" icon-class="music" />
-            <div style="margin-left: 10px">全部歌曲</div>
+            <el-tooltip
+              class="item"
+              effect="dark"
+              content="全部歌曲"
+              placement="right"
+            >
+              <SvgIcon :size="22" icon-class="music" />
+            </el-tooltip>
           </el-menu-item>
           <el-menu-item
             index="3"
             :class="activeIndex === '3' ? 'selectTab' : ''"
           >
-            <SvgIcon :size="22" icon-class="favorite" />
-            <div style="margin-left: 10px">我喜欢的</div>
+            <el-tooltip
+              class="item"
+              effect="dark"
+              content="我喜欢的"
+              placement="right"
+            >
+              <SvgIcon :size="22" icon-class="favorite" />
+            </el-tooltip>
           </el-menu-item>
           <el-menu-item
             index="4"
             :class="activeIndex === '4' ? 'selectTab' : ''"
           >
-            <SvgIcon :size="22" icon-class="music-list" />
-            <div style="margin-left: 10px">播放列表</div>
+            <el-tooltip
+              class="item"
+              effect="dark"
+              content="播放列表"
+              placement="right"
+            >
+              <SvgIcon :size="22" icon-class="music-list" />
+            </el-tooltip>
           </el-menu-item>
         </el-menu>
       </el-aside>
@@ -228,7 +253,9 @@
                 :image="
                   getWebsiteApiBaseUrl() +
                   'preview/' +
-                  collection.value + '/' + collection.name + 
+                  collection.value +
+                  '/' +
+                  collection.name +
                   '.jpg'
                 "
                 :card-data="collection"
@@ -251,7 +278,10 @@
                 :src="
                   getWebsiteApiBaseUrl() +
                   'preview/' +
-                  currentCollection.value + '/' + currentCollection.name + '.jpg'
+                  currentCollection.value +
+                  '/' +
+                  currentCollection.name +
+                  '.jpg'
                 "
               />
               <div style="flex-grow: 1; font-weight: bold; font-style: italic">
@@ -367,14 +397,16 @@
                     @click="previousMusic"
                     class="iconfont icon-next previous"
                   ></span>
-                  <SvgIcon v-if="playing"
+                  <SvgIcon
+                    v-if="playing"
                     class="iconfont icon-zanting1"
                     style="cursor: pointer"
                     :size="40"
                     icon-class="pause"
                     @click="pauseMusic"
                   />
-                  <SvgIcon v-else
+                  <SvgIcon
+                    v-else
                     class="iconfont icon-bofang"
                     style="cursor: pointer"
                     :size="40"
@@ -524,10 +556,11 @@ const pageChange = function (musics: any[]) {
   filterMusicList.value = musics;
 };
 
-const getArtistThumbnail = ()=> {
-  if(currentMusic.value && currentMusic.value.artistThumbnail) return getWebsiteApiBaseUrl() + currentMusic.value.artistThumbnail;
-  return '/favicon.png';
-}
+const getArtistThumbnail = () => {
+  if (currentMusic.value && currentMusic.value.artistThumbnail)
+    return getWebsiteApiBaseUrl() + currentMusic.value.artistThumbnail;
+  return "/favicon.png";
+};
 
 const singerCollection = async (singer: any) => {
   currentSinger.value = singer;
@@ -611,8 +644,7 @@ function lyricInit() {
     } else if (regex2.test(splitLyc[0])) {
       timeArr.push(timeFormat(splitLyc[0].substr(1, 6)));
     } else if (regex3.test(splitLyc[0])) {
-      timeArr.push(timeFormat(splitLyc[0].substr(4, splitLyc[0].length))
-      );
+      timeArr.push(timeFormat(splitLyc[0].substr(4, splitLyc[0].length)));
     }
 
     lrcArr.push(splitLyc[1]);
@@ -643,7 +675,6 @@ function setMusic(index: number) {
 function playMusic() {
   audioRef.value.play();
   playing.value = true;
-  
 }
 
 // 暂停音乐
@@ -795,7 +826,7 @@ onMounted(async () => {
   color: var(--gw-font-color);
   background: var(--gw-bg-color);
   border-right: 1px solid var(--gw-bg-active-color);
-  width: 150px;
+  width: 70px;
   margin-right: 5px;
   height: calc(100vh - 85px);
 }
@@ -818,6 +849,7 @@ onMounted(async () => {
 }
 
 .tab-body {
+  font-size:12px;
   flex-grow: 1;
   position: relative;
   overflow-y: scroll;
@@ -855,5 +887,4 @@ onMounted(async () => {
   background-color: transparent !important;
   /* 悬停行背景透明 */
 }
-
 </style>
