@@ -127,6 +127,7 @@ import { getWebsiteApiBaseUrl } from "@/utils/website";
 import { ElMessage } from "element-plus";
 import { musicAddPlaylistApi, musicLikeApi } from "@/api/music";
 interface TableProps {
+  currentMusic: any;
   tableData: any[]; // 组件对应的数据
   clickT?: (data: any) => void | Promise<void>;
   pageChange?:(data: any) => void | Promise<void>;
@@ -134,11 +135,13 @@ interface TableProps {
 }
 
 const props = defineProps<TableProps>();
-const currentMusicId = ref<number>(-1);
+
+let currentMusicId = computed(()=>{
+  return props.currentMusic ? props.currentMusic.id: -1;
+});
 
 // 点击卡片时调用父组件的回调函数
 function clickThis(rowData: any) {
-  currentMusicId.value = rowData.id;
   if (props?.clickT) {
     props?.clickT([rowData]);
   }

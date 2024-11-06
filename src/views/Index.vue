@@ -20,7 +20,7 @@ import { ref, watch, onMounted } from "vue";
 import router from "@/router";
 import { toRoute } from "@/router";
 import IndexFooter from "./index/IndexFooter.vue";
-import { randomMusicApi } from "@/api/resources"
+import { randomMusicApi } from "@/api/music"
 import type { RouteRecordName } from "vue-router";
 import Header from "../components/GWHeader.vue";
 import type { Tab } from "@/types/gw.props";
@@ -53,12 +53,12 @@ onMounted( async ()=>{
   const core = window._PlayerCore
   await randomMusicApi(5).then((rsp =>{
     if(rsp.data){
-      core.AppendSongList(rsp.data.map((music: Resource) => {
+      core.AppendSongList(rsp.data.map((music: any) => {
         return {
           id: music.id,
           name: music.title,
           src: getWebsiteApiBaseUrl() + music.previewUrl,
-          img: music.thumbnailUrl ? getWebsiteApiBaseUrl() + music.thumbnailUrl:""
+          img: music.artistThumbnail ? getWebsiteApiBaseUrl() + music.artistThumbnail:""
         }
       }))
       // core.Play();

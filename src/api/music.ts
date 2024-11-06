@@ -34,3 +34,12 @@ export const musicAddPlaylistApi = (params: any): Promise<R<any>> => {
 export const pageMusicApi = (params:any): Promise<R<any>> => {
   return rq.post<R<any>>('/music/page',{...params})
 }
+
+/**
+ * 获取随机音乐
+ * @param params
+ * @returns
+ */
+export const randomMusicApi = (param: any ): Promise<R<any>> => {
+  return rq.get<R<any>>('/music/random/' + param )
+}

@@ -95,14 +95,6 @@ export const refreshLibraryApi = ( params: any ): Promise<R<any>> => {
 }
 
 
-/**
- * 获取随机音乐
- * @param params
- * @returns
- */
-export const randomMusicApi = (param: any ): Promise<R<any>> => {
-  return rq.get<R<any>>('/resource/music/' + param )
-}
 
 /**
  * 分页获取资源列表

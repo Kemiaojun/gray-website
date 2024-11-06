@@ -209,7 +209,7 @@ img {
     width: 60px;
     font-size: 12px;
     padding: 5px;
-    text-align: left;
+    text-align: center;
     border-radius: 2px;
     border: 1px solid var(--gw-font-color);
     white-space: nowrap; /* 不换行 */

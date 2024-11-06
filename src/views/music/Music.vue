@@ -71,7 +71,7 @@
           </div>
           <GWMusicSortableTable
             :table-data="musicList"
-            :current-id="currentMusicId"
+            :current-music="currentMusic"
             :click-t="playSelectedMusic"
             :page-change="pageChange"
           ></GWMusicSortableTable>
@@ -112,7 +112,7 @@
           </div>
           <GWMusicSortableTable
             :table-data="allMusic"
-            :current-id="currentMusicId"
+            :current-music="currentMusic"
             :click-t="playSelectedMusic"
             :page-change="pageChange"
           ></GWMusicSortableTable>
@@ -154,7 +154,7 @@
           </div>
           <GWMusicSortableTable
             :table-data="allMusic"
-            :current-id="currentMusicId"
+            :current-music="currentMusic"
             :click-t="playSelectedMusic"
             :page-change="pageChange"
           ></GWMusicSortableTable>
@@ -299,6 +299,7 @@
               />
             </div>
             <GWSortableTable
+              :current-music="currentMusic"
               :table-data="collectionMusicList"
               :click-t="playSelectedMusic"
             ></GWSortableTable>
@@ -342,7 +343,7 @@
                 <img
                   ref="musicImgRef"
                   class="music-img"
-                  src="/favicon.png"
+                  :src="getArtistThumbnail()"
                   alt=""
                 />
                 <div ref="lyricMaskRef" class="lyric-mask">
@@ -358,7 +359,7 @@
 
               <div class="info-right">
                 <div class="music-name">
-                  <span ref="musicNameRef" class="name">Letting go</span>
+                  <span ref="musicNameRef" class="name"></span>
                   <span ref="musicAuthorRef" class="musician"></span>
                 </div>
                 <div class="playback-setting">
@@ -396,7 +397,7 @@
                 ref="playerProgressRef"
                 class="progress player-progress"
               ></span>
-              <span ref="musicTimeRef" class="time">03:22</span>
+              <span ref="musicTimeRef" class="time">00:00</span>
             </div>
           </div>
         </div>
@@ -467,7 +468,7 @@ const infoLeftRef = ref();
 const lyricMaskRef = ref();
 const playerProgressRef = ref();
 const musicTimeRef = ref();
-const currentMusicId = ref<number>(-1);
+const currentMusic = ref<any>();
 const soundProgressRef = ref();
 const roundRef = ref();
 const soundProgressBarRef = ref();
@@ -522,6 +523,11 @@ const playSelectedMusic = (rows: any) => {
 const pageChange = function (musics: any[]) {
   filterMusicList.value = musics;
 };
+
+const getArtistThumbnail = ()=> {
+  if(currentMusic.value && currentMusic.value.artistThumbnail) return getWebsiteApiBaseUrl() + currentMusic.value.artistThumbnail;
+  return '/favicon.png';
+}
 
 const singerCollection = async (singer: any) => {
   currentSinger.value = singer;
@@ -619,7 +625,7 @@ function lyricInit() {
 function setMusic(index: number) {
   if (musicList.value.length > 0) {
     let music = musicList.value[index];
-    currentMusicId.value = music.id;
+    currentMusic.value = music;
     // musicImgRef.value.src = music.img;
     audioRef.value.src =
       getWebsiteApiBaseUrl() +

@@ -30,7 +30,7 @@
           <td @click="clickThis(rowData)">
             <div
               :class="
-                rowData.id == currentId
+                rowData.id == currentMusicId
                   ? 'music-title active'
                   : 'music-title'
               "
@@ -139,7 +139,7 @@ import { getWebsiteApiBaseUrl } from "@/utils/website";
 import { ElMessage } from "element-plus";
 import { musicAddPlaylistApi, musicLikeApi } from "@/api/music";
 interface TableProps {
-  currentId: number;
+  currentMusic: any;
   tableData: any[]; // 组件对应的数据
   clickT?: (data: any) => void | Promise<void>;
   pageChange?:(data: any) => void | Promise<void>;
@@ -147,8 +147,8 @@ interface TableProps {
 
 const props = defineProps<TableProps>();
 
-let currentId = computed(()=>{
-  return props.currentId;
+let currentMusicId = computed(()=>{
+  return props.currentMusic ? props.currentMusic.id: -1;
 });
 
 // 点击卡片时调用父组件的回调函数
