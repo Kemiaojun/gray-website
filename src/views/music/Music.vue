@@ -85,8 +85,8 @@
               border-bottom: 1px solid var(--gw-font-color-1);
             "
           >
-          <el-input v-model="musicName2" placeholder="歌曲名称" />
-        </div>
+            <el-input v-model="musicName2" placeholder="歌曲名称" />
+          </div>
           <div
             class="row-card"
             style="border-bottom: 1px solid var(--gw-font-color-1)"
@@ -291,6 +291,12 @@
                 icon-class="next"
                 @click="nextMusic"
               />
+              <SvgIcon
+                style="cursor: pointer"
+                :size="20"
+                icon-class="refresh-music"
+                @click="refresh(currentCollection)"
+              />
             </div>
             <GWSortableTable
               :table-data="collectionMusicList"
@@ -360,16 +366,20 @@
                     @click="previousMusic"
                     class="iconfont icon-next previous"
                   ></span>
-                  <span
-                    ref="playRef"
-                    class="iconfont icon-bofang"
-                    @click="playMusic"
-                  ></span>
-                  <span
-                    ref="stopRef"
+                  <SvgIcon v-if="playing"
                     class="iconfont icon-zanting1"
+                    style="cursor: pointer"
+                    :size="40"
+                    icon-class="pause"
                     @click="pauseMusic"
-                  ></span>
+                  />
+                  <SvgIcon v-else
+                    class="iconfont icon-bofang"
+                    style="cursor: pointer"
+                    :size="40"
+                    icon-class="play1"
+                    @click="playMusic"
+                  />
                   <span
                     @click="nextMusic"
                     class="iconfont icon-next next"
@@ -439,19 +449,18 @@ async function pageMusic(param?: any) {
   });
 }
 
-const pageMusicName = function(param:any) {
-  pageMusic({musicName: param});
-}
+const pageMusicName = function (param: any) {
+  pageMusic({ musicName: param });
+};
 
 const showLyrics = ref<boolean>(false);
 
-const playRef = ref();
-const stopRef = ref();
 const audioRef = ref();
 const musicImgRef = ref();
 const musicNameRef = ref();
 const musicAuthorRef = ref();
 const lyricContentRef = ref();
+const playing = ref(false);
 
 const musicInfoRef = ref();
 const infoLeftRef = ref();
@@ -464,7 +473,7 @@ const roundRef = ref();
 const soundProgressBarRef = ref();
 
 //变量
-let duration:number,
+let duration: number,
   nowPlayIndex = 0;
 const singerTab = ref<number>(1);
 const currentSinger = ref<any>();
@@ -486,10 +495,24 @@ const filterMusicList = ref<any[]>([]);
 const allMusic = ref<any[]>([]);
 const lyricStr = ref<string>("");
 
-watch(() => musicName1.value,(newName1)=>{pageMusicName(newName1)});
-watch(() => musicName2.value,(newName2)=>{pageMusicName(newName2)});
-watch(() => musicName3.value,(newName3)=>{pageMusicName(newName3)});
-
+watch(
+  () => musicName1.value,
+  (newName1) => {
+    pageMusicName(newName1);
+  }
+);
+watch(
+  () => musicName2.value,
+  (newName2) => {
+    pageMusicName(newName2);
+  }
+);
+watch(
+  () => musicName3.value,
+  (newName3) => {
+    pageMusicName(newName3);
+  }
+);
 
 const playSelectedMusic = (rows: any) => {
   musicList.value = rows;
@@ -524,7 +547,7 @@ const refresh = (collection: any) => {
 };
 
 // 获取歌词
-let timeArr: string[] = [];
+let timeArr: any[] = [];
 let lrcArr: string[] = [];
 
 // 处理时间显示进度条
@@ -561,11 +584,11 @@ function toogleLyrics() {
 function lycSlide() {
   if (showLyrics.value) {
     let index = binarySearch(timeArr, Math.floor(audioRef.value.currentTime));
-    lyricContentRef.value.style.top = index * -12 + 150 + "px";
+    lyricContentRef.value.style.top = index * -20 + 100 + "px";
     [...lyricContentRef.value.children].forEach((item) => {
       item.style.color = "var(--gw-font-color)";
     });
-    lyricContentRef.value.children[index].style.color = "darkseagreen";
+    lyricContentRef.value.children[index].style.color = "aqua";
   }
 }
 
@@ -573,15 +596,17 @@ function lyricInit() {
   // 获取歌词
   let insertLrcStr = "";
   timeArr = [];
+  lrcArr = [];
   const str = lyricStr.value.split("\n");
   str.forEach((item) => {
     const splitLyc = item.split("]");
     if (regex1.test(splitLyc[0])) {
-      timeArr.push(String(timeFormat(splitLyc[0].substr(1, 5))));
+      timeArr.push(timeFormat(splitLyc[0].substr(1, 5)));
     } else if (regex2.test(splitLyc[0])) {
-      timeArr.push(String(timeFormat(splitLyc[0].substr(1, 6))));
+      timeArr.push(timeFormat(splitLyc[0].substr(1, 6)));
     } else if (regex3.test(splitLyc[0])) {
-      timeArr.push(String(timeFormat(splitLyc[0].substr(4, splitLyc[0].length))));
+      timeArr.push(timeFormat(splitLyc[0].substr(4, splitLyc[0].length))
+      );
     }
 
     lrcArr.push(splitLyc[1]);
@@ -611,15 +636,14 @@ function setMusic(index: number) {
 // 播放音乐
 function playMusic() {
   audioRef.value.play();
-  playRef.value.style.display = "none";
-  stopRef.value.style.display = "block";
+  playing.value = true;
+  
 }
 
 // 暂停音乐
 function pauseMusic() {
   audioRef.value.pause();
-  playRef.value.style.display = "block";
-  stopRef.value.style.display = "none";
+  playing.value = false;
 }
 
 // 上一首
@@ -647,14 +671,14 @@ function nextMusic() {
 function timeFormat(timeStr: string) {
   if (timeStr) {
     const timeStrArr = timeStr.split(":");
-    const minute = timeStrArr[0][0] == "0" ? timeStrArr[0][1] : timeStrArr[0];
-    const second = timeStrArr[1][0] == "0" ? timeStrArr[1][1] : timeStrArr[1];
+    const minute = timeStrArr[0];
+    const second = timeStrArr[1];
     return parseInt(minute) * 60 + parseInt(second);
   }
 }
 
 // 二分查找
-function binarySearch(arr:any, target:any, left = 0, right = arr.length - 1) {
+function binarySearch(arr: any, target: any, left = 0, right = arr.length - 1) {
   if (left > right) return left - 1;
   const mid = Math.floor((left + right) / 2);
   if (arr[mid] === target) return mid;
@@ -665,7 +689,7 @@ function binarySearch(arr:any, target:any, left = 0, right = arr.length - 1) {
   }
 }
 
-let timer:any;
+let timer: any;
 
 // 加载完MP3需要设置时间显示与进度条监听
 function canPlay() {
@@ -678,13 +702,13 @@ function canPlay() {
   }, 1000);
 }
 
-function adjustProgress(e:any) {
+function adjustProgress(e: any) {
   audioRef.value.currentTime = (e.offsetX / e.target.offsetWidth) * duration;
   timeAndProgress();
 }
 
 // 点击声音条更改声音大小
-function adjustSound(e:any) {
+function adjustSound(e: any) {
   audioRef.value.volume = e.offsetX / e.target.offsetWidth;
   soundProgressRef.value.style.width =
     (e.offsetX / e.target.offsetWidth) * 100 + "%";
@@ -825,4 +849,5 @@ onMounted(async () => {
   background-color: transparent !important;
   /* 悬停行背景透明 */
 }
+
 </style>

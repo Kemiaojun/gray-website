@@ -96,7 +96,7 @@
 .lyric-mask {
   width: 100%;
   height: 99.3%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--gw-bg-color-5);
   -webkit-backdrop-filter: blur(35px);
           backdrop-filter: blur(35px);
   border-radius: 20px;
@@ -121,12 +121,12 @@
   top: 70px;
   margin: 0;
   padding: 0;
-  font-size: 0.8vw;
+  font-size: 14px;
   list-style-type: none;
 }
 #lyc-content li {
   margin: 10px 0;
-  height: 15px;
+  height: 20px;
 }
 .music-player-wrapper .music-player .music-info .info-left img {
   width: 100%;
@@ -172,9 +172,6 @@
 .music-player-wrapper .music-player .music-info .info-right .playback-setting .icon-bofang,
 .music-player-wrapper .music-player .music-info .info-right .playback-setting .icon-zanting1 {
   font-size: 55px !important;
-}
-.music-player-wrapper .music-player .music-info .info-right .playback-setting .icon-zanting1 {
-  display: none;
 }
 .music-player-wrapper .music-player .progress-bar {
   position: relative;
