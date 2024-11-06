@@ -12,9 +12,9 @@
           <el-tooltip
             class="item"
             effect="dark"
-            :content="item.name"
+            :content="item.title"
             placement="top"
-            v-for="(item, key) in movie.files"
+            v-for="(item, key) in seriesData"
             :key="key"
           >
             <div
@@ -22,22 +22,26 @@
               :onclick="choosePlay"
               :fileName="item.value"
             >
-              {{ item.name }}
+              {{ item.chapter }}
             </div>
           </el-tooltip>
         </div>
       </div>
       <div class="gw-flex-info">
         <el-tooltip
-            class="item"
-            effect="dark"
-            :content="movie.title + size"
-            placement="bottom"
-          >
+          class="item"
+          effect="dark"
+          :content="movie.title + size"
+          placement="bottom"
+        >
           <h3 class="movie-title">{{ movie.title }}{{ size }}</h3>
-          </el-tooltip>
-       
-        <h3 v-if="movie.series == '是'" class="movie-play" :onclick="toogleSeries">
+        </el-tooltip>
+
+        <h3
+          v-if="movie.series == '是'"
+          class="movie-play"
+          :onclick="toogleSeries"
+        >
           剧集
         </h3>
         <h3 v-else class="movie-play" :onclick="playThis">Play</h3>
@@ -66,20 +70,19 @@ const currentVideName = ref<string>(movie.value.title);
 const showSeries = ref(false);
 
 let size = computed(() => {
-  if(movie.value.size){
-    if(movie.value.series == '是'){
-      return ' [共'+movie.value.size+'集]' 
-    }else{
-      let sz = movie.value.size/1024;
-      if(sz<1024) return ' ['+sz.toFixed(2)+'KB]'
-      sz = sz/1024;
-      if(sz<1024) return ' ['+sz.toFixed(2)+'MB]'
-      sz = sz/1024;
-      if(sz<1024) return ' ['+sz.toFixed(2)+'GB]'
+  if (movie.value.size) {
+    if (movie.value.series == "是") {
+      return " [共" + movie.value.size + "集]";
+    } else {
+      let sz = movie.value.size / 1024;
+      if (sz < 1024) return " [" + sz.toFixed(2) + "KB]";
+      sz = sz / 1024;
+      if (sz < 1024) return " [" + sz.toFixed(2) + "MB]";
+      sz = sz / 1024;
+      if (sz < 1024) return " [" + sz.toFixed(2) + "GB]";
     }
   }
 });
-
 
 // 点击卡片时调用父组件的回调函数
 function clickThis() {
@@ -102,9 +105,21 @@ function choosePlay(event: { target: any }) {
 }
 function playThis() {
   if (props?.play) {
-    props.play({ name: currentVideName.value, url: getWebsiteApiBaseUrl() + currentVideUrl.value });
+    props.play({
+      name: currentVideName.value,
+      url: getWebsiteApiBaseUrl() + currentVideUrl.value,
+    });
   }
 }
+
+let seriesData = computed(() => {
+  if (movie.value.files) {
+    return movie.value.files.map((item) => {
+      const [part1, part2] = item.name.split("-");
+      return { ...item, chapter:part1,title:part2 };
+    });
+  }
+});
 </script>
 
 <style scoped lang="scss">
