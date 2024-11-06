@@ -44,11 +44,7 @@
               border-bottom: 1px solid var(--gw-font-color-1);
             "
           >
-            <el-input
-              v-model="musicName3"
-              placeholder="歌曲名称"
-            >
-          </el-input>
+            <el-input v-model="musicName3" placeholder="歌曲名称"> </el-input>
           </div>
           <div
             class="row-card"
