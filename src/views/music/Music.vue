@@ -300,6 +300,7 @@
             <GWSortableTable
               :current-music="currentMusic"
               :table-data="collectionMusicList"
+              :page-change="pageChange"
               :click-t="playSelectedMusic"
             ></GWSortableTable>
           </div>
