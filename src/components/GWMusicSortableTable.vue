@@ -19,7 +19,6 @@
             Album
           </th>
           <th>Size</th>
-          <th>Time</th>
           <th>Ext</th>
           <th>Operation</th>
         </tr>
@@ -45,7 +44,6 @@
               {{ rowData.album }}
           </td>
           <td>{{ rowData.prettySize }}</td>
-          <td>{{ rowData.duration > 0 ? rowData.duration : "未知" }}</td>
           <td>
             <div class="ext-div">{{ rowData.ext }}</div>
           </td>
@@ -288,6 +286,8 @@ table th.sorted {
   color: #ffc207;
 }
 table td {
+  text-overflow: ellipsis;
+  white-space: nowrap;
   padding: 0.5rem 1rem;
   transition: all 0.3s ease;
 }
@@ -347,6 +347,7 @@ table tr:hover td {
   overflow: hidden;
   padding: 0 10px;
   color: #ff8aa9;
+  white-space: nowrap;
   &:hover {
     cursor: pointer;
   }

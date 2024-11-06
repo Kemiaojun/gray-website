@@ -223,6 +223,7 @@ function download() {
   text-wrap: nowrap;
   white-space-collapse: collapse;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .controls {

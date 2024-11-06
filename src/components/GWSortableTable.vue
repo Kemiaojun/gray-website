@@ -279,6 +279,8 @@ table th.sorted {
   color: #ffc207;
 }
 table td {
+  text-overflow: ellipsis;
+  white-space: nowrap;
   padding: 0.5rem 1rem;
   transition: all 0.3s ease;
 }
@@ -338,6 +340,7 @@ table tr:hover td {
   white-space-collapse: collapse;
   overflow: hidden;
   padding: 0 10px;
+  white-space: nowrap;
   &:hover {
     cursor: pointer;
   }

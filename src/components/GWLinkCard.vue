@@ -100,6 +100,7 @@ const { title, tsize, items } = toRefs(props);
   text-wrap: nowrap;
   white-space-collapse: collapse;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .name {
