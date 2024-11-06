@@ -623,7 +623,7 @@ function toogleLyrics() {
 function lycSlide() {
   if (showLyrics.value) {
     let index = binarySearch(timeArr, Math.floor(audioRef.value.currentTime));
-    lyricContentRef.value.style.top = index * -20 + 100 + "px";
+    lyricContentRef.value.style.top = index * -18 + 100 + "px";
     [...lyricContentRef.value.children].forEach((item) => {
       item.style.color = "var(--gw-font-color)";
     });
