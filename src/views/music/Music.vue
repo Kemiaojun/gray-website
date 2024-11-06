@@ -468,7 +468,7 @@ const roundRef = ref();
 const soundProgressBarRef = ref();
 
 //变量
-let duration,
+let duration:number,
   nowPlayIndex = 0;
 const singerTab = ref<number>(1);
 const currentSinger = ref<any>();
@@ -537,8 +537,8 @@ function timeAndProgress() {
     playerProgressRef.value.style.width =
       (audioRef.value.currentTime / audioRef.value.duration) * 100 + "%";
     let time: number = audioRef.value.duration - audioRef.value.currentTime;
-    let minue = parseInt(time / 60);
-    let second = parseInt(time % 60);
+    let minue = parseInt(String(time / 60));
+    let second = parseInt(String(time % 60));
     let str = `${minue < 10 ? "0" + minue : minue}:${
       second < 10 ? "0" + second : second
     }`;
@@ -576,15 +576,16 @@ function lycSlide() {
 function lyricInit() {
   // 获取歌词
   let insertLrcStr = "";
+  timeArr = [];
   const str = lyricStr.value.split("\n");
   str.forEach((item) => {
     const splitLyc = item.split("]");
     if (regex1.test(splitLyc[0])) {
-      timeArr.push(timeFormat(splitLyc[0].substr(1, 5)));
+      timeArr.push(String(timeFormat(splitLyc[0].substr(1, 5))));
     } else if (regex2.test(splitLyc[0])) {
-      timeArr.push(timeFormat(splitLyc[0].substr(1, 6)));
+      timeArr.push(String(timeFormat(splitLyc[0].substr(1, 6))));
     } else if (regex3.test(splitLyc[0])) {
-      timeArr.push(timeFormat(splitLyc[0].substr(4, splitLyc[0].length)));
+      timeArr.push(String(timeFormat(splitLyc[0].substr(4, splitLyc[0].length))));
     }
 
     lrcArr.push(splitLyc[1]);
@@ -657,7 +658,7 @@ function timeFormat(timeStr: string) {
 }
 
 // 二分查找
-function binarySearch(arr, target, left = 0, right = arr.length - 1) {
+function binarySearch(arr:any, target:any, left = 0, right = arr.length - 1) {
   if (left > right) return left - 1;
   const mid = Math.floor((left + right) / 2);
   if (arr[mid] === target) return mid;
@@ -668,7 +669,7 @@ function binarySearch(arr, target, left = 0, right = arr.length - 1) {
   }
 }
 
-let timer;
+let timer:any;
 
 // 加载完MP3需要设置时间显示与进度条监听
 function canPlay() {
@@ -681,13 +682,13 @@ function canPlay() {
   }, 1000);
 }
 
-function adjustProgress(e) {
+function adjustProgress(e:any) {
   audioRef.value.currentTime = (e.offsetX / e.target.offsetWidth) * duration;
   timeAndProgress();
 }
 
 // 点击声音条更改声音大小
-function adjustSound(e) {
+function adjustSound(e:any) {
   audioRef.value.volume = e.offsetX / e.target.offsetWidth;
   soundProgressRef.value.style.width =
     (e.offsetX / e.target.offsetWidth) * 100 + "%";

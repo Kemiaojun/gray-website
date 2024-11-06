@@ -263,7 +263,11 @@ let sortedData = computed(() => {
 });
 
 onMounted(() =>{
-  if(props.pageChange) props.pageChange(sortedData.value);
+    setTimeout(()=>{
+      if(props.pageChange){
+        props.pageChange(sortedData.value);
+      }
+    },1000);
 });
 </script>
 
