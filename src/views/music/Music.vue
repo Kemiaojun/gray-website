@@ -282,7 +282,7 @@
                 style="cursor: pointer"
                 :size="20"
                 icon-class="play"
-                @click="playSelectedMusic(sortedCollectionMusicList)"
+                @click="playSelectedMusic(filterMusicList)"
               />
               <SvgIcon
                 style="cursor: pointer"

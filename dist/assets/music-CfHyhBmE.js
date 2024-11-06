@@ -1,1 +1,0 @@
-import{d as t}from"./request_website-Co468qfb.js";const e=s=>t.post("/music/refresh",s),r=s=>t.post("/music/list",s),u=s=>t.get("/music/like/"+s),c=s=>t.get("/music/playlist/add/"+s),a=s=>t.post("/music/page",{...s}),m=s=>t.get("/music/random/"+s);export{c as a,r as b,e as c,u as m,a as p,m as r};
