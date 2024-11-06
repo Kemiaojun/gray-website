@@ -196,12 +196,8 @@ function addPlayThis(rowData: any) {
   const core = window._PlayerCore;
   core.AppendSongOnHead({
     name: rowData.title,
-    src:
-      getWebsiteApiBaseUrl() +
-      "preview/" +
-      rowData.folderPath +
-      "/" +
-      rowData.fileName,
+    src: getWebsiteApiBaseUrl() + rowData.previewUrl,
+    img: rowData.artistThumbnail ? getWebsiteApiBaseUrl() + rowData.artistThumbnail:"",
     id: rowData.id,
   });
   core.PlaySelectSong(rowData.id);
@@ -344,6 +340,12 @@ table tr:hover td {
 }
 
 .music-title {
+  max-width: 200px;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  white-space-collapse: collapse;
+  overflow: hidden;
+  padding: 0 10px;
   color: #ff8aa9;
   &:hover {
     cursor: pointer;

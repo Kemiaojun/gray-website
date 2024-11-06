@@ -66,6 +66,13 @@ box-shadow: 5px 5px 20px 7px rgba(0,0,0,0.25), -5px -5px 20px 7px rgba(0,0,0,0.2
     height: 30px;
     margin-top: -55px;
     background-color: var(--gw-bg-active-color);
+    p {
+      text-overflow: ellipsis;
+      text-wrap: nowrap;
+      white-space-collapse: collapse;
+      overflow: hidden;
+      padding: 0 10px;
+    }
 }
 
 .card:hover {
