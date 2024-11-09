@@ -7,11 +7,7 @@
   ],
   "compilerOptions": {
     "composite": true,
-    "types": [
-      "node"
-    ],
-    "lib": [
-      
-    ]
+    "types": ["node"],
+    "lib": []
   }
 }

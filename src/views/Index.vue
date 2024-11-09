@@ -22,7 +22,7 @@ import { toRoute } from "@/router";
 import IndexFooter from "./index/IndexFooter.vue";
 import { randomMusicApi } from "@/api/music"
 import type { RouteRecordName } from "vue-router";
-import Header from "../components/GWHeader.vue";
+import Header from "../components/layout/Header.vue";
 import type { Tab } from "@/types/gw.props";
 import { getWebsiteApiBaseUrl } from '@/utils/website'
 import type { Resource } from "@/types/gw.resources";

@@ -14,6 +14,7 @@ window.blconfig = {
     // 将该值填写你开放为博客的用户ID
     USER_ID: 1
   },
+
   /**
    * 博客样式，当前可设置样式如下：
    * 1. 左上角 LOGO 样式
@@ -27,12 +28,13 @@ window.blconfig = {
     // 是否以特殊样式显示专题文件夹
     SUBJECT_TITLE: true
   },
+
   /**
    * 不同env环境下的特殊配置
    */
   ENVS: {
     DEV: {
-      WEBSITE_API_BASE_URI: "http://localhost:8081/website-api/",
+      WEBSITE_API_BASE_URI: "http://192.168.192.66:8081/website-api/",
       BLOSSOM_API_BASE_URI: "http://192.168.192.66/blossom-api/"
     },
     TEST: {
@@ -40,22 +42,8 @@ window.blconfig = {
       BLOSSOM_API_BASE_URI: "http://192.168.192.66/blossom-api/"
     },
     PROD: {
-      WEBSITE_API_BASE_URI: "https://bugu.us.kg/website-api/",
-      BLOSSOM_API_BASE_URI: "https://bugu.us.kg/blossom-api/"
+      WEBSITE_API_BASE_URI: "https://graython.us.kg/website-api/",
+      BLOSSOM_API_BASE_URI: "https://graython.us.kg/blossom-api/"
     }
-  },
-  /**
-   * 可以填写你自己的网站，该信息会展示在右上角的【更多】按钮中，以及首页的【所有文章】下
-   * NAME: 网站名称
-   * URL: 网站地址
-   * LOGO: 网站LOGO地址
-   */
-  LINKS: [
-    // 下方是一个示例
-    {
-      NAME: 'Blossom 双链笔记软件',
-      URL: 'https://www.wangyunf.com/blossom-doc/index.html',
-      LOGO: 'https://www.wangyunf.com/bl/pic/home/bl/img/U1/head/blossom_logo.png'
-    }
-  ]
+  }
 }

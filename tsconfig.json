@@ -6,17 +6,14 @@
     "src/**/*.vue",
     "src/**/*.d.ts",
     "declaration.d.ts",
-    "public/global.d.ts"
-, "public/player"  ],
+    "public/global.d.ts",
+    "public/player"
+  ],
   "compilerOptions": {
     "baseUrl": "./",
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   "references": [
