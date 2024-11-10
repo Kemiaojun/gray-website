@@ -1,0 +1,37 @@
+{
+  "id": "4736368",
+  "name": "website",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "11249904",
+      "name": "sun",
+      "font_class": "sun",
+      "unicode": "e861",
+      "unicode_decimal": 59489
+    },
+    {
+      "icon_id": "15838585",
+      "name": "caps-unlock-filling",
+      "font_class": "caps-unlock-filling",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    },
+    {
+      "icon_id": "10972033",
+      "name": "moon",
+      "font_class": "moon",
+      "unicode": "e68f",
+      "unicode_decimal": 59023
+    },
+    {
+      "icon_id": "11808058",
+      "name": "menu",
+      "font_class": "menu",
+      "unicode": "e6a6",
+      "unicode_decimal": 59046
+    }
+  ]
+}

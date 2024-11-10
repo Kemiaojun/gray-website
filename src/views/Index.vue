@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-container">
+  <div class="layout-root-container">
     <Header
       v-if="showHeader()"
       :tabs="tabs"
@@ -12,6 +12,7 @@
       </keep-alive>
     </router-view>
     <IndexFooter v-if="showFooter()"></IndexFooter>
+    <ToolBox :toTop=true ></ToolBox>
   </div>
 </template>
 
@@ -108,13 +109,15 @@ const selectTab = (name: string) => {
 };
 </script>
 <style scoped lang="scss">
-.flex-container {
+.layout-root-container {
   @include box(100%, 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  overflow: hidden;
+  overflow-y: scroll;
+  background-color: var(--gw-bg-color);
+  color: var(--gw-font-color);
 }
 </style>

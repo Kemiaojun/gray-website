@@ -8,7 +8,7 @@
     </bl-row>
     <bl-row class="head-row tabs" width="100%" height="100%">
       <div v-for="(tab, index) in tabs" :key="index" :class="['tab', selectedTab === tab.name ? 'active':'']"  @click="selectTab(index,tab.name)">
-        <SvgIcon :size="18" :icon-class="tab.icon" />
+        <SvgIcon :size="18" :icon-class="tab.icon" color="red"/>
         <span class="tab-text">{{ tab.title }}</span>
       </div>
     </bl-row>
@@ -53,6 +53,7 @@ import { isNotBlank } from '@/utils/obj'
 import DayNightSwitch from "@/components/DayNight.vue";
 import {useDark} from "@vueuse/core";
 import type { Tab } from '@/types/gw.props'
+import { color } from 'echarts'
 
 let isDark = useDark();
 

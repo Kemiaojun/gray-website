@@ -397,22 +397,16 @@
                     @click="previousMusic"
                     class="iconfont icon-next previous"
                   ></span>
-                  <SvgIcon
-                    v-if="playing"
-                    class="iconfont icon-zanting1"
-                    style="cursor: pointer"
-                    :size="40"
-                    icon-class="pause"
+                  
+                  <span v-if="playing"
                     @click="pauseMusic"
-                  />
-                  <SvgIcon
-                    v-else
-                    class="iconfont icon-bofang"
-                    style="cursor: pointer"
-                    :size="40"
-                    icon-class="play1"
+                    class="iconfont icon-zanting1"
+                  ></span>
+                  <span
+                  v-else
                     @click="playMusic"
-                  />
+                    class="iconfont icon-bofang"
+                  ></span>
                   <span
                     @click="nextMusic"
                     class="iconfont icon-next next"
@@ -803,7 +797,7 @@ onMounted(async () => {
 <style scoped lang="scss">
 @import "./style.css";
 /* 引入相对路径的 CSS 文件 */
-@import "@/assets/iconfont/iconfont.css";
+@import "@/assets/styles/iconfont/player/iconfont.css";
 /* 引入相对路径的 CSS 文件 */
 
 .root-container {

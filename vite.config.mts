@@ -45,14 +45,11 @@ export default defineConfig({
       filename: "stats.html", // 分析图生成的文件名
       open: true, //如果存在本地服务端口，将在打包后自动展示
     }),
-    // ElementPlus 按需引入的插件
     AutoImport({
-      imports: [
-        "vue", // 自动导入 vue API，例如 ref、reactive
-        "vue-router", // 自动导入 vue-router 的 API，例如 useRoute、useRouter
-      ],
+      imports: ['vue', 'vue-router', 'pinia'],
       resolvers: [ElementPlusResolver()],
-    }),
+      dts: "src/types/auto-imports.d.ts",
+  }),
     Components({
       resolvers: [ElementPlusResolver()],
     }),
