@@ -63,10 +63,11 @@ const handleLogin = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("/background.png");
-  background-position: center;
-  background-size: cover;
   flex-direction: column;
+  background: linear-gradient(45deg, #ff7e5f, #feb47b);
+}
+.dark .login-root{
+  background: linear-gradient(45deg, #232526, #414345);
 }
 
 .form {
@@ -75,7 +76,7 @@ const handleLogin = () => {
   transform: scale(1.1);
   color: var(--gw-font-color);
   padding: 2rem 2rem;
-  font-size: 1rem;
+  font-size: 1.4rem;
   flex-direction: column;
 }
 
@@ -92,24 +93,22 @@ const handleLogin = () => {
   height: 100%;
   width: 100%;
   padding: 0 6rem;
-  font-size: 1rem;
   border: 1px solid var(--gw-bg-color);
   border-radius: 1rem;
   /* border-bottom: 2.5px solid #ffffff; */
   transition: all 0.2s ease;
 }
 
-input[type="text"],
-input[type="password"] {
-  background-color: transparent;
-}
+// input[type="text"],
+// input[type="password"] {
+//   background-color: transparent;
+// }
 
 .input-field .iconbl {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   color: var(--gw-font-color);
-  font-size: 2rem;
   transition: all 0.2s ease;
   padding-left: 2rem;
 }
