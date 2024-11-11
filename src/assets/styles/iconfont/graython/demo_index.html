@@ -55,6 +55,12 @@
           <ul class="icon_lists dib-box">
           
             <li class="dib">
+              <span class="icon iconfont">&#xe653;</span>
+                <div class="name">moon</div>
+                <div class="code-name">&amp;#xe653;</div>
+              </li>
+          
+            <li class="dib">
               <span class="icon iconfont">&#xe861;</span>
                 <div class="name">sun</div>
                 <div class="code-name">&amp;#xe861;</div>
@@ -64,12 +70,6 @@
               <span class="icon iconfont">&#xe688;</span>
                 <div class="name">caps-unlock-filling</div>
                 <div class="code-name">&amp;#xe688;</div>
-              </li>
-          
-            <li class="dib">
-              <span class="icon iconfont">&#xe68f;</span>
-                <div class="name">moon</div>
-                <div class="code-name">&amp;#xe68f;</div>
               </li>
           
             <li class="dib">
@@ -96,9 +96,9 @@
 <pre><code class="language-css"
 >@font-face {
   font-family: 'iconfont';
-  src: url('iconfont.woff2?t=1731238926843') format('woff2'),
-       url('iconfont.woff?t=1731238926843') format('woff'),
-       url('iconfont.ttf?t=1731238926843') format('truetype');
+  src: url('iconfont.woff2?t=1731245119053') format('woff2'),
+       url('iconfont.woff?t=1731245119053') format('woff'),
+       url('iconfont.ttf?t=1731245119053') format('truetype');
 }
 </code></pre>
           <h3 id="-iconfont-">第二步：定义使用 iconfont 的样式</h3>
@@ -125,6 +125,15 @@
         <ul class="icon_lists dib-box">
           
           <li class="dib">
+            <span class="icon iconfont icon-moon1"></span>
+            <div class="name">
+              moon
+            </div>
+            <div class="code-name">.icon-moon1
+            </div>
+          </li>
+          
+          <li class="dib">
             <span class="icon iconfont icon-sun"></span>
             <div class="name">
               sun
@@ -139,15 +148,6 @@
               caps-unlock-filling
             </div>
             <div class="code-name">.icon-caps-unlock-filling
-            </div>
-          </li>
-          
-          <li class="dib">
-            <span class="icon iconfont icon-moon"></span>
-            <div class="name">
-              moon
-            </div>
-            <div class="code-name">.icon-moon
             </div>
           </li>
           
@@ -189,6 +189,14 @@
           
             <li class="dib">
                 <svg class="icon svg-icon" aria-hidden="true">
+                  <use xlink:href="#icon-moon1"></use>
+                </svg>
+                <div class="name">moon</div>
+                <div class="code-name">#icon-moon1</div>
+            </li>
+          
+            <li class="dib">
+                <svg class="icon svg-icon" aria-hidden="true">
                   <use xlink:href="#icon-sun"></use>
                 </svg>
                 <div class="name">sun</div>
@@ -201,14 +209,6 @@
                 </svg>
                 <div class="name">caps-unlock-filling</div>
                 <div class="code-name">#icon-caps-unlock-filling</div>
-            </li>
-          
-            <li class="dib">
-                <svg class="icon svg-icon" aria-hidden="true">
-                  <use xlink:href="#icon-moon"></use>
-                </svg>
-                <div class="name">moon</div>
-                <div class="code-name">#icon-moon</div>
             </li>
           
             <li class="dib">

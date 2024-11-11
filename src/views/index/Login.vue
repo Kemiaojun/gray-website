@@ -64,10 +64,7 @@ const handleLogin = () => {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: linear-gradient(45deg, #ff7e5f, #feb47b);
-}
-.dark .login-root{
-  background: linear-gradient(45deg, #232526, #414345);
+  background: var(--gw-bg-color);
 }
 
 .form {

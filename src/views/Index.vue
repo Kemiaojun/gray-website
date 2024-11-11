@@ -11,7 +11,6 @@
         <component :is="Component" />
       </keep-alive>
     </router-view>
-    <IndexFooter v-if="showFooter()"></IndexFooter>
     <ToolBox :toTop=true ></ToolBox>
   </div>
 </template>
@@ -95,14 +94,6 @@ const showHeader = () => {
   return true;
 };
 
-const showFooterArray = ["Home"];
-
-const showFooter = () => {
-  const currentRoute = router.currentRoute.value;
-  return currentRoute?.name &&
-  showFooterArray.find((ele) => ele === currentRoute.name);
-};
-
 const selectTab = (name: string) => {
   selectedTab.value = name;
   toRoute(name);
@@ -110,7 +101,8 @@ const selectTab = (name: string) => {
 </script>
 <style scoped lang="scss">
 .layout-root-container {
-  @include box(100%, 100%);
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

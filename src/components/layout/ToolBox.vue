@@ -1,50 +1,61 @@
 <script setup lang="ts">
+import {useDark} from "@vueuse/core";
+import DayNight from "./DayNight.vue";
+
+let isDark = useDark();
+const moreRef = ref();
 const props = defineProps({
   toTop: {
     type: Boolean,
     default: false,
-  }
-})
+  },
+});
 const { toTop } = toRefs(props);
 const isContainerVisible = ref(false);
 
 const toggleContainer = () => {
-  circleTransition();
-  isContainerVisible.value = !isContainerVisible.value;
+  colorAnimation();
+  if(isContainerVisible.value){
+    isContainerVisible.value = false;
+    moreRef.value.classList.add("hide");
+  }else{
+    isContainerVisible.value = true;
+    moreRef.value.classList.remove("hide");
+  }
+  
 };
-const circleTransition = () => {
-  const circle = document.querySelector(".rotate-box");
-  circle?.classList.add('active');
+const colorAnimation = () => {
+  const circle = document.getElementById("menu-icon");
+  circle?.classList.add("active");
   setTimeout(function () {
-circle?.classList.remove('active');
+    circle?.classList.remove("active");
   }, 1000);
 };
 // 自定义事件
-const emit = defineEmits(['ReadingMode'])
+const emit = defineEmits(["ReadingMode"]);
 
-onMounted(()=>{
+onMounted(() => {
   console.log(toTop.value);
-})
-
-
+});
 </script>
 
 <template>
   <div class="container_div">
-    <div class="hide" :class="{ visible: isContainerVisible }">
+    <div ref="moreRef" class="hide">
+      <DayNight></DayNight>
     </div>
     <div class="rotate-box" @click="toggleContainer">
-      <span style="font-size: 2rem;" class="iconfont icon_moon"></span>
+      <el-tooltip effect="light" content="更多功能" placement="left">
+        <span id="menu-icon" class="iconfont icon-menu"></span>
+      </el-tooltip>
     </div>
     <div class="mb-4">
-      <ToTop v-if="toTop"/>
+      <ToTop v-if="toTop" />
     </div>
-    
   </div>
 </template>
 
 <style scoped lang="scss">
-
 .container_div {
   z-index: 7777;
   position: fixed;
@@ -59,21 +70,20 @@ onMounted(()=>{
 .hide {
   opacity: 0;
   height: auto;
-  transition: all .5s;
-  transform: translate(90px,0);
+  transition: all 0.5s;
+  transform: translate(9rem, 0);
 }
 
 .visible {
   height: auto;
   opacity: 1;
-  transform: translate(0,0); /* 当添加 .visible 类时，容器滑入 */
-  transition: all .5s;
+  transform: translate(0, 0); /* 当添加 .visible 类时，容器滑入 */
+  transition: all 0.5s;
 }
+
 .rotate-box {
   animation: rotating 3s linear infinite;
 }
 
-.rotate-box.active {
-  color: greenyellow;
-}
+
 </style>

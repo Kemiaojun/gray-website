@@ -33,3 +33,16 @@
     }
   }
 }
+
+
+.iconfont {
+  color: var(--gw-icon-color);
+  opacity: 0.5;
+  font-size: 3rem;
+  &:hover {
+    opacity: 1;
+  }
+  &.active {
+    color: var(--gw-icon-active-color);
+  }
+}

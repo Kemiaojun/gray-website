@@ -13,7 +13,6 @@
       </div>
     </bl-row>
     <bl-row class="head-row" width="auto" height="100%">
-      <day-night-switch :size="60" v-model="isDark"></day-night-switch>
       <el-popover
         popper-class="popper-dark"
         placement="bottom-start"
@@ -50,11 +49,8 @@ import { useUserStore } from '@/stores/user'
 import { logout } from '@/utils/auth'
 import { getSysName, getThemeLogoStyle } from '@/utils/env'
 import { isNotBlank } from '@/utils/obj'
-import DayNightSwitch from "@/components/DayNight.vue";
-import {useDark} from "@vueuse/core";
 import type { Tab } from '@/types/gw.props'
 
-let isDark = useDark();
 
 interface TabProps {
   tabs: Tab[];
@@ -119,7 +115,7 @@ const handlLogout = () => {
 
   .project-name {
     @include box(auto, 100%);
-    margin-left: 10px;
+    margin-left: 1rem;
     text-shadow: 3px 3px 5px var(--gw-bg-color);
     cursor: pointer;
     color: transparent;

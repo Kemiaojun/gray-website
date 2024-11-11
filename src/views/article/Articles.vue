@@ -22,24 +22,52 @@
           :indent="14"
           :icon="ArrowRightBold"
           node-key="i"
-          @nodeClick="clickCurDoc">
+          @nodeClick="clickCurDoc"
+        >
           <template #default="{ _node, data }">
             <div
               class="menu-item-wrapper"
               :style="{
                 marginTop: data.p === '0' ? '5px' : '1px',
-                marginBottom: data.p === '0' ? '5px' : '1px'
-              }">
-              <div :class="[data.t.includes('subject') && userStore.userParams.WEB_BLOG_SUBJECT_TITLE === '1' ? 'subject-title' : 'doc-title']">
+                marginBottom: data.p === '0' ? '5px' : '1px',
+              }"
+            >
+              <div
+                :class="[
+                  data.t.includes('subject') &&
+                  userStore.userParams.WEB_BLOG_SUBJECT_TITLE === '1'
+                    ? 'subject-title'
+                    : 'doc-title',
+                ]"
+              >
                 <div class="doc-name">
-                  <img class="menu-icon-img" v-if="isShowImg(data)" :src="data.icon" />
-                  <svg v-else-if="isShowSvg(data)" class="icon menu-icon" aria-hidden="true">
+                  <img
+                    class="menu-icon-img"
+                    v-if="isShowImg(data)"
+                    :src="data.icon"
+                  />
+                  <svg
+                    v-else-if="isShowSvg(data)"
+                    class="icon menu-icon"
+                    aria-hidden="true"
+                  >
                     <use :xlink:href="'#' + data.icon"></use>
                   </svg>
-                  <div class="name-wrapper" :style="{ maxWidth: isNotBlank(data.icon) ? 'calc(100% - 25px)' : '100%' }">
+                  <div
+                    class="name-wrapper"
+                    :style="{
+                      maxWidth: isNotBlank(data.icon)
+                        ? 'calc(100% - 25px)'
+                        : '100%',
+                    }"
+                  >
                     {{ data.n }}
                   </div>
-                  <bl-tag v-for="tag in tags(data)" :bg-color="tag.bgColor" :icon="tag.icon">
+                  <bl-tag
+                    v-for="tag in tags(data)"
+                    :bg-color="tag.bgColor"
+                    :icon="tag.icon"
+                  >
                     {{ tag.content }}
                   </bl-tag>
                 </div>
@@ -49,27 +77,52 @@
         </el-tree>
       </div>
 
-      <div class="doc-content-container" ref="PreviewRef" :style="{ fontSize: getFontSize() }">
-        <div class="article-name" v-if="userStore.userParams.WEB_BLOG_SHOW_ARTICLE_NAME === '1'">{{ article.name }}</div>
+      <div
+        class="doc-content-container"
+        ref="PreviewRef"
+        :style="{ fontSize: getFontSize() }"
+      >
+        <div
+          class="article-name"
+          v-if="userStore.userParams.WEB_BLOG_SHOW_ARTICLE_NAME === '1'"
+        >
+          {{ article.name }}
+        </div>
 
         <el-watermark
           :font="{
             color: userStore.userParams.WEB_BLOG_WATERMARK_COLOR,
             fontSize: userStore.userParams.WEB_BLOG_WATERMARK_FONTSIZE,
-            textBaseline: 'hanging'
+            textBaseline: 'hanging',
           }"
-          :content="article.id > 0 && userStore.userParams.WEB_BLOG_WATERMARK_ENABLED === '1' ? userStore.userParams.WEB_BLOG_WATERMARK_CONTENT : ''"
-          :gap="[userStore.userParams.WEB_BLOG_WATERMARK_GAP, userStore.userParams.WEB_BLOG_WATERMARK_GAP]">
-          <div class="bl-preview" :style="{ fontSize: getFontSize() }" v-html="article.html"></div>
+          :content="
+            article.id > 0 &&
+            userStore.userParams.WEB_BLOG_WATERMARK_ENABLED === '1'
+              ? userStore.userParams.WEB_BLOG_WATERMARK_CONTENT
+              : ''
+          "
+          :gap="[
+            userStore.userParams.WEB_BLOG_WATERMARK_GAP,
+            userStore.userParams.WEB_BLOG_WATERMARK_GAP,
+          ]"
+        >
+          <div
+            class="bl-preview"
+            :style="{ fontSize: getFontSize() }"
+            v-html="article.html"
+          ></div>
         </el-watermark>
       </div>
 
       <div class="toc-container" :style="tocStyle">
         <div class="viewer-toc">
           <div v-if="article.id != 0" class="doc-info">
-            <div class="doc-name" style="font-size: 15px">{{ article.name }}</div>
+            <div class="doc-name" style="font-size: 15px">
+              {{ article.name }}
+            </div>
             <div class="doc-subtitle">
-              <span class="iconbl bl-pen-line"></span> {{ article.words }} 字 | <span class="iconbl bl-read-line"></span> {{ article.uv }} |
+              <span class="iconbl bl-pen-line"></span> {{ article.words }} 字 |
+              <span class="iconbl bl-read-line"></span> {{ article.uv }} |
               <span class="iconbl bl-like-line"></span> {{ article.likes }}
             </div>
             <div class="doc-subtitle">
@@ -83,7 +136,12 @@
           </div>
           <div class="toc-title">目录</div>
           <div class="toc-content">
-            <div v-for="toc in tocList" :key="toc.id" :class="['toc-item', 'link', toc.clazz]" @click="toScroll(toc.id)">
+            <div
+              v-for="toc in tocList"
+              :key="toc.id"
+              :class="['toc-item', 'link', toc.clazz]"
+              @click="toScroll(toc.id)"
+            >
               {{ toc.content }}
             </div>
           </div>
@@ -103,90 +161,98 @@
     :close-on-click-modal="true"
     :with-header="true"
     :destroy-on-close="true"
-    size="70px">
-    <ArticleSetting style="background-color: var(--gw-bg-color);"></ArticleSetting>
+    size="7rem"
+  >
+    <ArticleSetting
+      style="background-color: var(--gw-bg-color)"
+    ></ArticleSetting>
   </el-drawer>
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
-import { ref, onUnmounted, nextTick } from 'vue'
-import { useUserStore } from '@/stores/user'
-import { useLifecycle } from '@/utils/lifecycle'
+import { useRoute } from "vue-router";
+import { ref, onUnmounted, nextTick } from "vue";
+import { useUserStore } from "@/stores/user";
+import { useLifecycle } from "@/utils/lifecycle";
 // element plus
-import { ArrowRightBold, Setting } from '@element-plus/icons-vue'
+import { ArrowRightBold, Setting } from "@element-plus/icons-vue";
 // ts
-import 'katex/dist/katex.min.css'
-import { getFontSize } from './scripts/article-setting'
-import { parseToc, toScroll, type Toc } from './scripts/doc-toc'
-import { isShowImg, isShowSvg, tags } from './scripts/doc-tree-detail'
-import { onHtmlEventDispatch } from './scripts/doc-content-event-dispatch'
-import { articleInfoOpenApi, articleInfoApi, docTreeOpenApi, docTreeApi } from '@/api/blossom'
+import "katex/dist/katex.min.css";
+import { getFontSize } from "./scripts/article-setting";
+import { parseToc, toScroll, type Toc } from "./scripts/doc-toc";
+import { isShowImg, isShowSvg, tags } from "./scripts/doc-tree-detail";
+import { onHtmlEventDispatch } from "./scripts/doc-content-event-dispatch";
+import {
+  articleInfoOpenApi,
+  articleInfoApi,
+  docTreeOpenApi,
+  docTreeApi,
+} from "@/api/blossom";
 // utils
-import { isNull, isNotNull, isNotBlank } from '@/utils/obj'
+import { isNull, isNotNull, isNotBlank } from "@/utils/obj";
 // components
-import ArticleSetting from './ArticleSetting.vue'
+import ArticleSetting from "./ArticleSetting.vue";
 
-const userStore = useUserStore()
+const userStore = useUserStore();
 useLifecycle(
   () => {
-    window.onHtmlEventDispatch = onHtmlEventDispatch
-    getRouteQueryParams()
-    window.addEventListener('resize', onresize)
-    initStyle()
+    window.onHtmlEventDispatch = onHtmlEventDispatch;
+    getRouteQueryParams();
+    window.addEventListener("resize", onresize);
+    initStyle();
   },
   () => {
-    getRouteQueryParams()
-    window.addEventListener('resize', onresize)
-    initStyle()
+    getRouteQueryParams();
+    window.addEventListener("resize", onresize);
+    initStyle();
   }
-)
+);
 
 onUnmounted(() => {
-  window.removeEventListener('resize', onresize)
-})
+  window.removeEventListener("resize", onresize);
+});
 
-const DocTreeRef = ref()
+const DocTreeRef = ref();
 
 /**
  * 路由中获取ID参数
  */
 const getRouteQueryParams = () => {
-  let articleId = route.query.articleId
+  let articleId = route.query.articleId;
   getDocTree(() => {
     nextTick(() => {
-      DocTreeRef.value.setCurrentKey(docTreeCurrentId.value)
-    })
-  })
+      DocTreeRef.value.setCurrentKey(docTreeCurrentId.value);
+    });
+  });
   if (isNotNull(articleId)) {
-    docTreeCurrentId.value = articleId as string
-    let treeParam: any = { ty: 3, i: articleId }
-    clickCurDoc(treeParam)
+    docTreeCurrentId.value = articleId as string;
+    let treeParam: any = { ty: 3, i: articleId };
+    clickCurDoc(treeParam);
   }
-}
+};
 
-const route = useRoute()
+const route = useRoute();
 // 文档菜单的加载动画
-const docTreeLoading = ref(true)
+const docTreeLoading = ref(true);
 // 文档菜单
-const docTreeCurrentId = ref('')
-const docTreeData = ref<DocTree[]>([])
+const docTreeCurrentId = ref("");
+const docTreeData = ref<DocTree[]>([]);
 // 当前选中的文章, 用于在编辑器中展示
 const article = ref<DocInfo>({
   id: 0,
   pid: 0,
-  name: '',
+  name: "",
   tags: [],
   sort: 0,
   starStatus: 0,
   openStatus: 0,
   type: 3,
   html: `<div style="color:#E3E3E3;width:100%;height:300px;display:flex;justify-content: center;
-    align-items: center;font-size:25px;">请在左侧菜单选择文章</div>`
-})
-const tocList = ref<Toc[]>([])
-const defaultOpeneds = ref<string[]>([])
-const PreviewRef = ref()
+    align-items: center;font-size:25px;">请在左侧菜单选择文章</div>`,
+});
+const tocList = ref<Toc[]>([]);
+const defaultOpeneds = ref<string[]>([]);
+const PreviewRef = ref();
 
 /**
  * 获取文档树状列表
@@ -194,22 +260,22 @@ const PreviewRef = ref()
  * 2. 在 workbench 中点击按钮调用, 每个按钮是单选的
  */
 const getDocTree = (callback?: () => void) => {
-  docTreeLoading.value = true
-  docTreeData.value = []
-  defaultOpeneds.value = []
+  docTreeLoading.value = true;
+  docTreeData.value = [];
+  defaultOpeneds.value = [];
 
   const then = (resp: any) => {
-    docTreeData.value = resp.data
+    docTreeData.value = resp.data;
     docTreeData.value.forEach((l1: DocTree) => {
-      defaultOpeneds.value.push(l1.i.toString())
-    })
-    if (callback) callback()
-  }
+      defaultOpeneds.value.push(l1.i.toString());
+    });
+    if (callback) callback();
+  };
 
   docTreeOpenApi()
-      .then((resp) => then(resp))
-      .finally(() => (docTreeLoading.value = false))
-}
+    .then((resp) => then(resp))
+    .finally(() => (docTreeLoading.value = false));
+};
 
 /**
  * 获取文章信息
@@ -218,142 +284,146 @@ const getDocTree = (callback?: () => void) => {
 const clickCurDoc = async (tree: DocTree) => {
   // 如果选中的是文章, 则查询文章详情, 用于在编辑器中显示以及注入
   if (tree.ty == 3) {
-    await getCurEditArticle(tree.i)
-    window.history.replaceState('', '', '#/articles?articleId=' + tree.i)
+    await getCurEditArticle(tree.i);
+    window.history.replaceState("", "", "#/articles?articleId=" + tree.i);
     nextTick(() => {
-      PreviewRef.value.scrollTo({ top: 0 })
-      parseTocAsync(PreviewRef.value)
-    })
+      PreviewRef.value.scrollTo({ top: 0 });
+      parseTocAsync(PreviewRef.value);
+    });
   }
-}
+};
 
 /**
  * 如果点击的是文章, 则查询文章信息和正文, 并在编辑器中显示.
  */
 const getCurEditArticle = async (id: string) => {
-  if (id === '-999') {
+  if (id === "-999") {
     article.value.html = `<div style="color:#C6C6C6;font-weight: 300;width:100%;height:300px;padding:150px 20px;font-size:25px;text-align:center">
       该博客所配置的 USER_ID 为<br/><span style="color:#e3a300; border-bottom: 5px solid #e3a300;border-radius:5px">${window.blconfig.SYS.USER_ID}</span>
-      </div>`
-    return
+      </div>`;
+    return;
   }
 
   const then = (resp: any) => {
     if (isNull(resp.data)) {
-      return
+      return;
     }
-    article.value = resp.data
-  }
-  
-    await articleInfoOpenApi({ id: id, showToc: false, showMarkdown: false, showHtml: true }).then((resp) => then(resp))
-  
-}
+    article.value = resp.data;
+  };
+
+  await articleInfoOpenApi({
+    id: id,
+    showToc: false,
+    showMarkdown: false,
+    showHtml: true,
+  }).then((resp) => then(resp));
+};
 
 /**
  * 解析目录
  */
 const parseTocAsync = async (ele: HTMLElement) => {
-  tocList.value = parseToc(ele)
-}
+  tocList.value = parseToc(ele);
+};
 
 //#region ----------------------------------------< setting >----------------------------------------
-const isShowSetting = ref(false)
+const isShowSetting = ref(false);
 
 const showSetting = () => {
-  isShowSetting.value = true
-}
+  isShowSetting.value = true;
+};
 //#endregion
 
 //#region ----------------------------------------< 响应式样式 >--------------------------------------
-const maskStyle = ref({ display: 'none' })
-const menuShow = ref(false)
-const menuStyle = ref({ display: 'none', opacity: 0 })
-const tocShow = ref(false)
-const tocStyle = ref({ display: 'none', opacity: 0 })
+const maskStyle = ref({ display: "none" });
+const menuShow = ref(false);
+const menuStyle = ref({ display: "none", opacity: 0 });
+const tocShow = ref(false);
+const tocStyle = ref({ display: "none", opacity: 0 });
 
 const handleMenu = (show: boolean) => {
-  menuShow.value = show
+  menuShow.value = show;
   if (show) {
-    maskStyle.value = { display: 'block' }
-    menuStyle.value = { display: 'block', opacity: 0 }
+    maskStyle.value = { display: "block" };
+    menuStyle.value = { display: "block", opacity: 0 };
     setTimeout(() => {
-      menuStyle.value = { display: 'block', opacity: 1 }
-    }, 1)
+      menuStyle.value = { display: "block", opacity: 1 };
+    }, 1);
   }
   if (!show) {
-    menuStyle.value = { display: 'block', opacity: 0 }
+    menuStyle.value = { display: "block", opacity: 0 };
     setTimeout(() => {
-      menuStyle.value = { display: 'none', opacity: 0 }
-    }, 300)
+      menuStyle.value = { display: "none", opacity: 0 };
+    }, 300);
   }
-}
+};
 
 const handleToc = (show: boolean) => {
-  tocShow.value = show
+  tocShow.value = show;
   if (show) {
-    maskStyle.value = { display: 'block' }
-    tocStyle.value = { display: 'block', opacity: 0 }
+    maskStyle.value = { display: "block" };
+    tocStyle.value = { display: "block", opacity: 0 };
     setTimeout(() => {
-      tocStyle.value = { display: 'block', opacity: 1 }
-    }, 1)
+      tocStyle.value = { display: "block", opacity: 1 };
+    }, 1);
   }
   if (!show) {
-    tocStyle.value = { display: 'block', opacity: 0 }
+    tocStyle.value = { display: "block", opacity: 0 };
     setTimeout(() => {
-      tocStyle.value = { display: 'none', opacity: 0 }
-    }, 300)
+      tocStyle.value = { display: "none", opacity: 0 };
+    }, 300);
   }
-}
+};
 
 const initStyle = () => {
-  let width = document.body.clientWidth
+  let width = document.body.clientWidth;
   if (width > 1100) {
-    menuStyle.value = { display: 'block', opacity: 1 }
+    menuStyle.value = { display: "block", opacity: 1 };
   }
   if (width > 1100) {
-    maskStyle.value = { display: 'none' }
-    tocStyle.value = { display: 'block', opacity: 1 }
+    maskStyle.value = { display: "none" };
+    tocStyle.value = { display: "block", opacity: 1 };
   }
-}
+};
 
 const closeAll = () => {
-  handleMenu(false)
-  handleToc(false)
-  maskStyle.value = { display: 'none' }
-}
+  handleMenu(false);
+  handleToc(false);
+  maskStyle.value = { display: "none" };
+};
 
 /**
  *
  */
 const onresize = () => {
-  let width = document.body.clientWidth
+  let width = document.body.clientWidth;
   if (width < 1100) {
-    menuShow.value = false
-    menuStyle.value = { display: 'none', opacity: 0 }
+    menuShow.value = false;
+    menuStyle.value = { display: "none", opacity: 0 };
   }
   if (width > 1100) {
-    maskStyle.value = { display: 'none' }
-    menuStyle.value = { display: 'block', opacity: 1 }
+    maskStyle.value = { display: "none" };
+    menuStyle.value = { display: "block", opacity: 1 };
   }
 
   if (width < 1100) {
-    tocShow.value = false
-    tocStyle.value = { display: 'none', opacity: 0 }
+    tocShow.value = false;
+    tocStyle.value = { display: "none", opacity: 0 };
   }
   if (width > 1100) {
-    maskStyle.value = { display: 'none' }
-    tocStyle.value = { display: 'block', opacity: 1 }
+    maskStyle.value = { display: "none" };
+    tocStyle.value = { display: "block", opacity: 1 };
   }
-}
+};
 
 //#endregion
 </script>
 
 <style scoped lang="scss">
-@import './styles/doc-content.scss';
-@import './styles/doc-toc.scss';
-@import './styles/doc-tree.scss';
-@import './styles/doc-tree-detail.scss';
+@import "./styles/doc-content.scss";
+@import "./styles/doc-toc.scss";
+@import "./styles/doc-tree.scss";
+@import "./styles/doc-tree-detail.scss";
 
 .articles-root {
   @include box(100vw, calc(100vh - 60px));

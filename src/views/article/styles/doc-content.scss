@@ -4,16 +4,12 @@
   max-width: 1160px;
   overflow-x: hidden;
   overflow-y: scroll;
-  padding: 0 30px;
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #ebebeb;
-  }
+  padding: 0 2rem;
 
   .article-name {
     color: var(--gw-font-color);
-    font-weight: 700;
-    padding: 10px 0;
+    font-weight: bold;
+    padding: 1rem 0;
     border-bottom: 1px solid var(--gw-font-color);
     text-align: left;
     position: relative;

@@ -49,6 +49,8 @@
   --avatar-large-size: 64px;
   --avatar-medium-size: 48px;
   --avatar-small-size: 32px;
+  --gw-icon-color: lightskyblue;
+  --gw-icon-active-color: darkblue;
 }
 /* 黑夜主题 */
 html.dark {
@@ -59,6 +61,8 @@ html.dark {
   --gw-header-color: rgb(48, 49, 52);
   --gw-font-color: rgb(242, 242, 242);
   --gw-font-color-1: rgb(242, 242, 242, 0.1);
+  --gw-icon-color: deepskyblue;
+  --gw-icon-active-color: lightblue;
 }
 
 :root {

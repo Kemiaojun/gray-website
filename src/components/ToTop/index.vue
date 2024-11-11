@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { throttle } from "@/utils/optimize";
-import { ref } from "vue";
+defineProps({
+  // 接收父组件传递过来的图标高度
+  fontSize: {
+    type: String,
+    default: "3rem",
+  },
+});
 
 // 距离顶部高度
 const top = ref(0);
@@ -26,23 +32,17 @@ function backToTop() {
 
 <template>
   <transition name="el-zoom-in-bottom">
-    <div
-      style="font-size: 2rem; margin-top: 0.5rem"
-      v-if="top >= 800"
-      @click="backToTop"
-    >
+    <div style="margin-top: 1rem" v-if="top >= 800" @click="backToTop">
       <el-tooltip effect="light" content="回到顶部" placement="left">
-        <span class="iconfont icon-caps-unlock-filling"></span>
+        <span
+          :style="{ fontSize }"
+          class="iconfont icon-caps-unlock-filling"
+        ></span>
       </el-tooltip>
     </div>
   </transition>
 </template>
 
 <style scoped lang="scss">
-.iconfont {
-  color: darkgreen;
-}
-.dark .iconfont {
-  color: lightgreen;
-}
+
 </style>
