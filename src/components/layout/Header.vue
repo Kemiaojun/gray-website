@@ -1,18 +1,13 @@
 <template>
-  <div class="gw-header-root">
-    <bl-row class="head-row" width="auto" height="100%">
-      <div class="gw-logo" @click="toRoute('Home')">
-        <img :src="logo()" :style="getThemeLogoStyle()" />
-      </div>
-      <div class="project-name" @click="toRoute('Home')">{{ sysName() }}</div>
-    </bl-row>
-    <bl-row class="head-row tabs" width="100%" height="100%">
-      <div v-for="(tab, index) in tabs" :key="index" :class="['tab', selectedTab === tab.name ? 'active':'']"  @click="selectTab(index,tab.name)">
-        <SvgIcon :size="18" :icon-class="tab.icon" />
-        <span class="tab-text">{{ tab.title }}</span>
-      </div>
-    </bl-row>
-    <bl-row class="head-row" width="auto" height="100%">
+  <div
+    :class="['gw-header-root', wrapHeader ? 'hide' : '']"
+    style="backdrop-filter: blur(6px)"
+  >
+    <div
+      class="header-background"
+      :style="{ opacity: headerBackgroundOpacity - 0.05 }"
+    ></div>
+    <bl-row class="head-row mobile-menu" style="width:auto;">
       <el-popover
         popper-class="popper-dark"
         placement="bottom-start"
@@ -20,91 +15,172 @@
         :show-arrow="false"
         :hide-after="0"
         :offset="-5"
-        transition="el-zoom-in-top">
+        transition="el-zoom-in-top"
+      >
         <template #reference>
-          <div v-show="userStore.auth && userStore.auth.status === '已登录'" class="popper-target icon-circle">
-            <span class="iconbl bl-apps-line"></span>
-          </div>
+          <div @click="drawer = true" class="iconbl bl-indent-increase" style="font-size: 2rem;"></div>
         </template>
-        <div class="popper-content">
-          <div class="item" @click="toRoute('/todo')"><span class="iconbl bl-a-labellist-line"></span>待办事项</div>
-          <div class="item" @click="toRoute('/plan')"><span class="iconbl bl-calendar-line"></span>日历计划</div>
-          <div class="item" @click="toRoute('/note')"><span class="iconbl bl-note-line"></span>便签</div>
+        <div  v-if="drawer" class="popper-content">
+          <div class="item" @click="toRoute('/todo')">
+            <span class="iconbl bl-a-labellist-line"></span>待办事项
+          </div>
+          <div class="item" @click="toRoute('/plan')">
+            <span class="iconbl bl-calendar-line"></span>日历计划
+          </div>
+          <div class="item" @click="toRoute('/note')">
+            <span class="iconbl bl-note-line"></span>便签
+          </div>
           <div class="item-divider"></div>
-          <div class="item" @click="toRoute('/collection')"><span class="iconbl bl-user-line"></span>管理后台</div>
+          <div class="item" @click="handlLogout">
+            <span class="iconbl bl-logout-circle-line"></span>退出登陆
+          </div>
         </div>
       </el-popover>
-      <div class="iconbl-circle">
-          <span  @click="handlLogout" v-if="userStore.auth && userStore.auth.status === '已登录'" class="iconbl bl-logout-circle-line popper-target"></span>
-          <span v-else @click="toRoute('Login')" class="iconbl bl-login-circle-line popper-target"></span>
+    </bl-row>
+    <bl-row class="head-row logo-menu"  style="width:auto;justify-content: center;">
+      <div class="gw-logo" @click="toRoute('Home')">
+        <img :src="logo()" :style="getThemeLogoStyle()" />
       </div>
+      <div class="project-name" @click="toRoute('Home')">{{ sysName() }}</div>
+    </bl-row>
+    <bl-row class="head-row tabs  pc-menu" style="font-size: 2rem;">
+      <div
+        v-for="(tab, index) in tabs"
+        :key="index"
+        :class="['tab', selectedTab === tab.name ? 'active' : '']"
+        @click="selectTab(index, tab.name)"
+      >
+        <span
+          :class="['iconfont', tab.icon]"
+          style="color: var(--gw-font-color);font-size: 2rem;"
+        ></span>
+        <span class="tab-text" style="margin-left:3px;">{{ tab.title }}</span>
+      </div>
+    </bl-row>
+    <bl-row class="head-row" width="'auto'">
+      <el-popover
+        v-if="userStore.auth && userStore.auth.status === '已登录'"
+        popper-class="popper-dark"
+        placement="bottom-start"
+        trigger="click"
+        :show-arrow="false"
+        :hide-after="0"
+        :offset="-5"
+        transition="el-zoom-in-top"
+      >
+        <template #reference>
+          <span class="iconbl bl-user-line" style="font-size: 2rem;"></span>
+        </template>
+        <div class="popper-content">
+          <div class="item" @click="toRoute('/todo')">
+            <span class="iconbl bl-a-labellist-line"></span>待办事项
+          </div>
+          <div class="item" @click="toRoute('/plan')">
+            <span class="iconbl bl-calendar-line"></span>日历计划
+          </div>
+          <div class="item" @click="toRoute('/note')">
+            <span class="iconbl bl-note-line"></span>便签
+          </div>
+          <div class="item-divider"></div>
+          <div class="item" @click="handlLogout">
+            <span class="iconbl bl-logout-circle-line"></span>退出登陆
+          </div>
+        </div>
+      </el-popover>
+      <span
+        v-else
+        @click="toRoute('Login')"
+        class="iconbl bl-login-circle-line popper-target"
+      ></span>
     </bl-row>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, toRefs } from 'vue'
-import { toRoute } from '@/router'
-import { useUserStore } from '@/stores/user'
-import { logout } from '@/utils/auth'
-import { getSysName, getThemeLogoStyle } from '@/utils/env'
-import { isNotBlank } from '@/utils/obj'
-import type { Tab } from '@/types/gw.props'
-
+import { toRoute } from "@/router";
+import { useUserStore } from "@/stores/user";
+import { logout } from "@/utils/auth";
+import { throttle } from "@/utils/optimize";
+import { getSysName, getThemeLogoStyle } from "@/utils/env";
+import { isNotBlank } from "@/utils/obj";
+import type { Tab } from "@/types/gw.props";
+import DrawerMenu from "./DrawerMenu.vue";
 
 interface TabProps {
   tabs: Tab[];
   selectedTab: string;
 }
-
+const drawer = ref(true);
 const props = defineProps<TabProps>();
 
-const {tabs , selectedTab} = toRefs(props);
+const { tabs, selectedTab } = toRefs(props);
 
 const emit = defineEmits<{
-  (event: 'update:selectedTab', value: string): void;
+  (event: "update:selectedTab", value: string): void;
 }>();
 
 function selectTab(index: number, tab: string) {
-  emit('update:selectedTab', tab);
+  emit("update:selectedTab", tab);
 }
 
-const userStore = useUserStore()
+const userStore = useUserStore();
 
 const sysName = () => {
   if (userStore.userParams.WEB_LOGO_NAME) {
-    return userStore.userParams.WEB_LOGO_NAME
+    return userStore.userParams.WEB_LOGO_NAME;
   }
-  return getSysName()
-}
+  return getSysName();
+};
 
 const logo = () => {
-  if (userStore.userParams.WEB_LOGO_URL && isNotBlank(userStore.userParams.WEB_LOGO_URL)) {
-    return userStore.userParams.WEB_LOGO_URL
+  if (
+    userStore.userParams.WEB_LOGO_URL &&
+    isNotBlank(userStore.userParams.WEB_LOGO_URL)
+  ) {
+    return userStore.userParams.WEB_LOGO_URL;
   }
-  return 'favicon.png'
-}
+  return "favicon.png";
+};
 
 const handlLogout = () => {
   logout();
-  toRoute('Home')
-}
+  toRoute("Home");
+};
 
+// 透明度控制
+const top = ref(0);
+window.addEventListener(
+  "scroll",
+  throttle(() => {
+    top.value =
+      window.scrollY ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+  }, 100)
+);
+let headerBackgroundOpacity = computed(() => {
+  return top.value < 60 ? 0 : top.value > 260 ? 1 : (top.value - 60) / 200;
+});
+
+let wrapHeader = computed(() => {
+  return top.value > 260;
+});
 </script>
 
 <style lang="scss">
 .gw-header-root {
-  background-color: var(--gw-bg-color);
-  border-bottom: var(--el-border);
   @include box(100%, 60px);
   @include flex(row, space-between, center);
-  padding: 10px 10px;
-  z-index: 2000;
-
-  .head-row {
-    line-height: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0 3rem;
+  transition: all 0.3s;
+  &.hide {
+    top: -60px;
   }
-
   .gw-logo {
     @include box(40px, 40px);
     cursor: pointer;
@@ -112,26 +188,18 @@ const handlLogout = () => {
       @include box(40px, 40px);
     }
   }
-
-  .project-name {
-    @include box(auto, 100%);
-    margin-left: 1rem;
-    text-shadow: 3px 3px 5px var(--gw-bg-color);
-    cursor: pointer;
-    color: transparent;
-    font-family: current, sans-serif;
-    letter-spacing: 1px;
-    background: linear-gradient(90deg, var(--gw-header-color), var(--gw-font-color), var(--gw-header-color));
-    background-clip: text;
-    animation: glow 10s linear infinite;
-    transition: 1.5s;
-    background-size: 300%;
-    @keyframes glow {
-      to {
-        background-position: -300%;
-      }
-    }
-  }
+}
+.header-background {
+  width: 100%;
+  height: 100%;
+  background-color: var(--gw-bg-color);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  border-bottom: 1px solid gray;
+  transition: all 0.3s;
 }
 
 .tab-target {
@@ -222,10 +290,31 @@ const handlLogout = () => {
   color: var(--gw-font-color);
   font-weight: bold;
 }
+
+.head-row.mobile-menu {
+  display:none;
+}
+
+@media (max-width: 740px) {
+  .head-row.mobile-menu {
+    display: block;
+  }
+  .head-row.pc-menu {
+    display: none;
+  }
+  .head-row.logo-menu {
+    flex-grow: 1;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* 在屏幕宽度小于 400px 时隐藏文字，只显示图标 */
 @media (max-width: 1040px) {
   .tab-text {
     display: none;
   }
 }
+
+
 </style>

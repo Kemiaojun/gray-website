@@ -20,7 +20,7 @@ import router from '@/router'
 import { toRoute } from '@/router'
 import IndexFooter from './index/IndexFooter.vue'
 import type { RouteRecordName } from 'vue-router'
-import Header from '../components/GWHeader.vue'
+import Header from '../components/backup/GWHeader.vue'
 import type { Tab } from '@/types/gw.props'
 
 const tabs = ref<Tab[]>([{icon:"collection",name:'Collection',title:'合集'},{icon:"library",name:'Library',title:'库'},{icon:"anchor",name:'Anchor',title:'网址'}]);

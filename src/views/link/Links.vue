@@ -32,10 +32,11 @@ const getFontSize = (name: string) => {
 
 <style scoped lang="scss">
 .gray-link-root {
-  @include box(100%, 100%);
+  width: 100%;
   @include flex(row, flex-start, flex-start);
   flex-wrap: wrap;
   align-content: flex-start;
-  padding: 2rem;
+  padding: 0 2rem;
+  margin-top: 60px;
 }
 </style>

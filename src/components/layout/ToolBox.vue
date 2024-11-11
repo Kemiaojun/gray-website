@@ -40,7 +40,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container_div">
+  <div class="toolbox_div">
     <div ref="moreRef" class="hide">
       <DayNight></DayNight>
     </div>
@@ -56,7 +56,7 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-.container_div {
+.toolbox_div {
   z-index: 7777;
   position: fixed;
   bottom: 7rem;

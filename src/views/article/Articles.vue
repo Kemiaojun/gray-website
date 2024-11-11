@@ -426,12 +426,12 @@ const onresize = () => {
 @import "./styles/doc-tree-detail.scss";
 
 .articles-root {
-  @include box(100vw, calc(100vh - 60px));
+  @include box(100%, 100%);
   @include flex(column, flex-start, center);
   box-sizing: border-box;
   background: var(--gw-bg-color);
   position: relative;
-
+  margin-top: 60px;
   .mask {
     position: absolute;
     @include box(100%, calc(100% + 10px));
@@ -453,7 +453,7 @@ const onresize = () => {
   }
 
   .main {
-    @include box(100%, calc(100vh - 100px));
+    @include box(100%, calc(100vh - 70px));
     @include flex(row, center, center);
     padding: 10px;
     overflow: hidden;

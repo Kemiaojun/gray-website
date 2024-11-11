@@ -137,13 +137,17 @@ const pageSearch = async (params:any) =>{
    await waterFallRef.value.reset();
   }
 }
+
+  
 </script>
 
 <style scoped lang="scss">
 .virtual-waterfall-container {
-  width: calc(100%);
-  height: calc(100% - 50px);
-  padding: 5px 20px 20px 20px;
+  height: calc(100vh - 60px);
+    width: calc(100% - 5px);
+    /* min-height: 100%; */
+    padding: 2rem;
+    margin-top: 60px;
 }
 .img-item {
   width: 100%;

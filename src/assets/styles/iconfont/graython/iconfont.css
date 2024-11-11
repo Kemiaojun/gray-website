@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4736368 */
-  src: url('iconfont.woff2?t=1731245119053') format('woff2'),
-       url('iconfont.woff?t=1731245119053') format('woff'),
-       url('iconfont.ttf?t=1731245119053') format('truetype');
+  src: url('iconfont.woff2?t=1731307612420') format('woff2'),
+       url('iconfont.woff?t=1731307612420') format('woff'),
+       url('iconfont.ttf?t=1731307612420') format('truetype');
 }
 
 .iconfont {
@@ -13,8 +13,36 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-moon1:before {
-  content: "\e653";
+.icon-18erji-2:before {
+  content: "\e689";
+}
+
+.icon-heji:before {
+  content: "\e66e";
+}
+
+.icon-dianying:before {
+  content: "\e625";
+}
+
+.icon-wangzhanshouye:before {
+  content: "\e602";
+}
+
+.icon-wangzhanguanli:before {
+  content: "\e63a";
+}
+
+.icon-wangzhantubiao:before {
+  content: "\e601";
+}
+
+.icon-Bloggericon:before {
+  content: "\e604";
+}
+
+.icon-moon:before {
+  content: "\e654";
 }
 
 .icon-sun:before {

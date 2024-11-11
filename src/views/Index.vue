@@ -28,12 +28,12 @@ import { getWebsiteApiBaseUrl } from '@/utils/website'
 import type { Resource } from "@/types/gw.resources";
 
 const tabs = ref<Tab[]>([
-  { icon: "home", name: "Home", title: "首页" },
-  { icon: "blog", name: "Articles", title: "博文" },
-  { icon: "web", name: "Links", title: "导航" },
-  { icon: "image", name: "Resource", title: "资源" },
-  { icon: "studio", name: "Movie", title: "影院" },
-  { icon: "music3", name: "Music", title: "音乐" },
+  { icon: "icon-wangzhanshouye", name: "Home", title: "首页" },
+  { icon: "icon-Bloggericon", name: "Articles", title: "博文" },
+  { icon: "icon-wangzhantubiao", name: "Links", title: "导航" },
+  { icon: "icon-heji", name: "Resource", title: "资源" },
+  { icon: "icon-dianying", name: "Movie", title: "影院" },
+  { icon: "icon-18erji-2", name: "Music", title: "音乐" },
 
 ]);
 const selectedTab = ref("Home");
@@ -101,15 +101,15 @@ const selectTab = (name: string) => {
 </script>
 <style scoped lang="scss">
 .layout-root-container {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  overflow-y: scroll;
   background-color: var(--gw-bg-color);
   color: var(--gw-font-color);
+  min-height: 100vh;
+  overflow-y: scroll;
 }
 </style>

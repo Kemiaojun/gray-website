@@ -6,11 +6,60 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "7715054",
+      "icon_id": "1305012",
+      "name": "Headset-2",
+      "font_class": "18erji-2",
+      "unicode": "e689",
+      "unicode_decimal": 59017
+    },
+    {
+      "icon_id": "7318481",
+      "name": "合集",
+      "font_class": "heji",
+      "unicode": "e66e",
+      "unicode_decimal": 58990
+    },
+    {
+      "icon_id": "15391390",
+      "name": "电影",
+      "font_class": "dianying",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "3886978",
+      "name": "网站首页",
+      "font_class": "wangzhanshouye",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "9210550",
+      "name": "网站管理",
+      "font_class": "wangzhanguanli",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "11243146",
+      "name": "网站图标",
+      "font_class": "wangzhantubiao",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "6626161",
+      "name": "Blogger icon",
+      "font_class": "Bloggericon",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "9785644",
       "name": "moon",
-      "font_class": "moon1",
-      "unicode": "e653",
-      "unicode_decimal": 58963
+      "font_class": "moon",
+      "unicode": "e654",
+      "unicode_decimal": 58964
     },
     {
       "icon_id": "11249904",
