@@ -50,19 +50,28 @@
   --avatar-medium-size: 48px;
   --avatar-small-size: 32px;
   --gw-icon-color: lightskyblue;
-  --gw-icon-active-color: darkblue;
+  --gw-icon-active-color: rgb(64, 158, 255);
+  --gw-bg-wave01: rgb(216, 219, 222,0.7);
+  --gw-bg-wave02: rgb(216, 219, 222,0.5);
+  --gw-bg-wave03: rgb(216, 219, 222,0.3);
+  --gw-bg-wave04: rgb(216, 219, 222,1);
 }
 /* 黑夜主题 */
 html.dark {
   --gw-html-color: #000000;
   --gw-bg-color: rgb(55, 56, 57);
-  --gw-bg-active-color: rgb(69, 69, 73);
+  --gw-bg-active-color: rgb(70, 70, 70);
   --gw-bg-active-color-5: rgb(69, 69, 73,0.5);
   --gw-header-color: rgb(48, 49, 52);
   --gw-font-color: rgb(242, 242, 242);
   --gw-font-color-1: rgb(242, 242, 242, 0.1);
   --gw-icon-color: deepskyblue;
-  --gw-icon-active-color: lightblue;
+  --gw-icon-active-color: rgb(64, 158, 255);
+  
+  --gw-bg-wave01: rgb(70, 70, 70, 0.7);
+  --gw-bg-wave02: rgb(70, 70, 70, 0.5);
+  --gw-bg-wave03: rgb(70, 70, 70, 0.3);
+  --gw-bg-wave04: rgb(70, 70, 70, 1);
 }
 
 :root {

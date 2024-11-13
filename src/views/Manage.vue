@@ -1,6 +1,5 @@
 <template>
   <div class="flex-container">
-    <Header />
     <router-view v-slot="{ Component }">
       <component :is="Component" />
     </router-view>
@@ -8,7 +7,6 @@
 </template>
 
 <script setup lang="ts">
-import Header from "../components/GWResourceHeader.vue";
 </script>
 <style scoped lang="scss">
 .flex-container {

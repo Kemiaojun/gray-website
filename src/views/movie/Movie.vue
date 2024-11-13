@@ -1,5 +1,5 @@
 <template>
-  <div class="movie-gallery">
+  <div class="movie-root-container">
     <GWSearchCondition>
       <template v-slot:left-items>
         <div class="flex-item">
@@ -79,7 +79,7 @@
       :name="currentMovieName"
       :on-close="closePreview"
     ></GWPreviewVideo>
-    <div style="width: 100%">
+    <div style="width: 100%;margin-top: 1rem;">
       <el-pagination
         style="flex-direction: row-reverse"
         background
@@ -315,11 +315,12 @@ onMounted(async () => {
 </script>
 
 <style scoped lang="scss">
-.movie-gallery {
+.movie-root-container {
   background-color: var(--gw-bg-color);
   width: calc(100%);
-  height: calc(100% - 50px);
-  padding: 5px 20px 0 20px;
+  min-height: calc(100% - 60px);
+  margin-top: 60px;
+  padding: 0 1rem;
   overflow: scroll;
 }
 

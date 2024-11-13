@@ -7,7 +7,7 @@
       class="header-background"
       :style="{ opacity: headerBackgroundOpacity - 0.05 }"
     ></div>
-    <bl-row class="head-row mobile-menu" style="width:auto;">
+    <bl-row class="head-row mobile-menu" style="width: auto">
       <el-popover
         popper-class="popper-dark"
         placement="bottom-start"
@@ -18,32 +18,40 @@
         transition="el-zoom-in-top"
       >
         <template #reference>
-          <div @click="drawer = true" class="iconbl bl-indent-increase" style="font-size: 2rem;"></div>
+          <div
+            @click="drawer = true"
+            class="iconbl bl-indent-increase"
+            style="font-size: 2rem"
+          ></div>
         </template>
-        <div  v-if="drawer" class="popper-content">
-          <div class="item" @click="toRoute('/todo')">
-            <span class="iconbl bl-a-labellist-line"></span>待办事项
-          </div>
-          <div class="item" @click="toRoute('/plan')">
-            <span class="iconbl bl-calendar-line"></span>日历计划
-          </div>
-          <div class="item" @click="toRoute('/note')">
-            <span class="iconbl bl-note-line"></span>便签
-          </div>
-          <div class="item-divider"></div>
-          <div class="item" @click="handlLogout">
-            <span class="iconbl bl-logout-circle-line"></span>退出登陆
+        <div v-if="drawer" class="popper-content">
+          <div
+            v-for="(tab, index) in tabs"
+            :key="index"
+            :class="['item', 'tab', selectedTab === tab.name ? 'active' : '']"
+            @click="selectTab(index, tab.name)"
+          >
+            <span
+              :class="['iconfont', tab.icon]"
+              style="color: var(--gw-font-color);"
+            ><span style="padding: 0 1rem;">{{
+              tab.title
+            }}</span></span>
+
           </div>
         </div>
       </el-popover>
     </bl-row>
-    <bl-row class="head-row logo-menu"  style="width:auto;justify-content: center;">
+    <bl-row
+      class="head-row logo-menu"
+      style="width: auto; justify-content: center"
+    >
       <div class="gw-logo" @click="toRoute('Home')">
         <img :src="logo()" :style="getThemeLogoStyle()" />
       </div>
       <div class="project-name" @click="toRoute('Home')">{{ sysName() }}</div>
     </bl-row>
-    <bl-row class="head-row tabs  pc-menu" style="font-size: 2rem;">
+    <bl-row class="head-row tabs pc-menu" style="font-size: 2rem">
       <div
         v-for="(tab, index) in tabs"
         :key="index"
@@ -52,9 +60,9 @@
       >
         <span
           :class="['iconfont', tab.icon]"
-          style="color: var(--gw-font-color);font-size: 2rem;"
+          style="color: var(--gw-font-color); font-size: 2rem"
         ></span>
-        <span class="tab-text" style="margin-left:3px;">{{ tab.title }}</span>
+        <span class="tab-text" style="margin-left: 3px">{{ tab.title }}</span>
       </div>
     </bl-row>
     <bl-row class="head-row" width="'auto'">
@@ -69,7 +77,7 @@
         transition="el-zoom-in-top"
       >
         <template #reference>
-          <span class="iconbl bl-user-line" style="font-size: 2rem;"></span>
+          <span class="iconbl bl-user-line" style="font-size: 2rem"></span>
         </template>
         <div class="popper-content">
           <div class="item" @click="toRoute('/todo')">
@@ -104,7 +112,6 @@ import { throttle } from "@/utils/optimize";
 import { getSysName, getThemeLogoStyle } from "@/utils/env";
 import { isNotBlank } from "@/utils/obj";
 import type { Tab } from "@/types/gw.props";
-import DrawerMenu from "./DrawerMenu.vue";
 
 interface TabProps {
   tabs: Tab[];
@@ -160,11 +167,11 @@ window.addEventListener(
   }, 100)
 );
 let headerBackgroundOpacity = computed(() => {
-  return top.value < 60 ? 0 : top.value > 260 ? 1 : (top.value - 60) / 200;
+  return top.value < 60 ? 0 : top.value > 360 ? 1 : (top.value - 60) / 300;
 });
 
 let wrapHeader = computed(() => {
-  return top.value > 260;
+  return top.value > 360;
 });
 </script>
 
@@ -188,6 +195,32 @@ let wrapHeader = computed(() => {
       @include box(40px, 40px);
     }
   }
+
+  .project-name {
+    font-size: 2rem;
+    @include box(auto, 100%);
+    margin-left: 10px;
+    text-shadow: 3px 3px 5px var(--gw-bg-color);
+    cursor: pointer;
+    color: transparent;
+    font-family: current, sans-serif;
+    letter-spacing: 1px;
+    background: linear-gradient(
+      90deg,
+      var(--gw-header-color),
+      var(--gw-font-color),
+      var(--gw-header-color)
+    );
+    background-clip: text;
+    animation: glow 10s linear infinite;
+    transition: 1.5s;
+    background-size: 300%;
+    @keyframes glow {
+      to {
+        background-position: -300%;
+      }
+    }
+  }
 }
 .header-background {
   width: 100%;
@@ -198,7 +231,7 @@ let wrapHeader = computed(() => {
   position: absolute;
   left: 0;
   z-index: -1;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid rgba(11, 25, 38, 0.08);
   transition: all 0.3s;
 }
 
@@ -273,8 +306,7 @@ let wrapHeader = computed(() => {
 }
 
 .tab {
-  font-family: QianTuXiaoTu;
-  font-weight: 400;
+  font-family: ChillDuanSans_Light;
   border-radius: 5px;
   padding: 3px 20px;
   margin: 0 5px;
@@ -292,10 +324,10 @@ let wrapHeader = computed(() => {
 }
 
 .head-row.mobile-menu {
-  display:none;
+  display: none;
 }
 
-@media (max-width: 740px) {
+@media (max-width: 780px) {
   .head-row.mobile-menu {
     display: block;
   }
@@ -310,11 +342,9 @@ let wrapHeader = computed(() => {
 }
 
 /* 在屏幕宽度小于 400px 时隐藏文字，只显示图标 */
-@media (max-width: 1040px) {
+@media (max-width: 1075px) {
   .tab-text {
     display: none;
   }
 }
-
-
 </style>

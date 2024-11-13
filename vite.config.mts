@@ -52,6 +52,7 @@ export default defineConfig({
   }),
     Components({
       resolvers: [ElementPlusResolver()],
+      exclude: ['/src/components/backup/DayNight.vue'],
     }),
   ],
   resolve: {

@@ -2,10 +2,7 @@
   <div class="virtual-waterfall-container">
     <GWResourceSearch :data="searchCondition" @change="pageSearch">
       <template v-slot:right-items>
-        <div class="flex-item">
-          <span style="font-size: small; color: var(--gw-font-color)"
-            >资源数量: </span
-          ><span
+          <span
             style="
               font-size: small;
               color: var(--gw-font-color);
@@ -14,8 +11,9 @@
               text-decoration: underline;
             "
             >{{ resourceCount }}</span
+          ><span style="font-size: small; color: var(--gw-font-color)"
+            >资源数量: </span
           >
-        </div>
       </template>
     </GWResourceSearch>
     <fs-virtual-water-fall ref="waterFallRef" :request="req" :gap="20" :column="5" :request-size="10">

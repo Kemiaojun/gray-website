@@ -1,137 +1,87 @@
 <template>
-  <div class="blossom-home-root">
-    <div class="home-main">
-      <div class="home-main-userinfo">
-        <UserInfo></UserInfo>
+  <div class="gray-home-root">
+    <div class="banner-div">
+      <div class="round-div-1"></div>
+      <div class="round-div-2"></div>
+      <div class="pic-div">
+        <img id="bannerImg" src="" style="z-index: 888;" alt="banner image"/>
       </div>
-      <div class="home-main-right">
-        <div class="home-main-right-chart">
-          <ChartLineWords ref="ChartLineWordsRef"></ChartLineWords>
-        </div>
-        <div class="home-main-right-subject">
-          <HomeSubject></HomeSubject>
-        </div>
-      </div>
-    </div>
-    <div class="home-footer">
-      <div class="custom-info">
-        <div v-if="isNotBlank(gwab())" v-html="gwab()"></div>
-        <div v-if="isNotBlank(ipc())" style="cursor: pointer" @click="openNew('https://beian.miit.gov.cn/')">
-          {{ ipc() }}
-        </div>
-      </div>
+      <!-- 波浪 -->
+      <Wave></Wave>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useUserStore } from '@/stores/user'
-import { isNotBlank } from '@/utils/obj'
-import { getGwab, getIpc, getEmail } from '@/utils/env'
+import Wave from "@/components/Wave/index.vue";
+import emitter from "@/utils/mitt";
 
-import UserInfo from './HomeUserInfo.vue'
-import ChartLineWords from './ChartLineWords.vue'
-import HomeSubject from './HomeSubject.vue'
+const dayImage = "/light.png";
+const nightImage = "/dark.png";
 
-const userStore = useUserStore()
-const ChartLineWordsRef = ref()
+const handleDayNightChange = async (isDark:any) => {
+  console.log("主题又变了");
+  let bannerImg = document.getElementById("bannerImg");
+  if (bannerImg instanceof HTMLImageElement) {
+    bannerImg.src = isDark ? nightImage : dayImage;
+  }
+};
+
 onMounted(() => {
-  ChartLineWordsRef.value.reload()
-})
+  handleDayNightChange(document.documentElement.classList.contains("dark"));
+  emitter.on("dayNightChanged", (isDark) => {
+    handleDayNightChange(isDark);
+  });
+});
 
-const openNew = (url: string) => {
-  window.open(url)
-}
-
-const gwab = () => {
-  if (userStore.userParams.WEB_GONG_WANG_AN_BEI) {
-    return userStore.userParams.WEB_GONG_WANG_AN_BEI
-  }
-  return getGwab()
-}
-
-const ipc = () => {
-  if (userStore.userParams.WEB_IPC_BEI_AN_HAO) {
-    return userStore.userParams.WEB_IPC_BEI_AN_HAO
-  }
-  return getIpc()
-}
+onUnmounted(() => {
+  emitter.off("dayNightChanged", handleDayNightChange);
+});
 </script>
 
 <style scoped lang="scss">
-.blossom-home-root {
+.gray-home-root {
   @include box(100%, 100%);
   @include flex(column, center, center);
   position: relative;
   overflow: hidden;
+}
+.banner-div {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
 
-  .home-header {
-    @include box(100%, 60px);
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .home-main {
-    @include box(100%, calc(100% - 40px));
-    padding-top: 60px;
-    @include flex(row, flex-start, center);
-
-    .home-main-userinfo {
-      @include box(600px, 100%);
-    }
-
-    .home-main-right {
-      @include box(calc(100% - 600px), 100%);
-      @include flex(column, flex-start, center);
-      padding-right: 20px;
-
-      .home-main-right-chart {
-        @include box(100%, 40%);
-      }
-
-      .home-main-right-subject {
-        @include box(100%, 60%);
-      }
-    }
-  }
-
-  .home-footer {
-    @include box(100%, 40px);
-
-    // icp
-    .custom-info {
-      @include flex(column, flex-end, center);
-      height: 100%;
-      padding-bottom: 5px;
-    }
-
-    .about-us {
-      @include flex(row, center, center);
-      position: absolute;
-      right: 10px;
-      bottom: 10px;
-    }
-
-    div {
-      @include flex(row, center, center);
-      color: #6d6d6d;
-      font-size: 13px;
-      white-space: pre;
-    }
-  }
-
-  @media screen and (max-width: 1100px) {
-    .home-main {
-      .home-main-userinfo {
-        width: 100%;
-      }
-
-      .home-main-right {
-        display: none;
-      }
-    }
+.pic-div {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100vw;
+  height: 100vh;
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: scale-down;
   }
 }
+
+.round-div-1 {
+  background: rgba(227, 126, 15, 0.1607843137);
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  position: absolute;
+  left: 5rem;
+  top: 5rem;
+}
+
+.round-div-2 {
+  background: rgba(227, 126, 15, 0.1607843137);
+  border-radius: 50%;
+  width: 20rem;
+  height: 20rem;
+  position: absolute;
+  right: 10rem;
+  top: 10rem;
+}
+
 </style>

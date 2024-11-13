@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-root-container">
+  <div id="index-layout" class="layout-root-container">
     <Header
       v-if="showHeader()"
       :tabs="tabs"
@@ -12,6 +12,7 @@
       </keep-alive>
     </router-view>
     <ToolBox :toTop=true ></ToolBox>
+    <Music></Music>
   </div>
 </template>
 
@@ -19,13 +20,13 @@
 import { ref, watch, onMounted } from "vue";
 import router from "@/router";
 import { toRoute } from "@/router";
-import IndexFooter from "./index/IndexFooter.vue";
 import { randomMusicApi } from "@/api/music"
 import type { RouteRecordName } from "vue-router";
 import Header from "../components/layout/Header.vue";
+import ToolBox from "../components/ToolBox/index.vue";
+import Music from "../components/Music/index.vue";
 import type { Tab } from "@/types/gw.props";
 import { getWebsiteApiBaseUrl } from '@/utils/website'
-import type { Resource } from "@/types/gw.resources";
 
 const tabs = ref<Tab[]>([
   { icon: "icon-wangzhanshouye", name: "Home", title: "首页" },
@@ -41,29 +42,8 @@ const selectedTab = ref("Home");
 const includeRouter = ref<any>(["Home"]);
 const curRoute = ref<RouteRecordName>("Home");
 
-
-// key	type	explaination
-// name	string	Song name, will appear on song name area.
-// id	number	Song id, use Object to collect.
-// src	string	Song audio source.
-// author	string[] | undefined	Song author.
-// album	string | undefined	Song album.
-// img	string | undefined	Song thumbnail, will appear at player left.
 onMounted( async ()=>{
-  const core = window._PlayerCore
-  await randomMusicApi(5).then((rsp =>{
-    if(rsp.data){
-      core.AppendSongList(rsp.data.map((music: any) => {
-        return {
-          id: music.id,
-          name: music.title,
-          src: getWebsiteApiBaseUrl() + music.previewUrl,
-          img: music.artistThumbnail ? getWebsiteApiBaseUrl() + music.artistThumbnail:""
-        }
-      }))
-      // core.Play();
-    }
-  }));
+
 });
 
 watch(
@@ -110,6 +90,6 @@ const selectTab = (name: string) => {
   background-color: var(--gw-bg-color);
   color: var(--gw-font-color);
   min-height: 100vh;
-  overflow-y: scroll;
+  overflow: hidden;
 }
 </style>

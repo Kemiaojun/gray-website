@@ -36,6 +36,6 @@ declare global {
           }
         ]
     };
-    _PlayerCore: any; // 或者指定更具体的类型
+    _MusicPlayer: any; // 或者指定更具体的类型
   }
 }

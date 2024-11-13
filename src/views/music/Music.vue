@@ -1,5 +1,5 @@
 <template>
-  <div class="root-container">
+  <div class="music-root-container">
     <el-container class="layout-container-demo">
       <el-aside>
         <el-menu :default-active="activeIndex" @select="handleSelect">
@@ -233,7 +233,7 @@
                 "
               >
               </GWAvatar>
-              <div style="flex-grow: 1; font-weight: bold; font-style: italic">
+              <div class="pc-show" style="flex-grow: 1; font-weight: bold; font-style: italic">
                 {{ currentSinger.name }}
               </div>
               <div
@@ -284,7 +284,7 @@
                   '.jpg'
                 "
               />
-              <div style="flex-grow: 1; font-weight: bold; font-style: italic">
+              <div class="pc-show" style="flex-grow: 1; font-weight: bold; font-style: italic">
                 {{ currentCollection.name }}
               </div>
               <div
@@ -335,98 +335,6 @@
             ></GWSortableTable>
           </div>
         </div>
-        <div class="music-player-wrapper">
-          <div class="music-player">
-            <audio
-              src=""
-              ref="audioRef"
-              @timeupdate="lycSlide"
-              @canplay="canPlay"
-              @ended="nextMusic"
-            ></audio>
-            <div class="top-bar">
-              <span class="iconfont icon-24gl-volumeMiddle"></span>
-              <div
-                ref="soundProgressBarRef"
-                class="progress-bar sound-progress-bar"
-              >
-                <span
-                  @click="adjustSound"
-                  class="duration-bar sound-duration"
-                ></span>
-                <span ref="soundProgressRef" class="progress sound-progress">
-                  <span
-                    @mousedown="roundMouseDown"
-                    ref="roundRef"
-                    class="round"
-                  ></span>
-                </span>
-              </div>
-              <span
-                class="iconfont icon-geciweidianji"
-                @click="toogleLyrics"
-              ></span>
-            </div>
-
-            <div ref="musicInfoRef" class="music-info">
-              <div ref="infoLeftRef" class="info-left">
-                <img
-                  ref="musicImgRef"
-                  class="music-img"
-                  :src="getArtistThumbnail()"
-                  alt=""
-                />
-                <div ref="lyricMaskRef" class="lyric-mask">
-                  <div class="lyric-wrapper">
-                    <ul
-                      ref="lyricContentRef"
-                      id="lyc-content"
-                      style="top: 100px"
-                    ></ul>
-                  </div>
-                </div>
-              </div>
-
-              <div class="info-right">
-                <div class="music-name">
-                  <span ref="musicNameRef" class="name"></span>
-                  <span ref="musicAuthorRef" class="musician"></span>
-                </div>
-                <div class="playback-setting">
-                  <span
-                    @click="previousMusic"
-                    class="iconfont icon-next previous"
-                  ></span>
-                  
-                  <span v-if="playing"
-                    @click="pauseMusic"
-                    class="iconfont icon-zanting1"
-                  ></span>
-                  <span
-                  v-else
-                    @click="playMusic"
-                    class="iconfont icon-bofang"
-                  ></span>
-                  <span
-                    @click="nextMusic"
-                    class="iconfont icon-next next"
-                  ></span>
-                </div>
-              </div>
-            </div>
-            <div
-              @click="adjustProgress"
-              class="progress-bar player-progress-bar"
-            >
-              <span class="duration-bar play-duration"></span>
-              <span
-                ref="playerProgressRef"
-                class="progress player-progress"
-              ></span>
-              <span ref="musicTimeRef" class="time">00:00</span>
-            </div>
-          </div>
-        </div>
       </el-container>
     </el-container>
   </div>
@@ -442,12 +350,10 @@ import GWTitleCard from "@/components/GWTitleCard.vue";
 import GWSortableTable from "@/components/GWSortableTable.vue";
 import GWMusicSortableTable from "@/components/GWMusicSortableTable.vue";
 import { getWebsiteApiBaseUrl } from "@/utils/website";
+import emitter from '@/utils/mitt';
 
 // 获取路由对象
 const route = useRoute();
-const regex1 = /^\[(\d{1}):(\d{2})\.(\d+)$/;
-const regex2 = /^\[(\d{2}):(\d{2})\.(\d+)$/;
-const regex3 = /^\[(\d{1}):(\d{2}):(\d{2})$/;
 const activeIndex = ref("1");
 
 // 选择菜单
@@ -480,28 +386,10 @@ const pageMusicName = function (param: any) {
   pageMusic({ musicName: param });
 };
 
-const showLyrics = ref<boolean>(false);
 
-const audioRef = ref();
-const musicImgRef = ref();
-const musicNameRef = ref();
-const musicAuthorRef = ref();
-const lyricContentRef = ref();
-const playing = ref(false);
-
-const musicInfoRef = ref();
-const infoLeftRef = ref();
-const lyricMaskRef = ref();
-const playerProgressRef = ref();
-const musicTimeRef = ref();
 const currentMusic = ref<any>();
-const soundProgressRef = ref();
-const roundRef = ref();
-const soundProgressBarRef = ref();
 
 //变量
-let duration: number,
-  nowPlayIndex = 0;
 const singerTab = ref<number>(1);
 const currentSinger = ref<any>();
 const currentCollection = ref<any>();
@@ -520,7 +408,6 @@ const singerCollectionList = ref<any[]>([]);
 const musicList = ref<any[]>([]);
 const filterMusicList = ref<any[]>([]);
 const allMusic = ref<any[]>([]);
-const lyricStr = ref<string>("");
 
 watch(
   () => musicName1.value,
@@ -541,8 +428,24 @@ watch(
   }
 );
 
+const previousMusic = () =>{
+  emitter.emit('previousMusic');
+}
+
+const nextMusic = () =>{
+  emitter.emit('nextMusic');
+}
+
+const setMusic = (index:number) =>{
+  emitter.emit('setMusic',index);
+}
+
+const playMusic = () =>{
+  emitter.emit('playMusic');
+}
+
 const playSelectedMusic = (rows: any) => {
-  musicList.value = rows;
+  emitter.emit('playSelectedMusic',rows);
   setMusic(0);
   playMusic();
 };
@@ -550,11 +453,6 @@ const pageChange = function (musics: any[]) {
   filterMusicList.value = musics;
 };
 
-const getArtistThumbnail = () => {
-  if (currentMusic.value && currentMusic.value.artistThumbnail)
-    return getWebsiteApiBaseUrl() + currentMusic.value.artistThumbnail;
-  return "/favicon.png";
-};
 
 const singerCollection = async (singer: any) => {
   currentSinger.value = singer;
@@ -579,197 +477,6 @@ const refresh = (collection: any) => {
   musicRefreshApi({ folderPath: collection.value });
 };
 
-// 获取歌词
-let timeArr: any[] = [];
-let lrcArr: string[] = [];
-
-// 处理时间显示进度条
-function timeAndProgress() {
-  if (playerProgressRef.value) {
-    playerProgressRef.value.style.width =
-      (audioRef.value.currentTime / audioRef.value.duration) * 100 + "%";
-    let time: number = audioRef.value.duration - audioRef.value.currentTime;
-    let minue = parseInt(String(time / 60));
-    let second = parseInt(String(time % 60));
-    let str = `${minue < 10 ? "0" + minue : minue}:${
-      second < 10 ? "0" + second : second
-    }`;
-    musicTimeRef.value.innerHTML = str;
-    lycSlide();
-  }
-}
-
-function toogleLyrics() {
-  if (!showLyrics.value) {
-    musicInfoRef.value.style.display = "block";
-    lyricMaskRef.value.style.display = "block";
-    infoLeftRef.value.style.width = "100%";
-    showLyrics.value = true;
-  } else {
-    musicInfoRef.value.style.display = "flex";
-    lyricMaskRef.value.style.display = "none";
-    infoLeftRef.value.style.width = "40%";
-    showLyrics.value = false;
-  }
-}
-
-// 歌词正常滚动
-function lycSlide() {
-  if (showLyrics.value) {
-    let index = binarySearch(timeArr, Math.floor(audioRef.value.currentTime));
-    lyricContentRef.value.style.top = index * -18 + 100 + "px";
-    [...lyricContentRef.value.children].forEach((item) => {
-      item.style.color = "var(--gw-font-color)";
-    });
-    lyricContentRef.value.children[index].style.color = "aqua";
-  }
-}
-
-function lyricInit() {
-  // 获取歌词
-  let insertLrcStr = "";
-  timeArr = [];
-  lrcArr = [];
-  const str = lyricStr.value.split("\n");
-  str.forEach((item) => {
-    const splitLyc = item.split("]");
-    if (regex1.test(splitLyc[0])) {
-      timeArr.push(timeFormat(splitLyc[0].substr(1, 5)));
-    } else if (regex2.test(splitLyc[0])) {
-      timeArr.push(timeFormat(splitLyc[0].substr(1, 6)));
-    } else if (regex3.test(splitLyc[0])) {
-      timeArr.push(timeFormat(splitLyc[0].substr(4, splitLyc[0].length)));
-    }
-
-    lrcArr.push(splitLyc[1]);
-    insertLrcStr += `<li>${lrcArr[lrcArr.length - 1]}</li>`;
-  });
-  lyricContentRef.value.innerHTML = insertLrcStr;
-}
-
-// 设置播放的音乐和图片
-function setMusic(index: number) {
-  if (musicList.value.length > 0) {
-    let music = musicList.value[index];
-    currentMusic.value = music;
-    // musicImgRef.value.src = music.img;
-    audioRef.value.src =
-      getWebsiteApiBaseUrl() +
-      "preview/" +
-      music.folderPath +
-      "/" +
-      music.fileName;
-    musicAuthorRef.value.innerHTML = music.artist;
-    musicNameRef.value.innerHTML = music.title;
-    lyricStr.value = music.lyrics;
-    lyricInit();
-  }
-}
-// 播放音乐
-function playMusic() {
-  audioRef.value.play();
-  playing.value = true;
-}
-
-// 暂停音乐
-function pauseMusic() {
-  audioRef.value.pause();
-  playing.value = false;
-}
-
-// 上一首
-function previousMusic() {
-  if (nowPlayIndex == 0) {
-    nowPlayIndex = musicList.value.length - 1;
-  } else {
-    nowPlayIndex--;
-  }
-  setMusic(nowPlayIndex);
-  playMusic();
-}
-
-// 下一首
-function nextMusic() {
-  if (nowPlayIndex == musicList.value.length - 1) {
-    nowPlayIndex = 0;
-  } else {
-    nowPlayIndex++;
-  }
-  setMusic(nowPlayIndex);
-  playMusic();
-}
-// 格式化时间
-function timeFormat(timeStr: string) {
-  if (timeStr) {
-    const timeStrArr = timeStr.split(":");
-    const minute = timeStrArr[0];
-    const second = timeStrArr[1];
-    return parseInt(minute) * 60 + parseInt(second);
-  }
-}
-
-// 二分查找
-function binarySearch(arr: any, target: any, left = 0, right = arr.length - 1) {
-  if (left > right) return left - 1;
-  const mid = Math.floor((left + right) / 2);
-  if (arr[mid] === target) return mid;
-  if (arr[mid] > target) {
-    return binarySearch(arr, target, left, mid - 1);
-  } else {
-    return binarySearch(arr, target, mid + 1, right);
-  }
-}
-
-let timer: any;
-
-// 加载完MP3需要设置时间显示与进度条监听
-function canPlay() {
-  if (timer) {
-    clearInterval(timer);
-  }
-  duration = audioRef.value.duration;
-  timer = setInterval(function () {
-    timeAndProgress();
-  }, 1000);
-}
-
-function adjustProgress(e: any) {
-  audioRef.value.currentTime = (e.offsetX / e.target.offsetWidth) * duration;
-  timeAndProgress();
-}
-
-// 点击声音条更改声音大小
-function adjustSound(e: any) {
-  audioRef.value.volume = e.offsetX / e.target.offsetWidth;
-  soundProgressRef.value.style.width =
-    (e.offsetX / e.target.offsetWidth) * 100 + "%";
-}
-
-// 声音拖动
-function roundMouseDown() {
-  let soundBarLength = soundProgressBarRef.value.offsetWidth;
-
-  // 鼠标移动
-  document.onmousemove = function (ev) {
-    let myEvent = ev || event;
-    let disX =
-      myEvent.clientX - soundProgressBarRef.value.getBoundingClientRect().left;
-    if (disX > soundBarLength) {
-      disX = soundBarLength;
-    } else if (disX == 0) {
-      disX = 0;
-    }
-    soundProgressRef.value.style.width = (disX / soundBarLength) * 100 + "%";
-    audioRef.value.volume = disX / soundBarLength;
-  };
-
-  // 鼠标抬起
-  document.onmouseup = function () {
-    document.onmousemove = null;
-    document.onmouseup = null;
-  };
-}
-
 let filteredList = computed(() => {
   return singerList.value.filter((singer) => {
     return singer.name.toLowerCase().includes(singerName.value.toLowerCase());
@@ -787,29 +494,33 @@ onMounted(async () => {
     playlist: 1,
   }).then((rsp) => {
     musicList.value = rsp.data.result;
-    if (musicList.value.length > 0) {
-      setMusic(0);
-    }
   });
+  emitter.on("musicChanged",(music:any) =>{
+    currentMusic.value = music;
+  });
+});
+
+onUnmounted(() => {
+  emitter.off("musicChanged");
 });
 </script>
 
 <style scoped lang="scss">
-@import "./style.css";
 /* 引入相对路径的 CSS 文件 */
 @import "@/assets/styles/iconfont/player/iconfont.css";
 /* 引入相对路径的 CSS 文件 */
 
-.root-container {
+.music-root-container {
   background-color: var(--gw-bg-color);
-  @include box(100%, 100%);
+  width: 100%;
+  height: calc(100vh - 60px);
   position: relative;
-  overflow: scroll;
+  margin-top: 60px;
   display: flex;
   gap: 20px;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 5px 20px 20px 20px;
+  padding: 0 1rem 1rem 1rem;
 }
 
 .selectTab {
@@ -821,7 +532,6 @@ onMounted(async () => {
   background: var(--gw-bg-color);
   border-right: 1px solid var(--gw-bg-active-color);
   width: 70px;
-  margin-right: 5px;
   height: calc(100vh - 85px);
 }
 
@@ -880,5 +590,12 @@ onMounted(async () => {
 .transparent-table .el-table__row:hover {
   background-color: transparent !important;
   /* 悬停行背景透明 */
+}
+
+@media screen and (max-width: 400px) {
+
+.pc-show {
+  display: none;
+}
 }
 </style>

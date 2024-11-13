@@ -3,29 +3,32 @@
     <table>
       <thead>
         <tr>
-          <th
-            :class="{ sorted: sort === 'trackNumber' }"
+          <th 
+            :class="['pc-show',sort === 'trackNumber' ? 'sorted':'']"
             @click="sortBy('trackNumber')"
           >
             #
           </th>
-          <th :class="{ sorted: sort === 'title' }" @click="sortBy('title')">
+          <th 
+          :class="{ sorted: sort === 'title' }" @click="sortBy('title')">
             Title
           </th>
-          <th :class="{ sorted: sort === 'artist' }" @click="sortBy('artist')">
+          <th 
+          :class="[sort === 'artist' ? 'sorted':'']"  @click="sortBy('artist')">
             Artist
           </th>
-          <th :class="{ sorted: sort === 'album' }" @click="sortBy('album')">
+          <th 
+          :class="['pc-show',sort === 'album' ? 'sorted':'']"   @click="sortBy('album')">
             Album
           </th>
-          <th>Size</th>
-          <th>Ext</th>
+          <th class="pc-show">Size</th>
+          <th class="pc-show">Ext</th>
           <th>Operation</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(rowData, index) in sortedData">
-          <td>{{ rowData.trackNumber }}</td>
+          <td class="pc-show">{{ rowData.trackNumber }}</td>
           <td @click="clickThis(rowData)">
             <div
               :class="
@@ -40,11 +43,11 @@
           <td>
               {{ rowData.artist }}
           </td>
-          <td>
+          <td class="pc-show">
               {{ rowData.album }}
           </td>
-          <td>{{ rowData.prettySize }}</td>
-          <td>
+          <td class="pc-show">{{ rowData.prettySize }}</td>
+          <td class="pc-show">
             <div class="ext-div">{{ rowData.ext }}</div>
           </td>
           <td style="display: flex">
@@ -100,19 +103,6 @@
                 :size="20"
                 icon-class="delete"
                 @click="addThis(index, rowData)"
-              />
-            </el-tooltip>
-            <el-tooltip
-              class="item"
-              effect="dark"
-              content="添加到悬窗播放"
-              placement="right"
-            >
-              <SvgIcon
-                style="margin-left: 10px"
-                :size="20"
-                icon-class="audio2"
-                @click="addPlayThis(rowData)"
               />
             </el-tooltip>
           </td>
@@ -185,20 +175,6 @@ async function addThis(index: number, rowData: any) {
       }
     })
     .finally(() => {});
-}
-
-//
-
-function addPlayThis(rowData: any) {
-  // 调后台接口
-  const core = window._PlayerCore;
-  core.AppendSongOnHead({
-    name: rowData.title,
-    src: getWebsiteApiBaseUrl() + rowData.previewUrl,
-    img: rowData.artistThumbnail ? getWebsiteApiBaseUrl() + rowData.artistThumbnail:"",
-    id: rowData.id,
-  });
-  core.PlaySelectSong(rowData.id);
 }
 
 const sort = ref<string>("trackNumber");
@@ -362,5 +338,12 @@ table tr:hover td {
   text-align: center;
   border-radius: 0.5rem;
   background-color: var(--gw-bg-active-color);
+}
+
+@media screen and (max-width: 500px) {
+
+.pc-show {
+  display: none;
+}
 }
 </style>

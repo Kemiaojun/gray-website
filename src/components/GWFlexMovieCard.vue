@@ -116,13 +116,18 @@ let seriesData = computed(() => {
   if (movie.value.files) {
     return movie.value.files.map((item) => {
       const [part1, part2] = item.name.split("-");
-      return { ...item, chapter:part1,title:part2 };
+      return { ...item, chapter: part1, title: part2 };
     });
   }
 });
 </script>
 
 <style scoped lang="scss">
+.img-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 img {
   overflow-clip-margin: content-box;
   vertical-align: middle;
@@ -168,23 +173,6 @@ img {
   }
 }
 
-@media (min-width: 768px) {
-  .gw-flex-item {
-    -ms-flex: 0 0 50%;
-    flex: 0 0 50%;
-    max-width: 0 0 50%;
-    padding: 0;
-    position: relative;
-  }
-  .gw-flex-card {
-    padding: 10px;
-  }
-  .img-card {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-}
 .overlay {
   position: absolute;
   padding: 10px;
@@ -199,7 +187,8 @@ img {
   background-color: var(--gw-bg-active-color-5); /* 半透明黑色遮罩 */
   opacity: 0.5; /* 可调节透明度 */
   overflow-y: scroll;
-  gap: 10px;
+  gap: 1rem;
+  max-height: 100%;
   display: none;
   &:hover {
     opacity: 1; /* 可调节透明度 */
@@ -221,16 +210,23 @@ img {
     }
   }
 }
+
+.gw-flex-item {
+  position: relative;
+}
+@media (min-width: 768px) {
+  .gw-flex-item {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 0 0 50%;
+  }
+}
+
 @media (min-width: 992px) {
   .gw-flex-item {
     -ms-flex: 0 0 25%;
     flex: 0 0 25%;
     max-width: 25%;
-    padding: 0;
-    position: relative;
-  }
-  .gw-flex-card {
-    padding: 10px;
   }
 }
 
@@ -239,11 +235,6 @@ img {
     -ms-flex: 0 0 20%;
     flex: 0 0 20%;
     max-width: 20%;
-    padding: 0;
-    position: relative;
-  }
-  .gw-flex-card {
-    padding: 10px;
   }
 }
 </style>

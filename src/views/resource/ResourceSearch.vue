@@ -8,7 +8,7 @@
           multiple
           collapse-tags
           placeholder="资源类型"
-          style="width: 150px"
+          style="width: 10rem"
         >
           <el-option
             v-for="item in types"
@@ -24,7 +24,7 @@
           v-model="selectedCollectionId"
           clearable
           placeholder="合集"
-          style="width: 150px"
+          style="width: 10rem"
           @change="handleCollectionChange"
         >
           <el-option
@@ -41,7 +41,7 @@
           v-model="selectedLibraryId"
           clearable
           placeholder="库"
-          style="width: 150px"
+          style="width: 10rem"
         >
           <el-option
             v-for="item in libraries"
@@ -128,17 +128,24 @@ watch(
 <style type="scss" scoped>
 /* 样式可以根据需要进行调整 */
 .gw-search-root {
-  margin: 0;
+  margin-bottom: 1rem;
   display: flex;
   width: 100%;
-  height: 40px;
   flex-direction: row;
   z-index: 2000;
   justify-content: space-between;
+  flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .search-item {
   display: inline-flex;
   margin-right: 5px;
+}
+
+.right-items {
+  flex-grow: 1;
+    flex-direction: row-reverse;
+    display: flex;
 }
 </style>

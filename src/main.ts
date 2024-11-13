@@ -23,9 +23,8 @@ import '@/router/route-init'
 import BLRow from '@/components/BLRow.vue'
 import BLCol from '@/components/BLCol.vue'
 import BLTag from '@/components/BLTag.vue'
-import ToTop from '@/components/ToTop/index.vue'
+
 import SvgIcon from '@/components/SvgIcon/index.vue'
-import ToolBox from '@/components/layout/ToolBox.vue'
 import 'virtual:svg-icons-register'
 
 const app = createApp(App)
@@ -34,7 +33,5 @@ app.use(router)
 app.component('bl-row', BLRow)
 .component('bl-col', BLCol)
 .component('bl-tag', BLTag)
-.component('to-top',ToTop)
 .component('svg-icon',SvgIcon)
-.component('tool-box',ToolBox)
 app.mount('#app')
