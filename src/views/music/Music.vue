@@ -75,24 +75,27 @@
             class="row-card"
             style="border-bottom: 1px solid var(--gw-font-color-1)"
           >
-            <SvgIcon
-              style="cursor: pointer"
-              :size="20"
-              icon-class="previous"
+            <span
+              style="
+                font-size: 2rem;
+                cursor: pointer;
+                transform: rotate(180deg);
+              "
               @click="previousMusic"
-            />
-            <SvgIcon
-              style="cursor: pointer"
-              :size="20"
-              icon-class="play"
+              class="iconfont icon-next"
+            ></span>
+
+            <span
+              style="font-size: 2rem; cursor: pointer"
               @click="playSelectedMusic(filterMusicList)"
-            />
-            <SvgIcon
-              style="cursor: pointer"
-              :size="20"
-              icon-class="next"
-              @click="nextMusic"
-            />
+              class="iconfont icon-play"
+            ></span>
+
+            <span
+              style="font-size: 2rem; cursor: pointer"
+              @click="nextMusic()"
+              class="iconfont icon-next"
+            ></span>
           </div>
           <GWMusicSortableTable
             :table-data="musicList"
@@ -116,24 +119,27 @@
             class="row-card"
             style="border-bottom: 1px solid var(--gw-font-color-1)"
           >
-            <SvgIcon
-              style="cursor: pointer"
-              :size="20"
-              icon-class="previous"
+            <span
+              style="
+                font-size: 2rem;
+                cursor: pointer;
+                transform: rotate(180deg);
+              "
               @click="previousMusic"
-            />
-            <SvgIcon
-              style="cursor: pointer"
-              :size="20"
-              icon-class="play"
+              class="iconfont icon-next"
+            ></span>
+
+            <span
+              style="font-size: 2rem; cursor: pointer"
               @click="playSelectedMusic(filterMusicList)"
-            />
-            <SvgIcon
-              style="cursor: pointer"
-              :size="20"
-              icon-class="next"
-              @click="nextMusic"
-            />
+              class="iconfont icon-play"
+            ></span>
+
+            <span
+              style="font-size: 2rem; cursor: pointer"
+              @click="nextMusic()"
+              class="iconfont icon-next"
+            ></span>
           </div>
           <GWMusicSortableTable
             :table-data="allMusic"
@@ -158,24 +164,27 @@
             class="row-card"
             style="border-bottom: 1px solid var(--gw-font-color-1)"
           >
-            <SvgIcon
-              style="cursor: pointer"
-              :size="20"
-              icon-class="previous"
+            <span
+              style="
+                font-size: 2rem;
+                cursor: pointer;
+                transform: rotate(180deg);
+              "
               @click="previousMusic"
-            />
-            <SvgIcon
-              style="cursor: pointer"
-              :size="20"
-              icon-class="play"
+              class="iconfont icon-next"
+            ></span>
+
+            <span
+              style="font-size: 2rem; cursor: pointer"
               @click="playSelectedMusic(filterMusicList)"
-            />
-            <SvgIcon
-              style="cursor: pointer"
-              :size="20"
-              icon-class="next"
-              @click="nextMusic"
-            />
+              class="iconfont icon-play"
+            ></span>
+
+            <span
+              style="font-size: 2rem; cursor: pointer"
+              @click="nextMusic()"
+              class="iconfont icon-next"
+            ></span>
           </div>
           <GWMusicSortableTable
             :table-data="allMusic"
@@ -233,7 +242,10 @@
                 "
               >
               </GWAvatar>
-              <div class="pc-show" style="flex-grow: 1; font-weight: bold; font-style: italic">
+              <div
+                class="pc-show"
+                style="flex-grow: 1; font-weight: bold; font-style: italic"
+              >
                 {{ currentSinger.name }}
               </div>
               <div
@@ -244,7 +256,10 @@
                 "
                 @click="singerTab = 1"
               >
-              <span style="font-size:2rem;" class="iconfont icon-back-filled"></span>
+                <span
+                  style="font-size: 2rem"
+                  class="iconfont icon-back-filled"
+                ></span>
               </div>
             </div>
             <div class="row-card">
@@ -284,7 +299,10 @@
                   '.jpg'
                 "
               />
-              <div class="pc-show" style="flex-grow: 1; font-weight: bold; font-style: italic">
+              <div
+                class="pc-show"
+                style="flex-grow: 1; font-weight: bold; font-style: italic"
+              >
                 {{ currentCollection.name }}
               </div>
               <div
@@ -295,37 +313,43 @@
                 "
                 @click="singerTab = 2"
               >
-              <span style="font-size:2rem;" class="iconfont icon-back-filled"></span>
+                <span
+                  style="font-size: 2rem"
+                  class="iconfont icon-back-filled"
+                ></span>
               </div>
             </div>
             <div
               class="row-card"
               style="border-bottom: 1px solid var(--gw-font-color-1)"
             >
-              <SvgIcon
-                style="cursor: pointer"
-                :size="20"
-                icon-class="previous"
+              <span
+                style="
+                  font-size: 2rem;
+                  cursor: pointer;
+                  transform: rotate(180deg);
+                "
                 @click="previousMusic"
-              />
-              <SvgIcon
-                style="cursor: pointer"
-                :size="20"
-                icon-class="play"
+                class="iconfont icon-next"
+              ></span>
+
+              <span
+                style="font-size: 2rem; cursor: pointer"
                 @click="playSelectedMusic(filterMusicList)"
-              />
-              <SvgIcon
-                style="cursor: pointer"
-                :size="20"
-                icon-class="next"
+                class="iconfont icon-play"
+              ></span>
+
+              <span
+                style="font-size: 2rem; cursor: pointer"
                 @click="nextMusic"
-              />
-              <SvgIcon
-                style="cursor: pointer"
-                :size="20"
-                icon-class="refresh-music"
+                class="iconfont icon-next"
+              ></span>
+
+              <span
+                style="font-size: 2rem; cursor: pointer"
                 @click="refresh(currentCollection)"
-              />
+                class="iconfont icon-refresh"
+              ></span>
             </div>
             <GWSortableTable
               :current-music="currentMusic"
@@ -350,7 +374,7 @@ import GWTitleCard from "@/components/GWTitleCard.vue";
 import GWSortableTable from "@/components/GWSortableTable.vue";
 import GWMusicSortableTable from "@/components/GWMusicSortableTable.vue";
 import { getWebsiteApiBaseUrl } from "@/utils/website";
-import emitter from '@/utils/mitt';
+import emitter from "@/utils/mitt";
 
 // 获取路由对象
 const route = useRoute();
@@ -385,7 +409,6 @@ async function pageMusic(param?: any) {
 const pageMusicName = function (param: any) {
   pageMusic({ musicName: param });
 };
-
 
 const currentMusic = ref<any>();
 
@@ -428,31 +451,30 @@ watch(
   }
 );
 
-const previousMusic = () =>{
-  emitter.emit('previousMusic');
-}
+const previousMusic = () => {
+  emitter.emit("previousMusic");
+};
 
-const nextMusic = () =>{
-  emitter.emit('nextMusic');
-}
+const nextMusic = () => {
+  emitter.emit("nextMusic");
+};
 
-const setMusic = (index:number) =>{
-  emitter.emit('setMusic',index);
-}
+const setMusic = (index: number) => {
+  emitter.emit("setMusic", index);
+};
 
-const playMusic = () =>{
-  emitter.emit('playMusic');
-}
+const playMusic = () => {
+  emitter.emit("playMusic");
+};
 
 const playSelectedMusic = (rows: any) => {
-  emitter.emit('playSelectedMusic',rows);
+  emitter.emit("playSelectedMusic", rows);
   setMusic(0);
   playMusic();
 };
 const pageChange = function (musics: any[]) {
   filterMusicList.value = musics;
 };
-
 
 const singerCollection = async (singer: any) => {
   currentSinger.value = singer;
@@ -495,7 +517,7 @@ onMounted(async () => {
   }).then((rsp) => {
     musicList.value = rsp.data.result;
   });
-  emitter.on("musicChanged",(music:any) =>{
+  emitter.on("musicChanged", (music: any) => {
     currentMusic.value = music;
   });
 });
@@ -553,7 +575,7 @@ onUnmounted(() => {
 }
 
 .tab-body {
-  font-size:12px;
+  font-size: 12px;
   flex-grow: 1;
   position: relative;
   overflow-y: scroll;
@@ -593,9 +615,8 @@ onUnmounted(() => {
 }
 
 @media screen and (max-width: 400px) {
-
-.pc-show {
-  display: none;
-}
+  .pc-show {
+    display: none;
+  }
 }
 </style>
