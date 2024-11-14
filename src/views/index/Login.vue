@@ -75,7 +75,7 @@ const handleLogin = () => {
   display: flex;
   position: relative;
   transform: scale(1.1);
-  color: var(--gw-font-color);
+  color: var(--gw-bg-font);
   padding: 2rem 2rem;
   font-size: 1.4rem;
   flex-direction: column;
@@ -94,7 +94,7 @@ const handleLogin = () => {
   height: 100%;
   width: 100%;
   padding: 0 6rem;
-  border: 1px solid var(--gw-bg-color);
+  border: 1px solid var(--gw-bg-basic);
   border-radius: 1rem;
   /* border-bottom: 2.5px solid #ffffff; */
   transition: all 0.2s ease;
@@ -109,7 +109,7 @@ const handleLogin = () => {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--gw-font-color);
+  color: var(--gw-bg-font);
   transition: all 0.2s ease;
   padding-left: 2rem;
 }

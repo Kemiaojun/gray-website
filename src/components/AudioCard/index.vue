@@ -247,10 +247,10 @@ function download() {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--gw-bg-active-color);
+  border: 1px solid var(--gw-bg-active);
   border-radius: 10px;
   overflow: hidden;
-  background-color: var(--gw-bg-color);
+  background-color: var(--gw-bg-basic);
   padding: 5px;
   &:hover {
     cursor: default;

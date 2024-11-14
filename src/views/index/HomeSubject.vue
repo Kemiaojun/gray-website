@@ -66,9 +66,9 @@ const toToc = (articleId: number) => {
     padding: 5px 10px;
     margin: 15px 16px;
     transition: border 0.3s, box-shadow 0.3s;
-    box-shadow: 0 0 12px var(--gw-font-color-1);
+    box-shadow: 0 0 12px var(--gw-bg-font-01);
     overflow: hidden;
-    background-color: var(--gw-bg-active-color);
+    background-color: var(--gw-bg-active);
     .iconbl {
       font-size: 12px;
       margin-right: 5px;
@@ -100,24 +100,24 @@ const toToc = (articleId: number) => {
     .name {
       height: 35px;
       font-weight: 700;
-      color: var(--gw-font-color);
+      color: var(--gw-bg-font);
       transition: text-shadow 0.3s;
     }
 
     .words {
       @include font(12px, 300);
       height: 20px;
-      color: var(--gw-font-color);
+      color: var(--gw-bg-font);
     }
 
     .upd-time {
       @include font(12px, 300);
       height: 20px;
-      color: var(--gw-font-color);
+      color: var(--gw-bg-font);
     }
 
     .cover-name {
-      background-color: var(--gw-bg-color);
+      background-color: var(--gw-bg-basic);
       @include box(150px, 17px);
       @include font(12px, 700);
       line-height: 17px;
@@ -125,7 +125,7 @@ const toToc = (articleId: number) => {
       top: 15px;
       right: -50px;
       opacity: 0;
-      color: var(--gw-font-color);
+      color: var(--gw-bg-font);
       box-shadow: 0 0 10px 1px #181818;
       text-align: center;
       transform: scale(0.8) rotate(45deg);
@@ -134,7 +134,7 @@ const toToc = (articleId: number) => {
 
     .describes {
       font-size: 12px;
-      color: var(--gw-font-color);
+      color: var(--gw-bg-font);
       margin-top: 5px;
     }
 
@@ -142,7 +142,7 @@ const toToc = (articleId: number) => {
       position: absolute;
       right: 5px;
       bottom: 8px;
-      color: var(--gw-font-color);
+      color: var(--gw-bg-font);
       opacity: 0;
       cursor: pointer;
 

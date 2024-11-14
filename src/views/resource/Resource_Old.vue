@@ -87,7 +87,7 @@ const closePreview = () => {
 
 <style scoped lang="scss">
 .image-gallery {
-  background-color: var(--gw-bg-color);
+  background-color: var(--gw-bg-basic);
   @include box(100%, 100%);
   position: relative;
   overflow: scroll;

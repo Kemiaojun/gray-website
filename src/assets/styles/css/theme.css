@@ -1,16 +1,5 @@
 :root {
-  /* 数字越大, 颜色越淡 */
-  /* --el-color-primary: #c1992f;
-  --el-color-primary-dark-2: rgba(250, 195, 56, 0.8);
-  --el-color-primary-light-1: rgba(193, 153, 47, 0.9);
-  --el-color-primary-light-2: rgba(193, 153, 47, 0.8);
-  --el-color-primary-light-3: rgba(193, 153, 47, 0.7);
-  --el-color-primary-light-5: rgba(193, 153, 47, 0.5);
-  --el-color-primary-light-6: rgba(193, 153, 47, 0.4);
-  --el-color-primary-light-7: rgba(193, 153, 47, 0.3);
-  --el-color-primary-light-8: rgba(193, 153, 47, 0.2);
-  --el-color-primary-light-9: rgba(232, 219, 190, 0.505); */
-
+  /* element UI */
   --el-color-primary:          rgb(104, 104, 104);
   --el-color-primary-dark:     rgb(104, 104, 104);
   --el-color-primary-dark-2:  rgba(104, 104, 104, 0.8);
@@ -30,48 +19,50 @@
   --el-text-color-secondary: #909399;
   --el-text-color-placeholder: #a8abb2;
   --el-text-color-disabled: #c0c4cc;
-
   --el-menu-item-height: 40px;
 }
 
 /* ================================= 自定义颜色 ================================== */
 /* 白天主题 */
 :root {
-  --gw-html-color: #ffffff;
-  --gw-bg-color: rgb(248, 249, 250);
-  --gw-bg-active-color: rgb(216, 219, 222);
-  --gw-bg-active-color-5: rgb(216, 219, 222,0.5);
-  --gw-header-color: rgb(49, 49, 49);
-  --gw-font-color: rgb(46, 52, 60);
-  --gw-font-color-1: rgb(46, 52, 60, 0.1);
+  --gw-bg-basic: rgb(248, 249, 250);
+
+  --gw-bg-active: rgb(216, 219, 222);
+  --gw-bg-active-07: rgb(216, 219, 222,0.7);
+  --gw-bg-active-05: rgb(216, 219, 222,0.5);
+  --gw-bg-active-03: rgb(216, 219, 222,0.3);
+
+  --gw-bg-header: rgb(49, 49, 49);
+
+
+  --gw-bg-font: rgb(46, 52, 60);
+  --gw-bg-font-01: rgb(46, 52, 60, 0.1);
+
   --avatar-xxlarge-size: 128px;
   --avatar-xlarge-size: 96px;
   --avatar-large-size: 64px;
   --avatar-medium-size: 48px;
   --avatar-small-size: 32px;
+
   --gw-icon-color: lightskyblue;
   --gw-icon-active-color: rgb(64, 158, 255);
-  --gw-bg-wave01: rgb(216, 219, 222,0.7);
-  --gw-bg-wave02: rgb(216, 219, 222,0.5);
-  --gw-bg-wave03: rgb(216, 219, 222,0.3);
-  --gw-bg-wave04: rgb(216, 219, 222,1);
+  
+  --gw-banner-round-1: rgb(228, 28, 8, 0.5);
 }
 /* 黑夜主题 */
 html.dark {
-  --gw-html-color: #000000;
-  --gw-bg-color: rgb(55, 56, 57);
-  --gw-bg-active-color: rgb(70, 70, 70);
-  --gw-bg-active-color-5: rgb(69, 69, 73,0.5);
-  --gw-header-color: rgb(48, 49, 52);
-  --gw-font-color: rgb(242, 242, 242);
-  --gw-font-color-1: rgb(242, 242, 242, 0.1);
+  --gw-bg-basic: rgb(55, 56, 57);
+  --gw-bg-active: rgb(70, 70, 70);
+  --gw-bg-active-07: rgb(70, 70, 70, 0.7);
+  --gw-bg-active-05: rgb(69, 69, 73,0.5);
+  --gw-bg-active-03: rgb(70, 70, 70, 0.3);
+  --gw-bg-header: rgb(48, 49, 52);
+  --gw-bg-font: rgb(242, 242, 242);
+  --gw-bg-font-01: rgb(242, 242, 242, 0.1);
   --gw-icon-color: deepskyblue;
   --gw-icon-active-color: rgb(64, 158, 255);
-  
-  --gw-bg-wave01: rgb(70, 70, 70, 0.7);
-  --gw-bg-wave02: rgb(70, 70, 70, 0.5);
-  --gw-bg-wave03: rgb(70, 70, 70, 0.3);
-  --gw-bg-wave04: rgb(70, 70, 70, 1);
+
+  --gw-banner-round-1: rgb(248, 249, 250, 0.5);
 }
 
 :root {

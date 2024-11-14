@@ -239,7 +239,7 @@ table {
 }
 table td,
 table th {
-  border-bottom: 0.1rem solid var(--gw-bg-active-color-5);
+  border-bottom: 0.1rem solid var(--gw-bg-active-05);
 }
 table th {
   padding: 2rem 1rem;
@@ -268,9 +268,9 @@ table tr:hover td {
   display: block;
   margin: 0 20px;
   padding: 10px 30px;
-  color: var(--gw-font-color);
+  color: var(--gw-bg-font);
   background: transparent;
-  border: 1px solid var(--gw-font-color);
+  border: 1px solid var(--gw-bg-font);
   outline: 0;
   border-radius: 10px;
   font: inherit;
@@ -286,17 +286,17 @@ table tr:hover td {
   display: inline-block;
 }
 .btn:visited {
-  color: var(--gw-font-color-1);
+  color: var(--gw-bg-font-01);
 }
 .btn:disabled,
 .btn:disabled:hover {
-  color: var(--gw-font-color-1);
-  border: 0.1rem solid var(--gw-font-color-1);
+  color: var(--gw-bg-font-01);
+  border: 0.1rem solid var(--gw-bg-font-01);
   cursor: initial;
 }
 .btn:hover,
 .btn:focus {
-  background-color: var(--gw-bg-active-color);
+  background-color: var(--gw-bg-active);
 }
 .grid {
   display: flex;
@@ -324,10 +324,10 @@ table tr:hover td {
 }
 
 .ext-div {
-  border: 1px solid var(--gw-bg-active-color);
+  border: 1px solid var(--gw-bg-active);
   text-align: center;
   border-radius: 0.5rem;
-  background-color: var(--gw-bg-active-color);
+  background-color: var(--gw-bg-active);
 }
 
 @media screen and (max-width: 500px) {

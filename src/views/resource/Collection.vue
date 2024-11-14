@@ -198,7 +198,7 @@ const onFileChange = (f: File) => {
 
 <style scoped lang="scss">
 .graython-Collection-root {
-  background-color: var(--gw-bg-color);
+  background-color: var(--gw-bg-basic);
   @include box(100%, 100%);
   position: relative;
   overflow: scroll;
@@ -225,7 +225,7 @@ const onFileChange = (f: File) => {
 
 .Collection-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 10px calc(--gw-font-color-1);
+  box-shadow: 0 4px 10px calc(--gw-bg-font-01);
 }
 
 .add-Collection {
@@ -256,6 +256,6 @@ const onFileChange = (f: File) => {
   border-radius: 3px;
 }
 .customize-btn.iconbl:hover {
-  background-color: var(--gw-font-color-1);
+  background-color: var(--gw-bg-font-01);
 }
 </style>

@@ -62,12 +62,12 @@ const { title, tsize, items } = toRefs(props);
   .link-item {
     height: 10rem;
     padding: 1rem;
-    border: 1px solid var(--gw-font-color-1);
+    border: 1px solid var(--gw-bg-font-01);
     border-radius: 0.5rem;
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: var(--gw-font-color);
+    color: var(--gw-bg-font);
     .img {
       width: 5rem;
       height: 5rem;

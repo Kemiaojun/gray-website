@@ -70,7 +70,7 @@ function nextPage() {
     position: fixed;
     box-sizing: border-box;
   z-index: 3000;
-  background-color: var(--gw-bg-color);
+  background-color: var(--gw-bg-basic);
   box-shadow: 0px 0px 0px #c8c8c8;
   overflow-y: auto;
 }
@@ -80,11 +80,11 @@ function nextPage() {
   display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: 1px solid var(--gw-bg-active-color);
+    border-bottom: 1px solid var(--gw-bg-active);
 
   .title {
     font-size: 18px;
-        color: var(--gw-font-color);
+        color: var(--gw-bg-font);
         margin-left: 10px;
   }
 
@@ -92,14 +92,14 @@ function nextPage() {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
-    color: var(--gw-font-color);
+    color: var(--gw-bg-font);
     user-select: none;
 
     .page-tool-item {
       border-radius: 5px;
       padding: 8px 15px;
       margin: 10px;
-      background-color: var(--gw-bg-active-color);
+      background-color: var(--gw-bg-active);
       cursor: pointer;
     }
   }

@@ -79,10 +79,10 @@ const renderChart = (callback?: any) => {
       '#aa725a',
     ],
     tooltip: {
-      backgroundColor: 'var(--gw-bg-active-color)',
-      borderColor: 'var(--gw-font-color-1)',
+      backgroundColor: 'var(--gw-bg-active)',
+      borderColor: 'var(--gw-bg-font-01)',
       textStyle: {
-        color: 'var(--gw-font-color)'
+        color: 'var(--gw-bg-font)'
       },
       formatter: (params: any) => {
         let date = params.data[0]
@@ -101,7 +101,7 @@ const renderChart = (callback?: any) => {
         splitLine: {
           show: true,
           lineStyle: {
-            color: 'var(--gw-font-color)',
+            color: 'var(--gw-bg-font)',
             width: 2,
             type: 'solid'
           }
@@ -113,9 +113,9 @@ const renderChart = (callback?: any) => {
         },
         yearLabel: { show: false },
         // 月份轴
-        monthLabel: { nameMap: 'ZH', color: 'var(--gw-font-color)' },
+        monthLabel: { nameMap: 'ZH', color: 'var(--gw-bg-font)' },
         // 天份轴
-        dayLabel: { nameMap: 'ZH', firstDay: 1, color: 'var(--gw-font-color)' }
+        dayLabel: { nameMap: 'ZH', firstDay: 1, color: 'var(--gw-bg-font)' }
       }
     ],
     visualMap: [
@@ -195,19 +195,19 @@ $info-margin-left: 130px;
   .heatmap-type-content {
     @include box(85px, 30px);
     @include font(12px, 700);
-    color: var(--gw-font-color);
+    color: var(--gw-bg-font);
   }
 
   .heatmap-type-choice-btn {
     @include box(30px, 30px);
-    @include border(1px, var(--gw-bg-active-color), 3px);
+    @include border(1px, var(--gw-bg-active), 3px);
     margin: 0 20px 0 25px;
     padding: 5px 3px;
     transition: box-shadow 0.4s;
     cursor: pointer;
 
     &:hover {
-      box-shadow: 0 0 10px 1px var(--gw-bg-active-color-5);
+      box-shadow: 0 0 10px 1px var(--gw-bg-active-05);
     }
 
     svg {

@@ -217,10 +217,10 @@ defineExpose({ reload, windowResize })
 <style lang="scss">
 .chart-line-word-tooltip {
   @include box(150px, 70px);
-  border: 1px solid var(--gw-font-color-1);
+  border: 1px solid var(--gw-bg-font-01);
   position: relative;
   z-index: 9999999;
-  background: var(--gw-bg-active-color);
+  background: var(--gw-bg-active);
   padding: 10px;
   box-shadow: none;
   backdrop-filter: blur(5px);
@@ -228,14 +228,14 @@ defineExpose({ reload, windowResize })
 
   .xaxis-title {
     @include font(20px, 700);
-    color: var(--gw-font-color);
+    color: var(--gw-bg-font);
   }
 
   .data {
     @include flex(row, space-between, center);
     @include font(18px, 300);
     margin-top: 10px;
-    color: var(--gw-font-color);
+    color: var(--gw-bg-font);
   }
 
   &::before {

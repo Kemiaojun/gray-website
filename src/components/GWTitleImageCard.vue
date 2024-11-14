@@ -84,7 +84,7 @@ function clickThis() {
   height: 200px;
   overflow: auto;
   border-radius: 8px;
-  box-shadow: 0 4px 8px var(--gw-bg-active-color);
+  box-shadow: 0 4px 8px var(--gw-bg-active);
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -107,8 +107,8 @@ function clickThis() {
   width: 100%;
   padding: 10px;
   text-align: center;
-  background-color: var(--gw-bg-active-color-5);
-  color: var(--gw-font-color);
+  background-color: var(--gw-bg-active-05);
+  color: var(--gw-bg-font);
   transition: all 0.3s ease;
 }
 
@@ -127,7 +127,7 @@ function clickThis() {
   position: absolute;
   right: 8px;
   top: 8px;
-  color: var(--gw-font-color);
+  color: var(--gw-bg-font);
   display: flex;
   flex-direction: column;
 }

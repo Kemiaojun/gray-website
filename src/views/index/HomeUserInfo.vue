@@ -56,7 +56,7 @@ const links = () => {
   @include box(100%, 100%);
   @include flex(column, center, center);
   font-family: 'Jetbrains Mono';
-  color: var(--gw-font-color);
+  color: var(--gw-bg-font);
   .userinfo-desc {
     @include flex(row, flex-start, flex-end);
 
@@ -77,13 +77,13 @@ const links = () => {
         height: 65px;
         
         letter-spacing: 5px;
-        text-shadow: 3px 3px 5px var(--gw-bg-active-color-5);
+        text-shadow: 3px 3px 5px var(--gw-bg-active-05);
       }
 
       .desc {
         @include font(13px, 300);
         height: 20px;
-        color: var(--gw-font-color);
+        color: var(--gw-bg-font);
         letter-spacing: 1px;
       }
     }
@@ -110,8 +110,8 @@ const links = () => {
           line-height: 25px;
 
           &:hover {
-            color: var(--gw-font-color);
-            text-shadow: 3px 3px 10px var(--gw-bg-active-color);
+            color: var(--gw-bg-font);
+            text-shadow: 3px 3px 10px var(--gw-bg-active);
           }
         }
       }

@@ -5,20 +5,20 @@
           <span
             style="
               font-size: small;
-              color: var(--gw-font-color);
+              color: var(--gw-bg-font);
               font-style: italic;
               font-weight: bold;
               text-decoration: underline;
             "
             >{{ resourceCount }}</span
-          ><span style="font-size: small; color: var(--gw-font-color)"
+          ><span style="font-size: small; color: var(--gw-bg-font)"
             >资源数量: </span
           >
       </template>
     </GWResourceSearch>
     <fs-virtual-water-fall ref="waterFallRef" :request="req" :gap="20" :column="5" :request-size="10">
       <template #item="{ item }">
-        <img v-if="item.resourceType === '图片'" class="img-item" :src="item.thumbnailUrl" @click="previewImage(item)"/>
+        <img v-lazy="true" v-if="item.resourceType === '图片'" class="img-item" :data-src="item.thumbnailUrl" @click="previewImage(item)"/>
         <AudioCard  v-else-if="item.resourceType === '音频' || item.resourceType === '歌曲'" :name="item.name" :duration="item.duration" :url="item.previewUrl" class="img-item"></AudioCard>
         <div class="video-container" v-else-if="item.resourceType === '视频'"> 
           <img  class="video-item" :src="item.thumbnailUrl" />
@@ -159,7 +159,7 @@ const pageSearch = async (params:any) =>{
 }
 
 .video-item {
-  // border:1px solid var(--gw-font-color);
+  // border:1px solid var(--gw-bg-font);
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -194,7 +194,7 @@ const pageSearch = async (params:any) =>{
   left: 50%;
   transform: translate(-50%, -50%); /* 将按钮移动到图片正中央 */
   font-size: 40px; /* 调整按钮大小 */
-  color: var(--gw-font-color); /* 按钮颜色 */
+  color: var(--gw-bg-font); /* 按钮颜色 */
   padding: 10px 20px; /* 增加一些内边距 */
   border-radius: 50%; /* 圆形按钮 */
   cursor: pointer;

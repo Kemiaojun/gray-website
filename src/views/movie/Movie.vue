@@ -25,12 +25,12 @@
       </template>
       <template v-slot:right-items>
         <div class="flex-item">
-          <span style="font-size: small; color: var(--gw-font-color)"
+          <span style="font-size: small; color: var(--gw-bg-font)"
             >影片数量: </span
           ><span
             style="
               font-size: small;
-              color: var(--gw-font-color);
+              color: var(--gw-bg-font);
               font-style: italic;
               font-weight: bold;
               text-decoration: underline;
@@ -55,7 +55,7 @@
         </div>
       </template>
     </GWSearchCondition>
-    <GWFlexContainer style="min-height: calc(100% - 100px)">
+    <FlexContainer style="min-height: calc(100% - 100px);justify-content: center;">
       <template v-slot:flex-items>
         <GWFlexMovieCard
           v-for="(movie, index) in movies"
@@ -64,7 +64,7 @@
           :movie="movie"
         ></GWFlexMovieCard>
       </template>
-    </GWFlexContainer>
+    </FlexContainer>
     <!-- 图片选择器 -->
     <input
       ref="fileselectRef"
@@ -152,7 +152,7 @@ import {
   movieCategoriesApi,
   m3u8MovieApi,
 } from "@/api/movie";
-import GWFlexContainer from "@/components/GWFlexContainer.vue";
+import FlexContainer from "@/components/Flex/FlexContainer.vue";
 import { ElMessage } from "element-plus";
 import type { FormRules, FormInstance } from "element-plus";
 import GWFlexMovieCard from "@/components/GWFlexMovieCard.vue";
@@ -316,7 +316,7 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 .movie-root-container {
-  background-color: var(--gw-bg-color);
+  background-color: var(--gw-bg-basic);
   width: calc(100%);
   min-height: calc(100% - 60px);
   margin-top: 60px;

@@ -4,7 +4,6 @@
     <div class="desc">您可能想前往....</div>
     <div class="router">
       <div class="item" @click="toRoute('/home')"><span class="iconbl bl-a-home1-line"></span>首页</div>
-      <div class="item" @click="toRoute('/articles')"><span class="iconbl bl-a-texteditorhighlightcolor-line"></span>文章列表</div>
     </div>
   </div>
 </template>
@@ -15,24 +14,26 @@ import { toRoute } from '@/router'
 
 <style scoped lang="scss">
 .notfound-root {
-  @include box(100%, 100%);
+  width: 100%;
+  height: 100vh;
   @include flex(column, center, center);
-  background-image: linear-gradient(to right bottom, rgb(62, 70, 78), rgb(33, 33, 33));
+  overflow: hidden;
+  background-color: var(--gw-bg-basic);
 
   .notfount {
     @include font(260px, 700);
-    color: #fff;
+    color: var(--gw-bg-font);
   }
 
   .desc {
     @include font(30px, 300);
-    color: #9b9b9b;
+    color: var(--gw-bg-font);
     padding-bottom: 10px;
   }
 
   .router {
     font-weight: 300;
-    color: #9b9b9b;
+    color: var(--gw-bg-font);
 
     img {
       margin-right: 5px;
@@ -51,7 +52,7 @@ import { toRoute } from '@/router'
       .iconbl {
         font-size: 30px;
         padding-right: 5px;
-        color: #9b9b9b;
+        color: var(--gw-bg-font);
       }
     }
   }

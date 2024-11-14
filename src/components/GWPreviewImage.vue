@@ -126,7 +126,7 @@ const zoomOut = () => {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: var(--gw-bg-active-color-5);
+  background: var(--gw-bg-active-05);
   z-index: 3000;
 }
 
@@ -156,9 +156,9 @@ const zoomOut = () => {
   flex-direction: column;
   .iconbl {
     &:hover {
-      background-color: var(--gw-bg-color);
+      background-color: var(--gw-bg-basic);
     }
-    background-color: var(--gw-bg-color-5);
+    background-color: var(--gw-bg-basic-5);
     border-radius: 50%;
     padding: 5px;
   }

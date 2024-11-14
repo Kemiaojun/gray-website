@@ -61,7 +61,7 @@ const handleVideoAbort = () => {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: var(--gw-bg-active-color-5);
+  background: var(--gw-bg-active-05);
   z-index: 3000;
 }
 
@@ -97,7 +97,7 @@ const handleVideoAbort = () => {
   display: flex;
   flex-direction: column;
   opacity: 50%;
-  background-color: var(--gw-bg-active-color);
+  background-color: var(--gw-bg-active);
   &:hover {
     opacity: 100%;
   }

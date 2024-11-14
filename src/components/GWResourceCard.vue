@@ -167,7 +167,7 @@ const downloadImage = (url: string, name: string) => {
   align-items: center;
   justify-content: center;
   position: relative;
-  background-color: var(--gw-bg-color);
+  background-color: var(--gw-bg-basic);
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -204,9 +204,9 @@ const downloadImage = (url: string, name: string) => {
   cursor: pointer;
   width: 30px;
   height: 30px;
-  color: var(--gw-font-color);
+  color: var(--gw-bg-font);
   &:hover {
-    background: var(--gw-bg-active-color);
+    background: var(--gw-bg-active);
     border-radius: 50%;
     .more-options {
       display: inline;
@@ -218,10 +218,10 @@ const downloadImage = (url: string, name: string) => {
   position: absolute;
   top: 35px;
   right: 0;
-  background-color: var(--gw-bg-color);
-  color: var(--gw-font-color);
-  border: 1px solid var(--gw-bg-active-color);
-  box-shadow: 0 2px 8px var(--gw-font-color-1);
+  background-color: var(--gw-bg-basic);
+  color: var(--gw-bg-font);
+  border: 1px solid var(--gw-bg-active);
+  box-shadow: 0 2px 8px var(--gw-bg-font-01);
   border-radius: 5px;
   z-index: 100;
 }
@@ -240,7 +240,7 @@ const downloadImage = (url: string, name: string) => {
 }
 
 .options-menu li:hover {
-  background-color: var(--gw-bg-active-color);
+  background-color: var(--gw-bg-active);
 }
 
 #triangle_bottom {
@@ -249,6 +249,6 @@ const downloadImage = (url: string, name: string) => {
   margin-left: 9px;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-bottom: 6px solid var(--gw-bg-color);
+  border-bottom: 6px solid var(--gw-bg-basic);
 }
 </style>

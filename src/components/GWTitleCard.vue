@@ -65,7 +65,7 @@ box-shadow: 5px 5px 20px 7px rgba(0,0,0,0.25), -5px -5px 20px 7px rgba(0,0,0,0.2
     font-size: 20px;
     height: 30px;
     margin-top: -55px;
-    background-color: var(--gw-bg-active-color);
+    background-color: var(--gw-bg-active);
     p {
       text-overflow: ellipsis;
       text-wrap: nowrap;

@@ -84,7 +84,7 @@ function lycSlide() {
     if(index < 0 ) index = 0;
     lyricContentRef.value.style.top = index * -21 + 150 + "px";
     [...lyricContentRef.value.children].forEach((item) => {
-      item.style.color = "var(--gw-font-color)";
+      item.style.color = "var(--gw-bg-font)";
     });
     lyricContentRef.value.children[index].style.color = "aqua";
   }
@@ -451,7 +451,7 @@ onUnmounted(() => {
 .music-disc {
   position: fixed;
   box-sizing: border-box;
-  background-color: var(--gw-bg-active-color);
+  background-color: var(--gw-bg-active);
   display: flex;
   align-items: center;
   z-index: 9999;

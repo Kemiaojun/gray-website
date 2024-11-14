@@ -87,8 +87,8 @@ const selectTab = (name: string) => {
   justify-content: center;
   align-items: center;
   position: relative;
-  background-color: var(--gw-bg-color);
-  color: var(--gw-font-color);
+  background-color: var(--gw-bg-basic);
+  color: var(--gw-bg-font);
   min-height: 100vh;
   overflow: hidden;
 }

@@ -144,7 +144,7 @@ img {
 }
 
 .gw-flex-info {
-  background: var(--gw-bg-active-color-5);
+  background: var(--gw-bg-active-05);
   border-radius: 0 0 0.5rem 0.5rem;
   padding: 1rem !important;
   align-items: center !important;
@@ -153,7 +153,7 @@ img {
 }
 
 .movie-title {
-  color: var(--gw-font-color);
+  color: var(--gw-bg-font);
   padding: 0.5rem;
   font-size: 1rem;
   white-space: nowrap; /* 不换行 */
@@ -162,7 +162,7 @@ img {
 }
 
 .movie-play {
-  background: var(--gw-bg-active-color);
+  background: var(--gw-bg-active);
   color: orange;
   text-align: center;
   padding: 0.5rem;
@@ -184,7 +184,7 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--gw-bg-active-color-5); /* 半透明黑色遮罩 */
+  background-color: var(--gw-bg-active-05); /* 半透明黑色遮罩 */
   opacity: 0.5; /* 可调节透明度 */
   overflow-y: scroll;
   gap: 1rem;
@@ -194,19 +194,19 @@ img {
     opacity: 1; /* 可调节透明度 */
   }
   .overlay-item {
-    background-color: var(--gw-bg-color);
+    background-color: var(--gw-bg-basic);
     width: 60px;
     font-size: 12px;
     padding: 5px;
     text-align: center;
     border-radius: 2px;
-    border: 1px solid var(--gw-font-color);
+    border: 1px solid var(--gw-bg-font);
     white-space: nowrap; /* 不换行 */
     overflow: hidden; /* 隐藏超出部分 */
     text-overflow: ellipsis; /* 使用省略号表示超出部分 */
     &:hover {
       cursor: pointer;
-      background-color: var(--gw-bg-active-color);
+      background-color: var(--gw-bg-active);
     }
   }
 }

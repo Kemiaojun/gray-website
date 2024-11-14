@@ -129,15 +129,15 @@ onMounted(async () => {
   width: 100%;
   height: 100%;
   padding: 20px;
-  background: var(--gw-bg-color);
+  background: var(--gw-bg-basic);
   z-index: 3000;
   gap: 5px;
   overflow: hidden;
   border-radius: 10px;
   display: inline-flex;
   &:focus {
-    border: 1px solid var(--gw-font-color);
-    background: var(--gw-bg-active-color-5);
+    border: 1px solid var(--gw-bg-font);
+    background: var(--gw-bg-active-05);
   }
 }
 
@@ -208,13 +208,13 @@ onMounted(async () => {
   cursor: pointer;
   user-select: none;
   font-size: 14px;
-  color: var(--gw-font-color);
-  background-color: var(--gw-bg-color);
+  color: var(--gw-bg-font);
+  background-color: var(--gw-bg-basic);
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 .class-items {
   border-radius: 10px;
-  border: 1px solid var(--gw-bg-active-color);
+  border: 1px solid var(--gw-bg-active);
   width: 120px;
   height: 100%;
   text-align: center;
@@ -234,8 +234,8 @@ onMounted(async () => {
     cursor: pointer;
     user-select: none;
     font-size: 14px;
-    color: var(--gw-font-color);
-    background-color: var(--gw-bg-active-color);
+    color: var(--gw-bg-font);
+    background-color: var(--gw-bg-active);
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
   }
 }

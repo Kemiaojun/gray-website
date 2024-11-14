@@ -66,14 +66,14 @@
             style="
               justify-content: space-between;
               align-items: center;
-              border-bottom: 1px solid var(--gw-font-color-1);
+              border-bottom: 1px solid var(--gw-bg-font-01);
             "
           >
             <el-input v-model="musicName3" placeholder="歌曲名称"> </el-input>
           </div>
           <div
             class="row-card"
-            style="border-bottom: 1px solid var(--gw-font-color-1)"
+            style="border-bottom: 1px solid var(--gw-bg-font-01)"
           >
             <span
               style="
@@ -110,14 +110,14 @@
             style="
               justify-content: space-between;
               align-items: center;
-              border-bottom: 1px solid var(--gw-font-color-1);
+              border-bottom: 1px solid var(--gw-bg-font-01);
             "
           >
             <el-input v-model="musicName2" placeholder="歌曲名称" />
           </div>
           <div
             class="row-card"
-            style="border-bottom: 1px solid var(--gw-font-color-1)"
+            style="border-bottom: 1px solid var(--gw-bg-font-01)"
           >
             <span
               style="
@@ -155,14 +155,14 @@
             style="
               justify-content: space-between;
               align-items: center;
-              border-bottom: 1px solid var(--gw-font-color-1);
+              border-bottom: 1px solid var(--gw-bg-font-01);
             "
           >
             <el-input v-model="musicName1" placeholder="歌曲名称" />
           </div>
           <div
             class="row-card"
-            style="border-bottom: 1px solid var(--gw-font-color-1)"
+            style="border-bottom: 1px solid var(--gw-bg-font-01)"
           >
             <span
               style="
@@ -200,7 +200,7 @@
               style="
                 justify-content: space-between;
                 align-items: center;
-                border-bottom: 1px solid var(--gw-font-color-1);
+                border-bottom: 1px solid var(--gw-bg-font-01);
               "
             >
               <el-input v-model="singerName" placeholder="歌手名字" />
@@ -210,7 +210,7 @@
               v-for="singer in filteredList"
               @click="singerCollection(singer)"
             >
-              <GWAvatar
+              <Avatar
                 size="xlarge"
                 :src="
                   getWebsiteApiBaseUrl() +
@@ -219,7 +219,7 @@
                   '.png'
                 "
               >
-              </GWAvatar>
+              </Avatar>
               <div class="name">{{ singer.name }}</div>
             </div>
           </div>
@@ -229,10 +229,10 @@
               style="
                 justify-content: space-between;
                 align-items: center;
-                border-bottom: 1px solid var(--gw-font-color-1);
+                border-bottom: 1px solid var(--gw-bg-font-01);
               "
             >
-              <GWAvatar
+              <Avatar
                 size="xlarge"
                 :src="
                   getWebsiteApiBaseUrl() +
@@ -241,7 +241,7 @@
                   '.png'
                 "
               >
-              </GWAvatar>
+              </Avatar>
               <div
                 class="pc-show"
                 style="flex-grow: 1; font-weight: bold; font-style: italic"
@@ -250,7 +250,7 @@
               </div>
               <div
                 style="
-                  background-color: var(--gw-bg-active-color);
+                  background-color: var(--gw-bg-active);
                   padding: 5px;
                   border-radius: 5px;
                 "
@@ -285,7 +285,7 @@
               style="
                 justify-content: space-between;
                 align-items: center;
-                border-bottom: 1px solid var(--gw-font-color-1);
+                border-bottom: 1px solid var(--gw-bg-font-01);
               "
             >
               <img
@@ -307,7 +307,7 @@
               </div>
               <div
                 style="
-                  background-color: var(--gw-bg-active-color);
+                  background-color: var(--gw-bg-active);
                   padding: 5px;
                   border-radius: 5px;
                 "
@@ -321,7 +321,7 @@
             </div>
             <div
               class="row-card"
-              style="border-bottom: 1px solid var(--gw-font-color-1)"
+              style="border-bottom: 1px solid var(--gw-bg-font-01)"
             >
               <span
                 style="
@@ -369,7 +369,7 @@ import { ref, onMounted, computed, watch } from "vue";
 import { useRoute } from "vue-router";
 import { movieCategoriesApi } from "@/api/movie";
 import { musicRefreshApi, musicListApi, pageMusicApi } from "@/api/music";
-import GWAvatar from "@/components/GWAvatar.vue";
+import Avatar from "@/components/Avatar/Avatar.vue";
 import GWTitleCard from "@/components/GWTitleCard.vue";
 import GWSortableTable from "@/components/GWSortableTable.vue";
 import GWMusicSortableTable from "@/components/GWMusicSortableTable.vue";
@@ -528,12 +528,9 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
-/* 引入相对路径的 CSS 文件 */
-@import "@/assets/styles/iconfont/player/iconfont.css";
-/* 引入相对路径的 CSS 文件 */
 
 .music-root-container {
-  background-color: var(--gw-bg-color);
+  background-color: var(--gw-bg-basic);
   width: 100%;
   height: calc(100vh - 60px);
   position: relative;
@@ -546,13 +543,13 @@ onUnmounted(() => {
 }
 
 .selectTab {
-  background-color: var(--gw-bg-active-color);
+  background-color: var(--gw-bg-active);
 }
 
 .layout-container-demo .el-aside {
-  color: var(--gw-font-color);
-  background: var(--gw-bg-color);
-  border-right: 1px solid var(--gw-bg-active-color);
+  color: var(--gw-bg-font);
+  background: var(--gw-bg-basic);
+  border-right: 1px solid var(--gw-bg-active);
   width: 70px;
   height: calc(100vh - 85px);
 }
@@ -567,9 +564,9 @@ onUnmounted(() => {
 
 .right-container {
   position: relative;
-  color: var(--gw-font-color);
-  background: var(--gw-bg-color);
-  border-right: 1px solid var(--gw-bg-active-color);
+  color: var(--gw-bg-font);
+  background: var(--gw-bg-basic);
+  border-right: 1px solid var(--gw-bg-active);
   height: 100%;
   display: flex;
 }
@@ -604,7 +601,7 @@ onUnmounted(() => {
 }
 
 .el-table__row {
-  background-color: var(--gw-bg-color) !important;
+  background-color: var(--gw-bg-basic) !important;
   /* 设置表格背景透明 */
 }
 

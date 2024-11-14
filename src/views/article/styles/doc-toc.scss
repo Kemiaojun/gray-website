@@ -1,9 +1,9 @@
 .toc-container {
   @include box(270px, 100%, 270px, 270px);
-  border-left: 1px solid var(--gw-bg-color);
+  border-left: 1px solid var(--gw-bg-basic);
 
   &::-webkit-scrollbar-thumb {
-    background-color: var(--gw-bg-color);
+    background-color: var(--gw-bg-basic);
   }
 
   .viewer-toc {
@@ -14,7 +14,7 @@
 
     .doc-info {
       .doc-name {
-        color: var(--gw-font-color);
+        color: var(--gw-bg-font);
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -25,7 +25,7 @@
         @include font(12px);
         font-family: 'Jetbrains Mono';
         width: 100%;
-        color: var(--gw-font-color);
+        color: var(--gw-bg-font);
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -39,11 +39,11 @@
 .toc-title {
   @include box(100%, 50px);
   @include font(25px, 700);
-  color: var(--gw-font-color);
+  color: var(--gw-bg-font);
   line-height: 40px;
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 3px solid var(--gw-bg-color);
+  border-top: 3px solid var(--gw-bg-basic);
 }
 
 .toc-content {
@@ -58,7 +58,7 @@
   .toc-item {
     width: auto;
     padding: 4px 0;
-    color: var(--gw-font-color);
+    color: var(--gw-bg-font);
     position: relative;
     cursor: pointer;
 
@@ -105,6 +105,6 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: var(--gw-bg-color);
+    background-color: var(--gw-bg-basic);
   }
 }

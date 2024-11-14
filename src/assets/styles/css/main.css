@@ -28,19 +28,19 @@ html {
 
 /* 滚动条的轨道 */
 ::-webkit-scrollbar-track {
-  background: var(--gw-bg-color); /* 轨道背景色 */
+  background: var(--gw-bg-basic); /* 轨道背景色 */
   border-radius: 5px;
 }
 
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
-  background: var(--gw-bg-active-color); /* 滑块颜色 */
+  background: var(--gw-bg-active); /* 滑块颜色 */
   border-radius: 5px;
 }
 
 /* 滑块悬停效果 */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--gw-font-color); /* 悬停时滑块颜色 */
+  background: var(--gw-bg-font); /* 悬停时滑块颜色 */
 }
 
 /** ================================== 博客 ================================== */
@@ -48,7 +48,7 @@ html {
 .module-workbench {
   @include box(35px, 35px);
   @include flex(row, center, center);
-  background-color: var(--gw-html-color);
+  background-color: var(--gw-bg-basic);
   box-shadow: -1px 0px 3px #bababa;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -72,11 +72,11 @@ html {
     background-color: #606060;
 
     .iconbl {
-      color: var(--gw-html-color);
+      color: var(--gw-bg-basic);
     }
 
     i {
-      --color: var(--gw-html-color) !important;
+      --color: var(--gw-bg-basic) !important;
     }
   }
 }

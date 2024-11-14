@@ -114,12 +114,12 @@ let computedSize = computed(() => {
 .logo-card {
   width: 280px;
   height: 150px;
-  background: var(--gw-bg-color);
+  background: var(--gw-bg-basic);
   display: flex;
-  color: var(--gw-font-color);
+  color: var(--gw-bg-font);
   justify-content: center;
   position: relative;
-  border: 1px solid var(--gw-bg-active-color);
+  border: 1px solid var(--gw-bg-active);
   flex-direction: column;
   cursor: pointer;
   transition: all 0.3s ease-in-out;

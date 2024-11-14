@@ -33,7 +33,7 @@
           >
             <span
               :class="['iconfont', tab.icon]"
-              style="color: var(--gw-font-color);"
+              style="color: var(--gw-bg-font);"
             ><span style="padding: 0 1rem;">{{
               tab.title
             }}</span></span>
@@ -60,7 +60,7 @@
       >
         <span
           :class="['iconfont', tab.icon]"
-          style="color: var(--gw-font-color); font-size: 2rem"
+          style="color: var(--gw-bg-font); font-size: 2rem"
         ></span>
         <span class="tab-text" style="margin-left: 3px">{{ tab.title }}</span>
       </div>
@@ -200,16 +200,16 @@ let wrapHeader = computed(() => {
     font-size: 2rem;
     @include box(auto, 100%);
     margin-left: 10px;
-    text-shadow: 3px 3px 5px var(--gw-bg-color);
+    text-shadow: 3px 3px 5px var(--gw-bg-basic);
     cursor: pointer;
     color: transparent;
     font-family: current, sans-serif;
     letter-spacing: 1px;
     background: linear-gradient(
       90deg,
-      var(--gw-header-color),
-      var(--gw-font-color),
-      var(--gw-header-color)
+      var(--gw-bg-header),
+      var(--gw-bg-font),
+      var(--gw-bg-header)
     );
     background-clip: text;
     animation: glow 10s linear infinite;
@@ -225,7 +225,7 @@ let wrapHeader = computed(() => {
 .header-background {
   width: 100%;
   height: 100%;
-  background-color: var(--gw-bg-color);
+  background-color: var(--gw-bg-basic);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   position: absolute;
@@ -238,13 +238,13 @@ let wrapHeader = computed(() => {
 .tab-target {
   height: 100%;
   font-size: 20px;
-  color: var(--gw-font-color);
-  text-shadow: 3px 3px 5px var(--gw-bg-color);
+  color: var(--gw-bg-font);
+  text-shadow: 3px 3px 5px var(--gw-bg-basic);
   user-select: none;
   transition: color 0.3s;
   vertical-align: sub;
   &:hover {
-    color: var(--gw-font-color);
+    color: var(--gw-bg-font);
   }
 }
 
@@ -253,12 +253,12 @@ let wrapHeader = computed(() => {
   font-size: 15px;
   color: #909090;
   padding: 0 10px;
-  text-shadow: 1px 1px 2px var(--gw-bg-color);
+  text-shadow: 1px 1px 2px var(--gw-bg-basic);
   user-select: none;
   transition: color 0.3s;
 
   &:hover {
-    color: var(--gw-font-color);
+    color: var(--gw-bg-font);
   }
 
   .iconbl {
@@ -268,7 +268,7 @@ let wrapHeader = computed(() => {
 
 .icon-circle:hover {
   border-radius: 50%;
-  background-color: var(--gw-bg-active-color);
+  background-color: var(--gw-bg-active);
 }
 
 .item {
@@ -286,8 +286,8 @@ let wrapHeader = computed(() => {
   }
 
   &:hover {
-    color: var(--gw-font-color);
-    text-shadow: 3px 3px 5px var(--gw-font-color);
+    color: var(--gw-bg-font);
+    text-shadow: 3px 3px 5px var(--gw-bg-font);
   }
 }
 
@@ -298,7 +298,7 @@ let wrapHeader = computed(() => {
 }
 
 .gw-header-bg {
-  box-shadow: 0 1px 8px 1px var(--gw-bg-color);
+  box-shadow: 0 1px 8px 1px var(--gw-bg-basic);
 }
 
 .head-row.tabs {
@@ -313,13 +313,13 @@ let wrapHeader = computed(() => {
   cursor: pointer;
   transition: 0.3s;
   &:hover {
-    background: var(--gw-bg-active-color);
+    background: var(--gw-bg-active);
   }
 }
 
 .tab.active {
-  background: var(--gw-bg-active-color);
-  color: var(--gw-font-color);
+  background: var(--gw-bg-active);
+  color: var(--gw-bg-font);
   font-weight: bold;
 }
 

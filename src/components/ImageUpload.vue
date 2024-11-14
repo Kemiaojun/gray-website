@@ -1,42 +1,64 @@
 <template>
-  <div class="image-upload" :style="{ height: size ? size + 'px' : '200px'}" @click="selectFile" >
+  <div
+    class="image-upload"
+    :style="{ height: size ? size + 'px' : '200px' }"
+    @click="selectFile"
+  >
     <!-- 图片选择器 -->
-    <input ref="fileselectRef" style="display: none;" type="file" accept="image/*" @change="onFileChange" />
-    
+    <input
+      ref="fileselectRef"
+      style="display: none"
+      type="file"
+      accept="image/*"
+      @change="onFileChange"
+    />
+
     <!-- 图片预览 -->
-    <div  class="image-preview " :style="{ border: imageUrl ? 'none': '1px solid var(--gw-bg-active-color)', width: size ? size + 'px' : '200px' }">
-      <img  class="img" :style="{ height: size ? size + 'px' : '200px'}" v-if="imagePreview()" :src="imagePreview()" alt="预览图片" />
+    <div
+      class="image-preview"
+      :style="{
+        border: imageUrl ? 'none' : '1px solid var(--gw-bg-active)',
+        width: size ? size + 'px' : '200px',
+      }"
+    >
+      <img
+        class="img"
+        :style="{ height: size ? size + 'px' : '200px' }"
+        v-if="imagePreview()"
+        :src="imagePreview()"
+        alt="预览图片"
+      />
       <SvgIcon v-else :size="50" icon-class="add" />
     </div>
-   
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onUnmounted, onMounted, toRefs } from 'vue';
-import { getWebsiteApiBaseUrl } from '@/utils/website'
+import { ref, onUnmounted, onMounted, toRefs } from "vue";
+import { getWebsiteApiBaseUrl } from "@/utils/website";
 
 interface ImageProps {
-  imageUrl?: string; 
+  imageUrl?: string;
   size?: number;
 }
 
 const props = defineProps<ImageProps>();
 
+const { size } = toRefs(props);
 
-const { size } =  toRefs(props);
-
-const imageUrl=  ref(props.imageUrl);
+const imageUrl = ref(props.imageUrl);
 
 // 定义用于存储文件和预览图片的响应式变量
 const selectedFile = ref<File | null>(null);
 const imagePreview = () => {
-  if(imageUrl.value){
-    return  imageUrl.value.startsWith("http") || imageUrl.value.startsWith("data") ? imageUrl.value: getWebsiteApiBaseUrl() + imageUrl.value;
+  if (imageUrl.value) {
+    return imageUrl.value.startsWith("http") ||
+      imageUrl.value.startsWith("data")
+      ? imageUrl.value
+      : getWebsiteApiBaseUrl() + imageUrl.value;
   }
   return "";
-}
-
+};
 
 const fileselectRef = ref();
 
@@ -54,21 +76,19 @@ const onFileChange = (event: Event) => {
       imageUrl.value = e.target?.result as string;
     };
     reader.readAsDataURL(selectedFile.value);
-    emit("selectFile",selectedFile.value);
+    emit("selectFile", selectedFile.value);
   }
 };
 
 const selectFile = () => {
   fileselectRef.value.click();
-}
+};
 
-onUnmounted(() =>{
-  selectedFile.value = null;  
+onUnmounted(() => {
+  selectedFile.value = null;
 });
 
-onMounted(()=>{
-});
-
+onMounted(() => {});
 </script>
 
 <style scoped>
@@ -93,7 +113,6 @@ onMounted(()=>{
   width: auto;
   border-radius: 10px;
   object-fit: contain; /* 保证图片按比例填充容器 */
-  
 }
 
 button {

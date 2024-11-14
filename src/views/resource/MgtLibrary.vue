@@ -209,7 +209,7 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 .root-container {
-  background-color: var(--gw-bg-color);
+  background-color: var(--gw-bg-basic);
   @include box(100%, 100%);
   position: relative;
   overflow: scroll;
@@ -220,13 +220,13 @@ onMounted(async () => {
 }
 
 .selectTab {
-  background-color: var(--gw-bg-active-color);
+  background-color: var(--gw-bg-active);
 }
 
 .layout-container-demo .el-aside {
-  color: var(--gw-font-color);
-  background: var(--gw-bg-color);
-  border-right: 1px solid var(--gw-bg-active-color);
+  color: var(--gw-bg-font);
+  background: var(--gw-bg-basic);
+  border-right: 1px solid var(--gw-bg-active);
   width: 200px;
   height: calc(100vh - 65px);
 }
@@ -238,14 +238,14 @@ onMounted(async () => {
 }
 .right-container {
   position: relative;
-  color: var(--gw-font-color);
-  background: var(--gw-bg-color);
-  border-right: 1px solid var(--gw-bg-active-color);
+  color: var(--gw-bg-font);
+  background: var(--gw-bg-basic);
+  border-right: 1px solid var(--gw-bg-active);
   height: 100%;
 }
 
 .resource-gallery {
-  background-color: var(--gw-bg-color);
+  background-color: var(--gw-bg-basic);
   @include box(100%, 100%);
   position: relative;
   overflow: scroll;

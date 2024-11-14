@@ -342,7 +342,7 @@ const handleNodeChange = (data: any) => {
 
 .library-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 10px calc(--gw-font-color-1);
+  box-shadow: 0 4px 10px calc(--gw-bg-font-01);
 }
 
 .add-library {
@@ -373,6 +373,6 @@ const handleNodeChange = (data: any) => {
   border-radius: 3px;
 }
 .customize-btn.iconbl:hover {
-  background-color: var(--gw-font-color-1);
+  background-color: var(--gw-bg-font-01);
 }
 </style>

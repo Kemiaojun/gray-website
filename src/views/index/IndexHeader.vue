@@ -152,7 +152,7 @@ const clickTab = (event: MouseEvent) => {
 
 <style lang="scss">
 .graython-header-root {
-  background-color: var(--gw-bg-color);
+  background-color: var(--gw-bg-basic);
   border-bottom: var(--el-border);
   @include box(100%, 60px);
   @include flex(row, space-between, center);
@@ -175,12 +175,12 @@ const clickTab = (event: MouseEvent) => {
   .project-name {
     @include box(auto, 100%);
     margin-left: 10px;
-    text-shadow: 3px 3px 5px var(--gw-bg-color);
+    text-shadow: 3px 3px 5px var(--gw-bg-basic);
     cursor: pointer;
     color: transparent;
     font-family: current, sans-serif;
     letter-spacing: 1px;
-    background: linear-gradient(90deg, var(--gw-header-color), var(--gw-font-color), var(--gw-header-color));
+    background: linear-gradient(90deg, var(--gw-bg-header), var(--gw-bg-font), var(--gw-bg-header));
     -webkit-background-clip: text;
     animation: glow 10s linear infinite;
     transition: 1.5s;
@@ -196,13 +196,13 @@ const clickTab = (event: MouseEvent) => {
 .tab-target {
   height: 100%;
   font-size: 20px;
-  color: var(--gw-font-color);
-  text-shadow: 3px 3px 5px var(--gw-bg-color);
+  color: var(--gw-bg-font);
+  text-shadow: 3px 3px 5px var(--gw-bg-basic);
   user-select: none;
   transition: color 0.3s;
   vertical-align: sub;
   &:hover {
-    color: var(--gw-font-color);
+    color: var(--gw-bg-font);
   }
 }
 
@@ -211,12 +211,12 @@ const clickTab = (event: MouseEvent) => {
   font-size: 15px;
   color: #909090;
   padding: 0 10px;
-  text-shadow: 3px 3px 5px var(--gw-bg-color);
+  text-shadow: 3px 3px 5px var(--gw-bg-basic);
   user-select: none;
   transition: color 0.3s;
 
   &:hover {
-    color: var(--gw-font-color);
+    color: var(--gw-bg-font);
   }
 
   .iconbl {
@@ -226,7 +226,7 @@ const clickTab = (event: MouseEvent) => {
 
 .icon-circle:hover {
   border-radius: 50%;
-  background-color: var(--gw-bg-active-color);
+  background-color: var(--gw-bg-active);
 }
 
 .item {
@@ -244,8 +244,8 @@ const clickTab = (event: MouseEvent) => {
   }
 
   &:hover {
-    color: var(--gw-font-color);
-    text-shadow: 3px 3px 5px var(--gw-font-color);
+    color: var(--gw-bg-font);
+    text-shadow: 3px 3px 5px var(--gw-bg-font);
   }
 }
 
@@ -256,7 +256,7 @@ const clickTab = (event: MouseEvent) => {
 }
 
 .graython-header-bg {
-  box-shadow: 0 1px 8px 1px var(--gw-bg-color);
+  box-shadow: 0 1px 8px 1px var(--gw-bg-basic);
 }
 
 .head-row.tabs {
@@ -272,13 +272,13 @@ const clickTab = (event: MouseEvent) => {
   cursor: pointer;
   transition: 0.3s;
   &:hover {
-    background: var(--gw-bg-active-color);
+    background: var(--gw-bg-active);
   }
 }
 
 .tab.active {
-  background: var(--gw-bg-active-color);
-  color: var(--gw-font-color);
+  background: var(--gw-bg-active);
+  color: var(--gw-bg-font);
   font-weight: bold;
 }
 /* 在屏幕宽度小于 400px 时隐藏文字，只显示图标 */

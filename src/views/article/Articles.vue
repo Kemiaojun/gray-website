@@ -164,7 +164,7 @@
     size="7rem"
   >
     <ArticleSetting
-      style="background-color: var(--gw-bg-color)"
+      style="background-color: var(--gw-bg-basic)"
     ></ArticleSetting>
   </el-drawer>
 </template>
@@ -429,7 +429,7 @@ const onresize = () => {
   @include box(100%, 100%);
   @include flex(column, flex-start, center);
   box-sizing: border-box;
-  background: var(--gw-bg-color);
+  background: var(--gw-bg-basic);
   position: relative;
   margin-top: 60px;
   .mask {
@@ -478,7 +478,7 @@ const onresize = () => {
         left: 10px;
         top: 10px;
         border-radius: 10px;
-        background-color: var(--gw-bg-color);
+        background-color: var(--gw-bg-basic);
         padding-top: 10px;
         z-index: 9999;
         overflow: hidden;
@@ -509,8 +509,8 @@ const onresize = () => {
       position: absolute;
       right: 10px;
       top: 10px;
-      background-color: var(--gw-bg-color);
-      color: var(--gw-font-color);
+      background-color: var(--gw-bg-basic);
+      color: var(--gw-bg-font);
       border-radius: 10px;
       border: 0;
       z-index: 9999;

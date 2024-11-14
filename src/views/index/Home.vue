@@ -4,7 +4,7 @@
       <div class="round-div-1"></div>
       <div class="round-div-2"></div>
       <div class="pic-div">
-        <img id="bannerImg" src="" style="z-index: 888;" alt="banner image"/>
+        <img id="bannerImg" src="" style="z-index: 888" alt="banner image" />
       </div>
       <!-- 波浪 -->
       <Wave></Wave>
@@ -19,7 +19,7 @@ import emitter from "@/utils/mitt";
 const dayImage = "/light.png";
 const nightImage = "/dark.png";
 
-const handleDayNightChange = async (isDark:any) => {
+const handleDayNightChange = async (isDark: any) => {
   console.log("主题又变了");
   let bannerImg = document.getElementById("bannerImg");
   if (bannerImg instanceof HTMLImageElement) {
@@ -65,7 +65,7 @@ onUnmounted(() => {
 }
 
 .round-div-1 {
-  background: rgba(227, 126, 15, 0.1607843137);
+  background: var(--gw-banner-round-1);
   border-radius: 50%;
   width: 10rem;
   height: 10rem;
@@ -75,7 +75,7 @@ onUnmounted(() => {
 }
 
 .round-div-2 {
-  background: rgba(227, 126, 15, 0.1607843137);
+  background: rgba(227, 126, 15, 0.2);
   border-radius: 50%;
   width: 20rem;
   height: 20rem;
@@ -83,5 +83,4 @@ onUnmounted(() => {
   right: 10rem;
   top: 10rem;
 }
-
 </style>

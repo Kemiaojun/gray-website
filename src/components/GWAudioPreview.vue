@@ -208,10 +208,10 @@ defineExpose({
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--gw-bg-active-color);
+  border: 1px solid var(--gw-bg-active);
   border-radius: 10px;
   overflow: hidden;
-  background-color: var(--gw-bg-color);
+  background-color: var(--gw-bg-basic);
 }
 
 .audio-name {
@@ -291,7 +291,7 @@ defineExpose({
 /* 视频logo(播放按钮) */
 .play-button {
   font-size: 30px; /* 调整按钮大小 */
-  color: var(--gw-font-color); /* 按钮颜色 */
+  color: var(--gw-bg-font); /* 按钮颜色 */
   cursor: pointer;
   text-align: center;
   background-color: transparent;
