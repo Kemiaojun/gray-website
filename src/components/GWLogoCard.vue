@@ -5,7 +5,7 @@
         class="icon"
         viewBox="0 0 1024 1024"
         version="1.1"
-        style="position: absolute;left: 2px;top: 2px;"
+        style="position: absolute;left: 2px;top: 2px;width:2rem;height: 2rem;"
         xmlns="http://www.w3.org/2000/svg"
         p-id="13916"
         width="200"
@@ -142,17 +142,17 @@ let computedSize = computed(() => {
 }
 
 .day-text {
-  font-size: 18px;
+  font-size: 1.5rem;
   margin-top: 0px;
-  margin-left: 15px;
+  margin-left: 1.5rem;
   font-weight: 500;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   padding: 10px;
 }
 
 .control-icon {
-  width: 20px;
-  height: 20px;
+  width: 2rem;
+  height: 2rem;
   &:hover {
     cursor: pointer;
   }

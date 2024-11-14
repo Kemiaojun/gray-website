@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AudioCard: typeof import('./src/components/AudioCard/index.vue')['default']
     BLCol: typeof import('./src/components/BLCol.vue')['default']
     BLRow: typeof import('./src/components/BLRow.vue')['default']
     BLTag: typeof import('./src/components/BLTag.vue')['default']
@@ -42,8 +43,6 @@ declare module 'vue' {
     FsEstimatedVirtualList: typeof import('./src/components/FsEstimatedVirtualList.vue')['default']
     FsVirtualList: typeof import('./src/components/FsVirtualList.vue')['default']
     Fullscreen: typeof import('./src/components/Fullscreen/index.vue')['default']
-    GWAudioPlayer: typeof import('./src/components/GWAudioPlayer.vue')['default']
-    'GWAudioPlayer copy': typeof import('./src/components/GWAudioPlayer copy.vue')['default']
     GWAudioPreview: typeof import('./src/components/GWAudioPreview.vue')['default']
     GWAvatar: typeof import('./src/components/GWAvatar.vue')['default']
     GWClassifyImage: typeof import('./src/components/GWClassifyImage.vue')['default']
@@ -67,7 +66,7 @@ declare module 'vue' {
     LinkGroup: typeof import('./src/components/LinkGroup/index.vue')['default']
     ListItem: typeof import('./src/components/ListItem.vue')['default']
     Loading: typeof import('./src/components/Loading/index.vue')['default']
-    Music: typeof import('./src/components/Music/index.vue')['default']
+    MusicPlayer: typeof import('./src/components/MusicPlayer/index.vue')['default']
     NotFound: typeof import('./src/components/NotFound.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

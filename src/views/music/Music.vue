@@ -244,7 +244,7 @@
                 "
                 @click="singerTab = 1"
               >
-                <SvgIcon :size="20" icon-class="back" />
+              <span style="font-size:2rem;" class="iconfont icon-back-filled"></span>
               </div>
             </div>
             <div class="row-card">
@@ -295,7 +295,7 @@
                 "
                 @click="singerTab = 2"
               >
-                <SvgIcon :size="20" icon-class="back" />
+              <span style="font-size:2rem;" class="iconfont icon-back-filled"></span>
               </div>
             </div>
             <div

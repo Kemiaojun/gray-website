@@ -5,7 +5,7 @@
     @mouseleave="showOverlay = false"
   >
     <div class="audio-name">{{ name }}</div>
-    <audioIcon></audioIcon>
+    <span class="iconfont icon-audio_frequency"></span>
     <!-- 控制条 -->
     <div class="controls">
       <div class="time-info">
@@ -30,7 +30,6 @@
 
 <script lang="ts" setup>
 import { ref, toRefs } from "vue";
-import audioIcon from "@/assets/icons/audio.svg";
 
 interface AudioProps {
   url: string;

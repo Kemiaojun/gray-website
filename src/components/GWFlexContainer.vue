@@ -14,5 +14,6 @@
   flex-wrap: wrap;
   align-items: center;
   align-content: center;
+  gap: 1rem;
 }
 </style>

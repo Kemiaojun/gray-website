@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "23809414",
+      "name": "audio_frequency",
+      "font_class": "audio_frequency",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "5119334",
+      "name": "delete_fill",
+      "font_class": "delete_fill",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "35125054",
+      "name": "删除带背景填充",
+      "font_class": "plus-circle-fill",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "40067802",
+      "name": "back-filled",
+      "font_class": "back-filled",
+      "unicode": "ea35",
+      "unicode_decimal": 59957
+    },
+    {
+      "icon_id": "1251012",
+      "name": "add",
+      "font_class": "add",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
       "icon_id": "13175665",
       "name": "最小化",
       "font_class": "-",

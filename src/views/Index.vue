@@ -12,7 +12,7 @@
       </keep-alive>
     </router-view>
     <ToolBox :toTop=true ></ToolBox>
-    <Music></Music>
+    <MusicPlayer></MusicPlayer>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ import { randomMusicApi } from "@/api/music"
 import type { RouteRecordName } from "vue-router";
 import Header from "../components/layout/Header.vue";
 import ToolBox from "../components/ToolBox/index.vue";
-import Music from "../components/Music/index.vue";
+import MusicPlayer from "../components/MusicPlayer/index.vue";
 import type { Tab } from "@/types/gw.props";
 import { getWebsiteApiBaseUrl } from '@/utils/website'
 
