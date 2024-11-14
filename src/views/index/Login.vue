@@ -1,5 +1,5 @@
 <template>
-  <div class="login-root">
+  <div class="login-root" id="login-background-div">
     <bl-col just="center" class="logo" height="auto">
       <img src="/favicon.png" style="width: 12rem" />
     </bl-col>
@@ -46,7 +46,6 @@
 import { ref } from "vue";
 import { toRoute } from "@/router";
 import { login } from "@/utils/auth";
-import { getSysName, getThemeLogoStyle } from "@/utils/env";
 
 const username = ref('');
 const password = ref('');
@@ -59,12 +58,17 @@ const handleLogin = () => {
 
 <style scoped lang="scss">
 .login-root {
-  @include box(100%, 100%);
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: var(--gw-bg-color);
+  background-image: url('/dark-bg.png');
+  background-size: cover; /* 背景图片覆盖整个div */
+  background-position: center; /* 背景图片居中 */
+  background-repeat: no-repeat; /* 背景图片不重复 */
+
 }
 
 .form {
