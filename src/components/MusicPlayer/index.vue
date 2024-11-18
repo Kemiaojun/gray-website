@@ -287,22 +287,13 @@ const stopDrag = () => {
   document.removeEventListener("mousemove", onDrag);
   document.removeEventListener("mouseup", stopDrag);
 };
-onMounted(async () => {
-  await randomMusicApi(5).then((rsp =>{
-    if(rsp.data){
-      musicList.value = rsp.data.map((music: any) => {
-        return {
-          id: music.id,
-          name: music.title,
-          src: getWebsiteApiBaseUrl() + music.previewUrl,
-          img: music.artistThumbnail ? getWebsiteApiBaseUrl() + music.artistThumbnail:"/favicon.png",
-          artist: music.artist,
-          lyrics: music.lyrics
-        }
-      })
-      // core.Play();
-    }
-  }));
+onMounted( () => {
+  const instance = getCurrentInstance();
+  if (instance) {
+    // 可以访问组件实例
+    window._MusicPlayer = instance.proxy; // 通过 proxy 获取到组件实例
+  }
+
   setMusic(0);
   emitter.on("playMusic", () => {
     playMusic();
@@ -330,11 +321,17 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
+  delete window._MusicPlayer;
   emitter.off("playMusic");
   emitter.off("previousMusic");
   emitter.off("nextMusic");
   emitter.off("setMusic");
   emitter.off("playSelectedMusic");
+});
+import { defineExpose } from 'vue';
+// 使用 defineExpose 暴露 playMusic 方法
+defineExpose({
+  playMusic,
 });
 </script>
 

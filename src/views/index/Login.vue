@@ -51,7 +51,7 @@ const username = ref('');
 const password = ref('');
 
 const handleLogin = () => {
-  debugger;
+  
   login(username.value, password.value);
 };
 </script>

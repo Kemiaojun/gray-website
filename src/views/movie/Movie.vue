@@ -317,8 +317,8 @@ onMounted(async () => {
 <style scoped lang="scss">
 .movie-root-container {
   background-color: var(--gw-bg-basic);
-  width: calc(100%);
-  min-height: calc(100% - 60px);
+  width: 100vw;
+  min-height: calc(100vh - 60px);
   margin-top: 60px;
   padding: 0 1rem;
   overflow: scroll;

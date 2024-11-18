@@ -3,7 +3,7 @@
 @font-face {
   font-family: Moderat;
   font-weight: 700;
-  src: url(@/assets/font/Moderat-Bold.aef2636.ttf) format("truetype"), url(@/assets/font/Moderat-Medium.9a1678a.ttf) format("truetype"), url(@/assets/font/Moderat-Regular.a2f5d8f.ttf) format("truetype");
+  src: url(@/assets/fonts/Moderat-Bold.aef2636.ttf) format("truetype"), url(@/assets/fonts/Moderat-Medium.9a1678a.ttf) format("truetype"), url(@/assets/fonts/Moderat-Regular.a2f5d8f.ttf) format("truetype");
   text-rendering: optimizeLegibility;
 }
 

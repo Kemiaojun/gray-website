@@ -11,10 +11,12 @@
       <el-popover
         popper-class="popper-dark"
         placement="bottom-start"
-        trigger="click"
+        trigger="hover"
         :show-arrow="false"
         :hide-after="0"
         :offset="-5"
+        open-delay="2000"
+        close-delay="2000"
         transition="el-zoom-in-top"
       >
         <template #reference>
@@ -26,7 +28,7 @@
         </template>
         <div v-if="drawer" class="popper-content">
           <div
-            v-for="(tab, index) in tabs"
+            v-for="(tab, index) in filterTabs"
             :key="index"
             :class="['item', 'tab', selectedTab === tab.name ? 'active' : '']"
             @click="selectTab(index, tab.name)"
@@ -127,6 +129,7 @@ const emit = defineEmits<{
 }>();
 
 function selectTab(index: number, tab: string) {
+
   emit("update:selectedTab", tab);
 }
 
@@ -173,6 +176,12 @@ let headerBackgroundOpacity = computed(() => {
 let wrapHeader = computed(() => {
   return top.value > 360;
 });
+
+let filterTabs = computed( () => {
+  return tabs.value.filter(item => {
+    return item.title != '资源';
+  })
+});
 </script>
 
 <style lang="scss">
@@ -198,7 +207,8 @@ let wrapHeader = computed(() => {
 
   .project-name {
     font-size: 2rem;
-    @include box(auto, 100%);
+    width: 10rem;
+    height: 100%;
     margin-left: 10px;
     text-shadow: 3px 3px 5px var(--gw-bg-basic);
     cursor: pointer;

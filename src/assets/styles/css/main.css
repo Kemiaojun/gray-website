@@ -4,7 +4,6 @@
 } */
 html {
   font-size: 62.5%;
-  overflow-y:scroll;
 }
 
 * {
@@ -13,10 +12,10 @@ html {
   box-sizing: border-box;
 }
 
-
 #app {
   width: 100%;
   height: auto;
+  overflow: auto;
 }
 
 /** ================================== 滚动条 ================================== */
@@ -106,6 +105,10 @@ html {
 }
 
 @keyframes fade {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

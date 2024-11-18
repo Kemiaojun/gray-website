@@ -32,8 +32,6 @@ import vSlideIn from '@/directives/vSlideIn'
 import vLazy from '@/directives/vLazy'
 import vViewRequest from '@/directives/vViewRequest'
 
-import { RecycleScroller } from 'vue-virtual-scroller'
-
 
 const app = createApp(App)
 app.directive('slide-in',vSlideIn)
@@ -46,5 +44,5 @@ app.component('bl-row', BLRow)
 .component('bl-col', BLCol)
 .component('bl-tag', BLTag)
 .component('svg-icon',SvgIcon)
-.component('RecycleScroller', RecycleScroller)
+
 app.mount('#app')

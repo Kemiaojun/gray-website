@@ -1,8 +1,6 @@
 <template>
   <el-config-provider :locale="zhCn">
     <RouterView />
-      <!-- 全局loading -->
-  <Loading></Loading>
   </el-config-provider>
 
 </template>

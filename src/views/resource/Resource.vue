@@ -2,97 +2,127 @@
   <div class="virtual-waterfall-container">
     <GWResourceSearch :data="searchCondition" @change="pageSearch">
       <template v-slot:right-items>
-          <span
-            style="
-              font-size: small;
-              color: var(--gw-bg-font);
-              font-style: italic;
-              font-weight: bold;
-              text-decoration: underline;
-            "
-            >{{ resourceCount }}</span
-          ><span style="font-size: small; color: var(--gw-bg-font)"
-            >资源数量: </span
-          >
+        <span
+          style="
+            font-size: small;
+            color: var(--gw-bg-font);
+            font-style: italic;
+            font-weight: bold;
+            text-decoration: underline;
+          "
+          >{{ resourceCount }}</span
+        ><span style="font-size: small; color: var(--gw-bg-font)"
+          >资源数量:
+        </span>
       </template>
     </GWResourceSearch>
-    <fs-virtual-water-fall ref="waterFallRef" :request="req" :gap="20" :column="5" :request-size="10">
+    <fs-virtual-water-fall
+      ref="waterFallRef"
+      :request="req"
+      :gap="20"
+      :column="5"
+      :request-size="10"
+    >
       <template #item="{ item }">
-        <img v-lazy="true" v-if="item.resourceType === '图片'" class="img-item" :data-src="item.thumbnailUrl" @click="previewImage(item)"/>
-        <AudioCard  v-else-if="item.resourceType === '音频' || item.resourceType === '歌曲'" :name="item.name" :duration="item.duration" :url="item.previewUrl" class="img-item"></AudioCard>
-        <div class="video-container" v-else-if="item.resourceType === '视频'"> 
-          <img  class="video-item" :src="item.thumbnailUrl" />
+        <img
+          v-lazy="true"
+          v-if="item.resourceType === '图片'"
+          class="img-item"
+          :data-src="item.thumbnailUrl"
+          @click="previewImage(item)"
+        />
+        <AudioCard
+          v-else-if="
+            item.resourceType === '音频' || item.resourceType === '歌曲'
+          "
+          :name="item.name"
+          :duration="item.duration"
+          :url="item.previewUrl"
+          class="img-item"
+        ></AudioCard>
+        <div class="video-container" v-else-if="item.resourceType === '视频'">
+          <img class="video-item" :src="item.thumbnailUrl" />
           <!-- 视频logo（播放按钮） -->
-          <div class="play-button" @click="previewVideo(item)">
-            ▶️
-          </div>
+          <div class="play-button" @click="previewVideo(item)">▶️</div>
         </div>
-        <div class="video-container" v-else-if="item.resourceType === 'PDF' || item.resourceType === 'PPT' || item.resourceType === 'WORD' || item.resourceType === 'EXCEL'"> 
-          <img  class="video-item" :src="item.thumbnailUrl" @click="previewPdf(item)"/>
+        <div
+          class="video-container"
+          v-else-if="
+            item.resourceType === 'PDF' ||
+            item.resourceType === 'PPT' ||
+            item.resourceType === 'WORD' ||
+            item.resourceType === 'EXCEL'
+          "
+        >
+          <img
+            class="video-item"
+            :src="item.thumbnailUrl"
+            @click="previewPdf(item)"
+          />
         </div>
-        <GWLogoCard  v-else-if="item.resourceType === 'DMG' || item.resourceType === '压缩包'  " :name="item.name" :url="item.previewUrl" :ext="item.ext" :size ="item.size" class="img-item"></GWLogoCard>
+        <GWLogoCard
+          v-else-if="
+            item.resourceType === 'DMG' || item.resourceType === '压缩包'
+          "
+          :name="item.name"
+          :url="item.previewUrl"
+          :ext="item.ext"
+          :size="item.size"
+          class="img-item"
+        ></GWLogoCard>
       </template>
     </fs-virtual-water-fall>
   </div>
-  <GWPreviewImage
-      v-if="previewShow == 0 "
-      :image="currentResource.previewUrl"
-      :name="currentResource.name"
-      :on-close="closePreview"></GWPreviewImage>
-    <GWPreviewVideo
-    v-if="previewShow == 1"
-    :url="currentResource.previewUrl"
-    :name="currentResource.name"
-    :on-close="closePreview"></GWPreviewVideo>
-
-    <GWPdfViewer v-if="previewShow == 4" :title="currentResource.name" :pages="currentResource.pageCount" :url="currentResource.previewUrl"  :doc="currentResource.fileUrl" :on-close="closePreview" />
 </template>
 
 <script setup lang="ts">
 import FsVirtualWaterFall from "@/components/GWVirtualWaterFall.vue";
 import type { FsVirtualWaterfallReuqest } from "@/components/types/type";
 import { ref, toRaw } from "vue";
-import { pageResourceApi } from "@/api/resources"
-import { getWebsiteApiBaseUrl } from '@/utils/website'
+import { pageResourceApi } from "@/api/resources";
+import { getWebsiteApiBaseUrl } from "@/utils/website";
 import type { ResourceSearch } from "@/types/gw.resources";
 import GWResourceSearch from "./ResourceSearch.vue";
+import { PreviewerApi } from "@/components/Previewer/index";
 const resourceCount = ref(0);
 let totalPage = 1;
-let searchCondition:ResourceSearch = {};
+let searchCondition: ResourceSearch = {};
 // 使用 ref 引用子组件实例
 const waterFallRef = ref<InstanceType<typeof FsVirtualWaterFall> | null>(null);
 
 const req: FsVirtualWaterfallReuqest = async (page, pageSize) => {
-  if( totalPage < page ){
+  if (totalPage < page) {
     return {
       total: 0,
       list: [],
-    }
+    };
   }
   // 请求，并传入分页参数
-  const rsp = await pageResourceApi(
-    {
-      ...searchCondition,pageNo:page,pageSize:pageSize
-    }
-  );
-  
+  const rsp = await pageResourceApi({
+    ...searchCondition,
+    pageNo: page,
+    pageSize: pageSize,
+  });
+
   // 数据处理
   let { result, total } = rsp.data;
   resourceCount.value = total;
-  totalPage = Math.ceil(total/pageSize);
+  totalPage = Math.ceil(total / pageSize);
   const rows = result.map((item: any) => ({
-    id:item.id, 
+    id: item.id,
     resourceType: item.resourceType,
     duration: item.duration,
-    width: item.thumbnailWidth?item.thumbnailWidth:400, 
-    height: item.thumbnailHeight?item.thumbnailHeight:250, 
+    width: item.thumbnailWidth ? item.thumbnailWidth : 400,
+    height: item.thumbnailHeight ? item.thumbnailHeight : 250,
     thumbnailUrl: getWebsiteApiBaseUrl() + item.thumbnailUrl,
-    previewUrl: item.pdfUrl ? getWebsiteApiBaseUrl() + item.pdfUrl: getWebsiteApiBaseUrl() + item.previewUrl,
+    previewUrl: item.pdfUrl
+      ? getWebsiteApiBaseUrl() + item.pdfUrl
+      : getWebsiteApiBaseUrl() + item.previewUrl,
     fileUrl: getWebsiteApiBaseUrl() + item.previewUrl,
-    name:item.name,
-    ext:item.ext,
-    size:item.size,
-    pageCount: item.pageCount?item.pageCount:0
+    name: item.name,
+    ext: item.ext,
+    size: item.size,
+    pageCount: item.pageCount ? item.pageCount : 0,
   }));
   return {
     total: total,
@@ -100,52 +130,42 @@ const req: FsVirtualWaterfallReuqest = async (page, pageSize) => {
   };
 };
 
-// 预览状态和当前图片
-const previewShow = ref<number>(-1);
-// 计算当前预览的图片
-const currentResource = ref<any>({});
-
 // 打开预览
-const previewImage = (image: any) => {
-  currentResource.value = image;
-  previewShow.value = 0;
+const previewImage = (item: any) => {
+  PreviewerApi.previewImage(item.previewUrl, item.name);
 };
 
 // 打开预览
-const previewPdf = (doc: any) => {
-  previewShow.value = 4;
-  currentResource.value = doc;
+const previewPdf = (item: any) => {
+  PreviewerApi.previewPdf({
+    title: item.name,
+    doc: item.fileUrl,
+    pages: item.pageCount,
+    url: item.previewUrl,
+  });
 };
 
 // 打开预览
 const previewVideo = (video: any) => {
-  previewShow.value = 1;
-  currentResource.value = video;
+  PreviewerApi.previewVideo(video.previewUrl, video.name);
 };
 
-// 关闭预览
-const closePreview = () => {
-  previewShow.value = -1;
-};
-
-const pageSearch = async (params:any) =>{
-  searchCondition = { ...params};
+const pageSearch = async (params: any) => {
+  searchCondition = { ...params };
   totalPage = 1;
-  if(waterFallRef.value){
-   await waterFallRef.value.reset();
+  if (waterFallRef.value) {
+    await waterFallRef.value.reset();
   }
-}
-
-  
+};
 </script>
 
 <style scoped lang="scss">
 .virtual-waterfall-container {
   height: calc(100vh - 60px);
-    width: calc(100% - 5px);
-    /* min-height: 100%; */
-    padding: 2rem;
-    margin-top: 60px;
+  width: calc(100% - 5px);
+  /* min-height: 100%; */
+  padding: 2rem;
+  margin-top: 60px;
 }
 .img-item {
   width: 100%;
@@ -210,5 +230,4 @@ const pageSearch = async (params:any) =>{
   display: inline-flex;
   margin-right: 5px;
 }
-
 </style>
