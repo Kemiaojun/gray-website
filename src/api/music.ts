@@ -43,3 +43,19 @@ export const pageMusicApi = (params:any): Promise<R<any>> => {
 export const randomMusicApi = (param: any ): Promise<R<any>> => {
   return rq.get<R<any>>('/music/random/' + param )
 }
+
+
+/**
+ * 新增歌手
+ * @param params
+ * @returns
+ */
+export const addMusicianApi = ( params: FormData ): Promise<R<any>> => {
+  // 定义请求的配置
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  };
+  return rq.post<R<any>>('/music/musician/add', params,config)
+}

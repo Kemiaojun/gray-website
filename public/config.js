@@ -34,7 +34,7 @@ window.blconfig = {
    */
   ENVS: {
     DEV: {
-      WEBSITE_API_BASE_URI: "http://192.168.192.66:8081/website-api/",
+      WEBSITE_API_BASE_URI: "http://localhost:8081/website-api/",
       BLOSSOM_API_BASE_URI: "http://192.168.192.66/blossom-api/"
     },
     TEST: {

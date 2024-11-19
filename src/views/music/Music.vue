@@ -361,14 +361,44 @@
         </div>
       </el-container>
     </el-container>
+    <!-- 模态框 -->
+  <el-dialog
+    style="padding: 30px; max-height: 500px; overflow: scroll"
+    title="上传头像"
+    v-model="dialogVisible"
+    width="400px"
+    @close="dialogVisible = false;"
+  >
+    <el-form
+      ref="musicianFormRef"
+      :model="form"
+      label-width="auto"
+      :rules="rules"
+    >
+      <ImageUpload :image-url="form.avatar" @select-file="onFileChange"></ImageUpload>
+      <el-form-item label="歌手名字：" prop="name">
+        <!-- 库名称 -->
+        <el-input v-model="form.name" placeholder="请输入歌手名字"></el-input>
+      </el-form-item>
+      <!-- 操作按钮 -->
+      <el-form-item style="flex-direction: column">
+        <el-button @click="dialogVisible = false;">取消</el-button>
+        <el-button type="primary" @click="handleConfirm(musicianFormRef)"
+          >确定</el-button
+        >
+      </el-form-item>
+    </el-form>
+  </el-dialog>
   </div>
+
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted, computed, watch } from "vue";
 import { useRoute } from "vue-router";
+import type { FormRules, FormInstance } from "element-plus";
 import { movieCategoriesApi } from "@/api/movie";
-import { musicRefreshApi, musicListApi, pageMusicApi } from "@/api/music";
+import { musicRefreshApi, musicListApi, pageMusicApi, addMusicianApi } from "@/api/music";
 import Avatar from "@/components/Avatar/Avatar.vue";
 import GWTitleCard from "@/components/GWTitleCard.vue";
 import GWSortableTable from "@/components/GWSortableTable.vue";
@@ -376,9 +406,54 @@ import GWMusicSortableTable from "@/components/GWMusicSortableTable.vue";
 import { getWebsiteApiBaseUrl } from "@/utils/website";
 import emitter from "@/utils/mitt";
 
+// 对话框是否可见
+const dialogVisible = ref(false);
+const form = reactive<any>({});
+const musicianFormRef = ref();
 // 获取路由对象
 const route = useRoute();
 const activeIndex = ref("1");
+
+const isCanRequest = ref(true);
+let file :File;
+
+const rules = reactive<FormRules<any>>({
+  name: [
+    {
+      required: true,
+      message: "请输入歌手名字",
+      trigger: "blur",
+    },
+  ]
+});
+
+const onFileChange = (f: File) => {
+  file = f;
+};
+
+const handleConfirm = async (formEl: FormInstance | undefined) => {
+  if (! isCanRequest.value) return;
+  if (!formEl) return;
+  await formEl.validate(async (valid, fields) => {
+    if (valid) {
+      isCanRequest.value = false;
+      let formData = new FormData();
+      formData.append('file', file);
+      formData.append('entity', JSON.stringify({name:form.name}));
+
+      await addMusicianApi(formData).then((rsp) => {
+        isCanRequest.value = true;
+        form.name = "";
+        form.avatar = '';
+        dialogVisible.value = false;
+      }).finally(()=>{
+        isCanRequest.value = true;
+      });
+    } else {
+      console.log("error submit!", fields);
+    }
+  });
+};
 
 // 选择菜单
 const handleSelect = function (key: any, keyPath: any) {
