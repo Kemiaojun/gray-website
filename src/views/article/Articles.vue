@@ -149,7 +149,7 @@
       </div>
 
       <div class="module-workbench" @click="showSetting">
-        <el-icon color="#7b7b7ba9"><Setting /></el-icon>
+        <el-icon style="font-size: 2rem;" color="#7b7b7ba9"><Setting /></el-icon>
       </div>
     </div>
   </div>

@@ -55,7 +55,7 @@
         </div>
       </template>
     </GWSearchCondition>
-    <FlexContainer style="min-height: calc(100% - 100px);justify-content: center;">
+    <FlexContainer style="min-height: calc(100% - 100px);justify-content: space-around">
       <template v-slot:flex-items>
         <GWFlexMovieCard
           v-for="(movie, index) in movies"

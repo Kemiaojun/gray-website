@@ -38,5 +38,6 @@ defineProps({
 <style scoped lang="scss">
 .svg-icon {
   vertical-align: sub;
+  outline:none;
 }
 </style>

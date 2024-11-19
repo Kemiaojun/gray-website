@@ -532,14 +532,13 @@ onUnmounted(() => {
 .music-root-container {
   background-color: var(--gw-bg-basic);
   width: 100%;
-  height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
   position: relative;
   margin-top: 60px;
   display: flex;
   gap: 20px;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 0 1rem 1rem 1rem;
 }
 
 .selectTab {
