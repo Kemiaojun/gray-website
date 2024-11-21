@@ -1,24 +1,6 @@
 <template>
   <div class="library-container">
-    <GWSearchCondition>
-      <template v-slot:search-items>
-        <div class="search-item">
-          <el-select
-            v-model="groupType"
-            clearable
-            placeholder="分组"
-            style="width: 150px"
-          >
-            <el-option
-              v-for="item in groupTypes"
-              :key="item.value"
-              :label="item.name"
-              :value="item.value"
-            />
-          </el-select>
-        </div>
-      </template>
-    </GWSearchCondition>
+    
     <div class="graython-Link-root">
       <GWTitleImageCard :blankCard="true" :onClick="createLink">
         <!-- <template v-slot:add-btn>
@@ -301,7 +283,8 @@ watch(
 <style scoped lang="scss">
 .library-container {
   width: 100%;
-  height: calc(100% - 50px);
+  height: calc(100vh - 60px);
+  margin-top: 60px;
   padding: 5px 20px;
   overflow: scroll;
 }

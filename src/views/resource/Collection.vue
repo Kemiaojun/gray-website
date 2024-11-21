@@ -199,7 +199,9 @@ const onFileChange = (f: File) => {
 <style scoped lang="scss">
 .graython-Collection-root {
   background-color: var(--gw-bg-basic);
-  @include box(100%, 100%);
+  width: 100%;
+  height: calc(100vh - 60px);
+  margin-top: 60px;
   position: relative;
   overflow: scroll;
   display: flex;

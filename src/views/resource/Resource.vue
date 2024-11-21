@@ -26,7 +26,7 @@
       <template #item="{ item }">
         <img
           v-lazy="true"
-          v-if="item.resourceType === '图片'"
+          v-if="item.resourceType === '图片' || item.resourceType === '免抠图'"
           class="img-item"
           :data-src="item.thumbnailUrl"
           @click="previewImage(item)"

@@ -313,7 +313,8 @@ const handleNodeChange = (data: any) => {
 <style scoped lang="scss">
 .library-container {
   width: 100%;
-  height: calc(100% - 50px);
+  height: calc(100vh - 60px);
+    margin-top: 60px;
   padding: 5px 20px;
   overflow: scroll;
 }
