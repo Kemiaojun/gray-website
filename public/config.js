@@ -4,7 +4,7 @@ window.blconfig = {
    */
   SYS: {
     // 修改该值可以改变网页左上角名称, 你可以改为你的名称
-    NAME: '二月',
+    NAME: 'Graython',
     // 公网安备号
     GONG_WANG_AN_BEI: '',
     // ICP 备案号
@@ -34,16 +34,16 @@ window.blconfig = {
    */
   ENVS: {
     DEV: {
-      WEBSITE_API_BASE_URI: "http://localhost:8081/website-api/",
-      BLOSSOM_API_BASE_URI: "http://192.168.192.66/blossom-api/"
+      WEBSITE_API_BASE_URI: "http://localhost:8081/",
+      BLOSSOM_API_BASE_URI: "http://61.111.251.180:9999/"
     },
     TEST: {
-      WEBSITE_API_BASE_URI: "http://192.168.192.66:8081/website-api/",
-      BLOSSOM_API_BASE_URI: "http://192.168.192.66/blossom-api/"
+      WEBSITE_API_BASE_URI: "http://61.111.251.180:8081/",
+      BLOSSOM_API_BASE_URI: "http://61.111.251.180:9999/"
     },
     PROD: {
-      WEBSITE_API_BASE_URI: "https://graython.us.kg/website-api/",
-      BLOSSOM_API_BASE_URI: "https://graython.us.kg/blossom-api/"
+      WEBSITE_API_BASE_URI: "http://61.111.251.180:8081/",
+      BLOSSOM_API_BASE_URI: "http://61.111.251.180:9999/"
     }
   }
 }
