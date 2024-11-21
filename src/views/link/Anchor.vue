@@ -1,6 +1,24 @@
 <template>
   <div class="library-container">
-    
+    <GWSearchCondition>
+      <template v-slot:left-items>
+        <div class="flex-item">
+          <el-select
+            v-model="groupType"
+            clearable
+            placeholder="分组"
+            style="width: 150px"
+          >
+            <el-option
+              v-for="item in groupTypes"
+              :key="item.value"
+              :label="item.name"
+              :value="item.value"
+            />
+          </el-select>
+        </div>
+      </template>
+    </GWSearchCondition>
     <div class="graython-Link-root">
       <GWTitleImageCard :blankCard="true" :onClick="createLink">
         <!-- <template v-slot:add-btn>
